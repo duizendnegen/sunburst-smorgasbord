@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Social share meta tags -->
+  <!-- <meta property="og:title" content="Simple Grid">
+  <meta property="og:description" content="A responsive, lightweight, simple CSS grid.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="http://simplegrid.io/img/simple-grid-computer.png">
+  <meta property="og:site_name" content="Simple Grid">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Simple Grid">
+  <meta name="twitter:description" content="A responsive, lightweight, simple CSS grid.">
+  <meta name="twitter:image:src" content="http://simplegrid.io/img/simple-grid-computer.png"> -->
+  <!-- End social share meta tags -->
+  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="stylesheet" href="css/simple-grid.css">
+  <title>Sunburst Smorgasbord | a tool to describe your relationships.</title>
+  <meta name="description" content="A customizable smorgasbord to describe your relationships.">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="/js/sunburst.d3.js"></script>
+    <script>
+        d3.json("/assets/flare.json")
+        .then(function(flare) {
+            var chart = Sunburst(flare, {
+                value: d => d.size, // size of each node (file); null for internal nodes (folders)
+                label: d => d.name, // display name for each cell
+                title: (d, n) => `${n.ancestors().reverse().map(d => d.data.name).join(".")}\n${n.value.toLocaleString("en")}`, // hover text
+                link: (d, n) => n.children
+                ? `https://github.com/prefuse/Flare/tree/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}`
+                : `https://github.com/prefuse/Flare/blob/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}.as`,
+                width: 1152,
+                height: 1152
+            });
+
+            document.querySelector("#sunburstContainer")
+                .appendChild(chart);
+        });
+    </script>
+</head>
+<body>
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 center">
+          <div class="img img-logo center"></div>
+          <h1>Sunburst Smorgasbord.</h1>
+          <h2 class="font-light">Relationship anarchy, as radiant as the sun.</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="body-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 center" id="sunburstContainer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p>Sunburst Smorgasbord<br/>
+          Made by JayK / Shandalara / dzing
+        </div>
+      </div>
+    </div>
+  </footer> -->
+</body>
+</html>
