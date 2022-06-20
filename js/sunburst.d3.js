@@ -69,7 +69,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
         .attr("height", height)
         .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
         .attr("font-family", "sans-serif")
-        .attr("font-size", 10)
+        .attr("font-size", 12)
         .attr("text-anchor", "middle");
   
     const cell = svg

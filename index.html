@@ -22,15 +22,17 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="/js/sunburst.d3.js"></script>
     <script>
-        d3.json("/assets/flare.json")
+        d3.json("/assets/autoingredients.json")
         .then(function(flare) {
             var chart = Sunburst(flare, {
-                value: d => d.size, // size of each node (file); null for internal nodes (folders)
-                label: d => d.name, // display name for each cell
-                title: (d, n) => `${n.ancestors().reverse().map(d => d.data.name).join(".")}\n${n.value.toLocaleString("en")}`, // hover text
+                //value: d => d.size, // size of each node (file); null for internal nodes (folders)
+                label: d => d.id, // display name for each cell
+                title: (d, n) => d.id, // hover text
+                /*
                 link: (d, n) => n.children
-                ? `https://github.com/prefuse/Flare/tree/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}`
-                : `https://github.com/prefuse/Flare/blob/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}.as`,
+                  ? `https://github.com/prefuse/Flare/tree/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}`
+                  : `https://github.com/prefuse/Flare/blob/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}.as`,
+                */
                 width: 1152,
                 height: 1152
             });
@@ -53,7 +55,7 @@
     </div>
   </div>
   <div class="body-content">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12 center" id="sunburstContainer">
           
