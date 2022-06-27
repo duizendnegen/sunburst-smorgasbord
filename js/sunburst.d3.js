@@ -45,7 +45,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
   
     // Construct a color scale.
     if (color != null) {
-      color = d3.scaleSequential([0, root.children.length - 1], color).unknown(fill);
+      color = d3.scaleSequential([0, root.children.length], color).unknown(fill);
       root.children.forEach((child, i) => child.index = i);
     }
   
