@@ -11,6 +11,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
     label, // given a node d, returns the name to display on the rectangle
     title, // given a node d, returns its hover text
     link, // given a node d, its link (if any)
+    onClick, // an event that fires when a node d is clicked
     linkTarget = "_blank", // the target attribute for links (if any)
     width = 640, // outer width, in pixels
     height = 400, // outer height, in pixels
@@ -30,6 +31,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
     // to convert tabular data to a hierarchy; otherwise we assume that the data is
     // specified as an object {children} with nested objects (a.k.a. the “flare.json”
     // format), and use d3.hierarchy.
+
     const root = path != null ? d3.stratify().path(path)(data)
         : id != null || parentId != null ? d3.stratify().id(id).parentId(parentId)(data)
         : d3.hierarchy(data, children);
@@ -42,6 +44,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
   
     // Compute the partition layout. Note polar coordinates: x is angle and y is radius.
     d3.partition().size([2 * Math.PI, radius])(root);
+    root.each(d => d.current = d);
   
     // Construct a color scale.
     if (color != null) {
@@ -81,10 +84,13 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
         .attr("target", link == null ? null : linkTarget);
   
     cell.append("path")
-        .attr("d", arc)
-        .attr("fill", color ? d => color(d.ancestors().reverse()[1]?.index) : fill)
-        .attr("fill-opacity", fillOpacity);
-  
+        .attr("d", d => arc(d.current))
+        .attr("fill", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
+        .attr("fill-original", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
+        .attr("fill-opacity", fillOpacity)
+        .attr("uuid", d => d.data.uuid)
+        .on("click", onClick ? onClick : null);
+
     if (label != null) cell
       .filter(d => (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)
       .append("text")
@@ -94,6 +100,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
           const y = (d.y0 + d.y1) / 2;
           return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
         })
+        .attr("fill-opacity", "1")
         .attr("dy", "0.32em")
         .text(d => label(d.data, d));
   
