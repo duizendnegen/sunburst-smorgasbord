@@ -19,28 +19,12 @@
   <link rel="stylesheet" href="css/simple-grid.css">
   <title>Sunburst Smorgasbord | a tool to describe your relationships.</title>
   <meta name="description" content="A customizable smorgasbord to describe your relationships.">
+  <script src="/js/canvas-toBlob.js"></script>
+  <script src="/js/FileSaver.min.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="/js/sunburst.d3.js"></script>
-    <script>
-        d3.json("/assets/autoingredients.json")
-        .then(function(flare) {
-            var chart = Sunburst(flare, {
-                //value: d => d.size, // size of each node (file); null for internal nodes (folders)
-                label: d => d.id, // display name for each cell
-                title: (d, n) => d.id, // hover text
-                /*
-                link: (d, n) => n.children
-                  ? `https://github.com/prefuse/Flare/tree/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}`
-                  : `https://github.com/prefuse/Flare/blob/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}.as`,
-                */
-                width: 1152,
-                height: 1152
-            });
-
-            document.querySelector("#sunburstContainer")
-                .appendChild(chart);
-        });
-    </script>
+  <script src="/js/main.js"></script>
+  
 </head>
 <body>
   <div class="jumbotron">
@@ -58,7 +42,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 center" id="sunburstContainer">
-          
+          <div>
+            <button id='saveButton'>Save a pic of your shining smorgasbord</button>
+          </div>
         </div>
       </div>
     </div>

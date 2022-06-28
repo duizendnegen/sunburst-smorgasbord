@@ -45,7 +45,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
   
     // Construct a color scale.
     if (color != null) {
-      color = d3.scaleSequential([0, root.children.length - 1], color).unknown(fill);
+      color = d3.scaleSequential([0, root.children.length], color).unknown(fill);
       root.children.forEach((child, i) => child.index = i);
     }
   
@@ -70,7 +70,8 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
         .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
         .attr("font-family", "sans-serif")
         .attr("font-size", 12)
-        .attr("text-anchor", "middle");
+        .attr("text-anchor", "middle")
+        .attr("id", 'theImage');
   
     const cell = svg
       .selectAll("a")
