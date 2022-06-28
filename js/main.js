@@ -1,5 +1,18 @@
 const mainWidth = 1152;
 const mainHeight = 1152;
+let toggleState = false;
+
+function getDisabledState(d) {
+  if (d.data.disabled) {
+    return true;
+  }
+  
+  if (d.parent) {
+    return getDisabledState(d.parent);
+  }
+
+  return false;
+}
 
 function setDisabledState(disabled, d) {
   if(!disabled) {
@@ -17,12 +30,17 @@ function setDisabledState(disabled, d) {
   }
 }
 
+function arcVisible(d) {
+  return d.x1 > d.x0;
+}
+
 d3.json("/assets/autoingredients.json")
   .then(function (flare) {
     let chart = Sunburst(flare, {
       id: d => d.uuid,
       label: d => d.name, // display name for each cell
       title: (d, n) => d.name, // hover text
+      value: d => d.value,
       width: mainWidth,
       height: mainHeight,
       onClick: (_, d) => {
@@ -39,7 +57,7 @@ d3.json("/assets/autoingredients.json")
     document.querySelector("#sunburstContainer")
       .appendChild(chart);
 
-
+    
     //PNG EXPORT FUNCTIONALITY
     // Set-up the export button
     d3.select('#saveButton').on('click', function () {
@@ -52,6 +70,43 @@ d3.json("/assets/autoingredients.json")
       }
     });
 
+    d3.select("#toggleButton").on("click", function() {
+      toggleState = !toggleState;
+
+      let root = d3.selectAll("path");
+      root.each(d => {
+        let disabled = toggleState && getDisabledState(d);
+        d.target = {
+          x0: disabled ? 0 : d.x0,
+          x1: disabled ? 0 : d.x1
+        }
+      });
+
+      const t = d3.select("svg").transition().duration(750);
+
+      d3.selectAll("path")
+        .transition(t)
+        .tween("data", d => {
+          const i = d3.interpolate(d.current, d.target);
+          return t => d.current = i(t);
+        })
+        .filter(function(d) {
+          return +this.getAttribute("fill-opacity") || arcVisible(d.target);
+        })
+          .attr("fill-opacity", d => arcVisible(d.target) ? 0.6 : 0)
+          .attr("pointer-events", d => arcVisible(d.target) ? "auto" : "none");
+          // .attrTween("d", d => () => {
+          //   if(d.data.uuid == '342ba656-f6eb-11ec-b939-0242ac120002')
+          //     console.log(d);
+          //   return d3.arc(d.current);
+          // });
+      
+      d3.selectAll("text").filter(function(d) {
+        return +this.getAttribute("fill-opacity") || arcVisible(d.target);
+      }).transition(t)
+        .attr("fill-opacity", d => + arcVisible(d.target) ? 1 : 0);
+        // .attrTween("transform", d => () => arcVisible(d.current));
+    });
 
     // Below are the functions that handle actual exporting:
     // getSVGString ( svgNode ) and svgString2Image( svgString, width, height, format, callback )
