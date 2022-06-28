@@ -86,6 +86,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
         .attr("fill", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
         .attr("fill-original", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
         .attr("fill-opacity", fillOpacity)
+        .attr("uuid", d => d.data.uuid)
         .on("click", onClick ? onClick : null);
 
     if (label != null) cell
