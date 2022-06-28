@@ -13,7 +13,19 @@ const mainHeight = 1152;
             : `https://github.com/prefuse/Flare/blob/master/flare/src/${n.ancestors().reverse().map(d => d.data.name).join("/")}.as`,
           */
           width: mainWidth,
-          height: mainHeight
+          height: mainHeight,
+          onClick: (event, d) => {
+            d.data.disabled = !d.data.disabled;
+
+            const target = d3
+              .select(event.target);
+
+            console.log(target.attr("d"));
+
+            let color = d.data.disabled ? "#000" : target.attr("fill-original");  // color(d.ancestors().reverse()[1]?.index);
+
+            target.attr("fill", color);
+          },
       });
 
       document.querySelector("#sunburstContainer")

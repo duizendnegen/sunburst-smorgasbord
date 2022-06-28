@@ -11,6 +11,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
     label, // given a node d, returns the name to display on the rectangle
     title, // given a node d, returns its hover text
     link, // given a node d, its link (if any)
+    onClick, // an event that fires when a node d is clicked
     linkTarget = "_blank", // the target attribute for links (if any)
     width = 640, // outer width, in pixels
     height = 400, // outer height, in pixels
@@ -82,9 +83,11 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
   
     cell.append("path")
         .attr("d", arc)
-        .attr("fill", color ? d => color(d.ancestors().reverse()[1]?.index) : fill)
-        .attr("fill-opacity", fillOpacity);
-  
+        .attr("fill", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
+        .attr("fill-original", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
+        .attr("fill-opacity", fillOpacity)
+        .on("click", onClick ? onClick : null);
+
     if (label != null) cell
       .filter(d => (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)
       .append("text")
