@@ -23,7 +23,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
     padding = 1, // separation between arcs
     radius = Math.min(width - marginLeft - marginRight, height - marginTop - marginBottom) / 2, // outer radius
     color = d3.interpolateRainbow, // color scheme, if any
-    fill = "#ccc", // fill for arcs (if no color encoding)
+    fill = "#1b1b1b", // fill for arcs (if no color encoding)
     fillOpacity = 0.6, // fill opacity for arcs
   } = {}) {
   
@@ -101,6 +101,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
           return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
         })
         .attr("fill-opacity", "1")
+        .attr("fill", "#fff") // Makes text in sunburst white
         .attr("dy", "0.32em")
         .text(d => label(d.data, d))
         .attr("uuid", d => d.data.uuid)

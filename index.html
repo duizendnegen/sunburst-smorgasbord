@@ -17,6 +17,7 @@
   <!-- End social share meta tags -->
   <link rel="shortcut icon" href="img/favicon.png">
   <link rel="stylesheet" href="css/simple-grid.css">
+  <link rel="stylesheet" href="css/main.css">
   <title>Sunburst Smorgasbord | a tool to describe your relationships.</title>
   <meta name="description" content="A customizable smorgasbord to describe your relationships.">
   <script src="/js/canvas-toBlob.js"></script>
@@ -32,7 +33,7 @@
       <div class="row">
         <div class="col-12 center">
           <div class="img img-logo center"></div>
-          <h1>Sunburst Smorgasbord.</h1>
+          <h1>Sunburst Smorgasbord</h1>
           <h2 class="font-light">Relationship anarchy, as radiant as the sun.</h2>
         </div>
       </div>
@@ -42,9 +43,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 center" id="sunburstContainer">
-          <div>
-            <button id='saveButton'>Save a pic of your shining smorgasbord</button>
-            <button id='toggleButton'>Toggle disabled elements</button>
+          <div class="button-wrapper">
+            <a class="button-trigger" id='saveButton' href="#0">
+              <strong>Download a copy</strong>
+            </a>
+          </div>
+          <div class="button-wrapper">
+            <input type="checkbox" class="button-toggle" id='toggleButton' autocomplete='off'>
+            <label for='toggleButton'>Show only what you've selected</label>
           </div>
         </div>
       </div>
