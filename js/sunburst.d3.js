@@ -102,7 +102,9 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
         })
         .attr("fill-opacity", "1")
         .attr("dy", "0.32em")
-        .text(d => label(d.data, d));
+        .text(d => label(d.data, d))
+        .attr("uuid", d => d.data.uuid)
+        .on("click", onClick ? onClick : null);
   
     if (title != null) cell.append("title")
         .text(d => title(d.data, d));
