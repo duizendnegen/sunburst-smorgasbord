@@ -15,17 +15,19 @@ function getDisabledState(d) {
 }
 
 function setDisabledState(disabled, d) {
-  if(!disabled) {
-    d.data.disabled = false;
-  }
+  d.data.disabled = disabled;
 
   const target = d3.select("path[uuid='" + d.data.uuid + "']");
   let color = disabled ? "#000" : target.attr("fill-original");
   target.attr("fill", color);
+}
 
-  if(d.children) {
+function setAndPropagateDisabledState(disabled, d) {
+  setDisabledState(disabled, d);
+
+  if (d.children) {
     d.children.forEach(function(child) {
-      setDisabledState(disabled, child);
+      setAndPropagateDisabledState(disabled, child);
     });
   }
 }
@@ -48,9 +50,18 @@ d3.json("/assets/autoingredients.json")
         if(d.parent == null) {
           return;
         }
-        d.data.disabled = !d.data.disabled;
 
-        setDisabledState(d.data.disabled, d);
+        let disabled = !d.data.disabled;
+
+        if (!disabled) {
+          parent = d.parent;
+
+          do {
+            setDisabledState(false, parent)
+          } while (parent = parent.parent)
+        }
+
+        setAndPropagateDisabledState(disabled, d);
       },
     });
 
