@@ -20,6 +20,11 @@ function setDisabledState(disabled, d) {
   const target = d3.select("path[uuid='" + d.data.uuid + "']");
   let color = disabled ? "#000" : target.attr("fill-original");
   target.attr("fill", color);
+
+  if (toggleState && disabled) {
+    target.attr("fill-opacity", 0);
+    d3.select("text[uuid='" + d.data.uuid + "']").attr("fill-opacity", 0);
+  }
 }
 
 function setAndPropagateDisabledState(disabled, d) {
