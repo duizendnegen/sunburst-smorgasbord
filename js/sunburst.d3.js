@@ -81,7 +81,14 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
       .data(root.descendants())
       .join("a")
         .attr("xlink:href", link == null ? null : d => link(d.data, d))
-        .attr("target", link == null ? null : linkTarget);
+        .attr("target", link == null ? null : linkTarget)
+        .attr("class", d => {
+          if (d.parent == null) {
+            return "sunburst-nonclickable";
+          } else {
+            return "sunburst-clickable";
+          }
+        });
   
     cell.append("path")
         .attr("d", d => arc(d.current))

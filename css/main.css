@@ -16,6 +16,16 @@ body {
   color: #fff;
 }
 
+/* SUNBURST STYLES */
+
+.sunbusrt-nonclickable {
+  cursor: default;
+}
+
+.sunburst-clickable {
+  cursor: pointer;
+}
+
 /* TOGGLE SWITCH FOR HIDING ELEMENTS */
 
 .button-toggle {
