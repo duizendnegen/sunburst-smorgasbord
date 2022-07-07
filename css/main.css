@@ -1,5 +1,9 @@
 /* GENERAL */
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   background: #1F1F1F;
