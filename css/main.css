@@ -22,10 +22,6 @@ body {
 
 /* SUNBURST STYLES */
 
-.sunbusrt-nonclickable {
-  cursor: default;
-}
-
 .sunburst-clickable {
   cursor: pointer;
 }
