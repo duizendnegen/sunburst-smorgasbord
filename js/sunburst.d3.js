@@ -90,7 +90,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
   
     cell.append("path")
         .attr("d", d => arc(d.current))
-        .attr("fill", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
+        .attr("fill", d => (d.data.disabled || d.data.disabled === undefined && d.parent) ? "#000" : color ? color(d.ancestors().reverse()[1]?.index) : fill)
         .attr("fill-original", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
         .attr("fill-opacity", fillOpacity)
         .attr("uuid", d => d.data.uuid)

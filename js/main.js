@@ -1,9 +1,8 @@
 const mainWidth = 1152;
 const mainHeight = 1152;
-let toggleState = false;
 
 function getDisabledState(d) {
-  if (d.data.disabled) {
+  if (d.data.disabled || d.data.disabled === undefined) {
     return true;
   }
   
@@ -20,14 +19,14 @@ function setDisabledState(disabled, d) {
   const target = d3.select("path[uuid='" + d.data.uuid + "']");
   let color = disabled ? "#000" : target.attr("fill-original");
   target.attr("fill", color);
-
-  if (toggleState && disabled) {
-    target.attr("fill-opacity", 0);
-    d3.select("text[uuid='" + d.data.uuid + "']").attr("fill-opacity", 0);
-  }
 }
 
 function setAndPropagateDisabledState(disabled, d) {
+  // don't allow the root element to be disabled
+  if(d.parent == null) {
+    return;
+  }
+
   setDisabledState(disabled, d);
 
   if (d.children) {
@@ -35,10 +34,6 @@ function setAndPropagateDisabledState(disabled, d) {
       setAndPropagateDisabledState(disabled, child);
     });
   }
-}
-
-function arcVisible(d) {
-  return d.x1 > d.x0;
 }
 
 d3.json("/assets/autoingredients.json")
@@ -56,7 +51,7 @@ d3.json("/assets/autoingredients.json")
           return;
         }
 
-        let disabled = !d.data.disabled;
+        let disabled = d.data.disabled === undefined ? false : !d.data.disabled;
 
         if (!disabled) {
           parent = d.parent;
@@ -77,51 +72,21 @@ d3.json("/assets/autoingredients.json")
     //PNG EXPORT FUNCTIONALITY
     // Set-up the export button
     d3.select('#saveButton').on('click', function () {
-      let svgString = getSVGString(document.getElementById('theImage'));
+      // deep clone the image and process to hide disabled elements
+      let nodes = document.getElementById('theImage').cloneNode(true);
+      nodes.querySelectorAll("path[fill='#000']").forEach(function(path) {
+        path.setAttribute('fill-opacity', 0);
+        var uuid = path.getAttribute('uuid');
+        nodes.querySelector("text[uuid='"+uuid+"'").setAttribute('fill-opacity', 0);
+      });
+
+      let svgString = getSVGString(nodes);
 
       svgString2Image(svgString, 2 * mainWidth, 2 * mainHeight, 'png', save); // passes Blob and filesize String to the callback
 
       function save(dataBlob, filesize) {
         saveAs(dataBlob, 'sunburst-smorgasbord.png'); // FileSaver.js function
       }
-    });
-
-    d3.select("#toggleButton").on("click", function() {
-      toggleState = !toggleState;
-
-      let root = d3.selectAll("path");
-      root.each(d => {
-        let disabled = toggleState && getDisabledState(d);
-        d.target = {
-          x0: disabled ? 0 : d.x0,
-          x1: disabled ? 0 : d.x1
-        }
-      });
-
-      const t = d3.select("svg").transition().duration(750);
-
-      d3.selectAll("path")
-        .transition(t)
-        .tween("data", d => {
-          const i = d3.interpolate(d.current, d.target);
-          return t => d.current = i(t);
-        })
-        .filter(function(d) {
-          return +this.getAttribute("fill-opacity") || arcVisible(d.target);
-        })
-          .attr("fill-opacity", d => arcVisible(d.target) ? 0.6 : 0)
-          .attr("pointer-events", d => arcVisible(d.target) ? "auto" : "none");
-          // .attrTween("d", d => () => {
-          //   if(d.data.uuid == '342ba656-f6eb-11ec-b939-0242ac120002')
-          //     console.log(d);
-          //   return d3.arc(d.current);
-          // });
-      
-      d3.selectAll("text").filter(function(d) {
-        return +this.getAttribute("fill-opacity") || arcVisible(d.target);
-      }).transition(t)
-        .attr("fill-opacity", d => + arcVisible(d.target) ? 1 : 0);
-        // .attrTween("transform", d => () => arcVisible(d.current));
     });
 
     // Below are the functions that handle actual exporting:
@@ -179,13 +144,11 @@ d3.json("/assets/autoingredients.json")
           }
         }
 
-
         return extractedCSSText;
 
         function contains(str, arr) {
           return arr.indexOf(str) === -1 ? false : true;
         }
-
       }
 
       function appendCSS(cssText, element) {
@@ -196,7 +159,6 @@ d3.json("/assets/autoingredients.json")
         element.insertBefore(styleElement, refNode);
       }
     }
-
 
     function svgString2Image(svgString, width, height, imageFormat, callback) {
       const format = imageFormat ? imageFormat : 'png';
