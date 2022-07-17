@@ -24,7 +24,7 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
     radius = Math.min(width - marginLeft - marginRight, height - marginTop - marginBottom) / 2, // outer radius
     color = d3.interpolateRainbow, // color scheme, if any
     fill = "#1b1b1b", // fill for arcs (if no color encoding)
-    fillOpacity = 0.6, // fill opacity for arcs
+    fillOpacity = 1.0, // fill opacity for arcs
   } = {}) {
   
     // If id and parentId options are specified, or the path option, use d3.stratify
@@ -90,8 +90,15 @@ function Sunburst(data, { // data is either tabular (array of objects) or hierar
   
     cell.append("path")
         .attr("d", d => arc(d.current))
-        .attr("fill", d => (d.data.disabled || d.data.disabled === undefined && d.parent) ? "#000" : color ? color(d.ancestors().reverse()[1]?.index) : fill)
-        .attr("fill-original", d => color ? color(d.ancestors().reverse()[1]?.index) : fill)
+        .attr("fill", d => {
+          if(d.data.disabled || d.data.disabled === undefined && d.parent) {
+            return "#000";
+          }
+          return color ? d3.color(color(d.ancestors().reverse()[1]?.index)).darker(1) : fill;
+        })
+        .attr("fill-original", d => {
+          return color ? d3.color(color(d.ancestors().reverse()[1]?.index)).darker(1) : fill;
+        })
         .attr("fill-opacity", fillOpacity)
         .attr("uuid", d => d.data.uuid)
         .on("click", onClick ? onClick : null);
