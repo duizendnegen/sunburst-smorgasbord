@@ -1,18 +1,39 @@
+import { useEffect, useState } from 'react';
 import './App.css';
+
 import Smorgasbord from './components/Smorgasbord/Smorgasbord';
 
-function App() {
+const App = () => {
+  const [flavours, setFlavours] = useState([]);
+
+  const fetchDefaultFlavours = () => {
+    return fetch('flavours.json')
+    .then((response) => {
+      return response.json();
+    })
+  }
+
+  useEffect(() => {
+    fetchDefaultFlavours().then((flavours) => {
+      setFlavours(flavours);
+    })
+  }, []);
+
   return (
     <div>
       <div className="container-fluid">
         <div className="row">
           <div className="col-12 center" id="sunburstContainer">
+            {/*
             <div className="button-wrapper">
               <a className="button-trigger" id='saveButton' href="#0">
-                <strong>Download as image | import existing Smorgasbord | export your Smorgasbord</strong>
+                <strong>Download as image
               </a>
             </div>
-            <Smorgasbord></Smorgasbord>
+            TODO add buttons as a button group with icons: import Smorgasbord, export Smorgasbord, export as image, reset to default
+            TODO consider local storage behavior: check whether that's empty on app boot, if it is, fill from flavours.json
+            */}
+            <Smorgasbord flavours={flavours}></Smorgasbord>
           </div>
         </div>
       </div>
