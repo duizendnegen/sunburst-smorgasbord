@@ -21,6 +21,68 @@ function setDisabledState(disabled, d) {
   target.attr("fill", color);
 }
 
+// interpret URL hash
+function setState() {
+  var statesSelected = Array();
+
+  // find the graph
+  nodes = document.getElementById('theImage')
+  // document not ready yet? retry in a second
+  if (nodes == null) {
+    setTimeout(setState, 1000)
+    return;
+  }
+
+  // disassemble hash in URL
+  states = document.location.hash.slice(1).split(';')
+  states.forEach(element => {
+    if (element != "") {
+      keyval = element.split(':');
+      if (keyval[1] == '1') {
+        statesSelected.push(decodeURI(keyval[0]));
+      }
+    }
+  });
+
+  // check all nodes whether they need to be set
+  nodes.querySelectorAll("path[fill]").forEach(function(path) {
+    var fill = path.getAttribute('fill');
+    // traverse all unset nodes
+    if (fill == '#000') {
+      var uuid = path.getAttribute('uuid');
+      // but not the known root node
+      if (uuid != '342b4d3c-f6eb-11ec-b939-0242ac120002') {
+        var text = nodes.querySelector("text[uuid='"+uuid+"']");
+        if (statesSelected.includes(text.textContent)) {
+          const target = d3.select("path[uuid='" + uuid + "']");
+          target.attr("fill", target.attr("fill-original"));
+        }
+      }
+    }
+  });
+
+  updateStateString();
+}
+
+function updateStateString() {
+  var state = "";
+  nodes = document.getElementById('theImage')
+  nodes.querySelectorAll("path[fill]").forEach(function(path) {
+    var fill = path.getAttribute('fill');
+    // all set nodes
+    if (fill != '#000') {
+      var uuid = path.getAttribute('uuid');
+      // but not the known root node
+      if (uuid != '342b4d3c-f6eb-11ec-b939-0242ac120002') {
+        var text = nodes.querySelector("text[uuid='"+uuid+"']");
+        state = state + text.textContent + ':1;';
+      }
+    }
+  });
+
+  document.location.hash = state;
+}
+
 function setAndPropagateDisabledState(disabled, d) {
   // don't allow the root element to be disabled
   if(d.parent == null) {
@@ -62,6 +124,9 @@ d3.json("/assets/autoingredients.json")
         }
 
         setAndPropagateDisabledState(disabled, d);
+
+        // propagate set values back to URL
+        updateStateString();
       },
     });
 
@@ -187,3 +252,8 @@ d3.json("/assets/autoingredients.json")
       image.src = imgsrc;
     }
   });
+
+window.onload = function() {
+  // set values present in URL
+  setState();
+};
