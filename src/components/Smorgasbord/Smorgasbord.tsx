@@ -69,7 +69,7 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
     }
   }
   
-  return <svg ref={svgRef} width={diameter} height={diameter} viewBox="-576 -576 1152 1152">
+  return <svg xmlns="http://www.w3.org/2000/svg" ref={svgRef} width={diameter} height={diameter} viewBox="-576 -576 1152 1152" id='smorgasbordImage'>
     {nodes
       .map((d, i) => (
         <g key={d.data.uuid}>
@@ -79,7 +79,12 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
             fillOpacity="1.0"
             onClick={() => { onElementClick(d.data.uuid) }}>
           </path>
-          <text transform={getTextTransform(d)} fill="#fff" fillOpacity="1.0" dy="0.32em">
+          <text
+            transform={getTextTransform(d)}
+            fill="#fff"
+            fillOpacity="1.0"
+            dy="0.32em"
+            style={{fontFamily: 'sans-serif', fontSize: '12px', textAnchor: 'middle'}}>
             {d.data.name}
           </text>
         </g>

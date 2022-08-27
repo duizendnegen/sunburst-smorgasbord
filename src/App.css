@@ -1,6 +1,6 @@
 /* GENERAL */
 /* TODO factor this out in a sepate style.css file and one that specifically applies to App.tsx */
-/* TODO base on https://concisecss.com/documentation/ui so we can have nice button groups easily */
+/* TODO base on some existing CSS framework that also has UI so we can have nice button groups and so on */
 
 html {
   scroll-behavior: smooth;
@@ -14,6 +14,10 @@ body {
 .button-wrapper {
   margin-top: 1;
   margin-bottom: 50px;
+  background: #4a1942;
+  display: inline-block;
+  border-radius: 50em;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* ROOT FONT STYLES */
@@ -31,17 +35,18 @@ body {
 /* SAVE IMAGE BUTTON */
 
 .button-trigger {
-  position: relative;
-  background: #4a1942;
-  display: inline-block;
-  border-radius: 50em;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   color: #fff;
+  display: inline-block;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;
   padding-right: 30px;
   text-decoration: none;
+  border-right:2px solid rgba(0, 0, 0, 0.7);
+}
+
+.button-trigger:last-child {
+  border-right: 0;
 }
 
 .button-trigger strong {

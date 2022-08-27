@@ -4,6 +4,9 @@ import * as d3 from "d3";
 
 import Smorgasbord from './components/Smorgasbord/Smorgasbord';
 import Flavour from './interfaces';
+import ImportJsonButton from './components/ImportJsonButton/ImportJsonButton';
+import ExportAsJsonButton from './components/ExportAsJsonButton/ExportAsJsonButton';
+import ExportAsImageButton from './components/ExportAsImageButton/ExportAsImageButton';
 
 const App = () => {
   const [flavours, setFlavours] = useState([]);
@@ -23,6 +26,9 @@ const App = () => {
   }
 
   useEffect(() => {
+    /*
+    TODO consider local storage behavior: check whether that's empty on app boot, if it is, fill from flavours.json
+    */
     fetchDefaultFlavours().then((flavours) => {
       setFlavours(flavours);
     });
@@ -38,6 +44,11 @@ const App = () => {
       .parentId(d => d.parentId)
         (flavours));
   }, [ flavours ]);
+
+  const importNewFlavours = (data: any) => {
+    let json = JSON.parse(data);
+    setFlavours(json);
+  }
 
   const handleElementClick = (uuid: string) => {
     // find the target flavour
@@ -116,15 +127,11 @@ const App = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-12 center" id="sunburstContainer">
-            {/*
             <div className="button-wrapper">
-              <a className="button-trigger" id='saveButton' href="#0">
-                <strong>Download as image
-              </a>
+              <ExportAsImageButton></ExportAsImageButton>
+              <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
+              <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
             </div>
-            TODO add buttons as a button group with icons: import Smorgasbord, export Smorgasbord, export as image, reset to default
-            TODO consider local storage behavior: check whether that's empty on app boot, if it is, fill from flavours.json
-            */}
             <Smorgasbord
               hierchicalFlavours={hierchicalFlavours}
               onElementClick={handleElementClick}></Smorgasbord>
