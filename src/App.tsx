@@ -1,23 +1,115 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import * as d3 from "d3";
 
 import Smorgasbord from './components/Smorgasbord/Smorgasbord';
+import Flavour from './interfaces';
 
 const App = () => {
   const [flavours, setFlavours] = useState([]);
+  const [hierchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
 
   const fetchDefaultFlavours = () => {
     return fetch('flavours.json')
     .then((response) => {
       return response.json();
     })
+    .then((flavours) => {
+      return flavours.map(flavour => {
+        flavour.state = 'NO';
+        return flavour;
+      });
+    });
   }
 
   useEffect(() => {
     fetchDefaultFlavours().then((flavours) => {
       setFlavours(flavours);
-    })
+    });
   }, []);
+
+  useEffect(() => {
+    if(!flavours || flavours.length === 0) {
+      return;
+    }
+
+    setHierarchicalFlavours(d3.stratify<Flavour>()
+      .id(d => d.uuid)
+      .parentId(d => d.parentId)
+        (flavours));
+  }, [ flavours ]);
+
+  const handleElementClick = (uuid: string) => {
+    // find the target flavour
+    let targetFlavour = flavours.find(flavour => flavour.uuid === uuid);
+    let targetHierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
+
+    // ignore root click
+    if (targetHierarchicalFlavour.ancestors().length === 1) {
+      return;
+    }
+
+    let oldState = targetFlavour.state;
+    let newState = oldState === 'NO' ? 'YES'
+      : oldState === 'YES' ? 'MAYBE'
+      : 'NO';
+    
+    // 'NO'? Update all children to that
+    if (newState === 'NO') {
+      setFlavours(
+        flavours.map(flavour => {
+          if (flavour.uuid === uuid) {
+            flavour.state = newState;
+          } else {
+            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)) {
+              flavour.state = newState;
+            }
+          }
+
+          return flavour;
+        })
+      );
+    }
+
+    // 'YES'? Update the parents and children to that
+    if (newState === 'YES') {
+      setFlavours(
+        flavours.map(flavour => {
+          if (flavour.uuid === uuid) {
+            flavour.state = newState;
+          } else {
+            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
+              || hierarchicalFlavour.children?.some(child => child.data.uuid === targetFlavour.uuid)) {
+              flavour.state = newState;
+            }
+          }
+
+          return flavour;
+        })
+      );
+    }
+    
+    // 'MAYBE'? Update the children that have 'YES' to that
+    if (newState === 'MAYBE') {
+      setFlavours(
+        flavours.map(flavour => {
+          if (flavour.uuid === uuid) {
+            flavour.state = newState;
+          } else {
+            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid
+                && hierarchicalFlavour.data.state === 'YES')) {
+              flavour.state = newState;
+            }
+          }
+
+          return flavour;
+        })
+      );
+    }
+  }
 
   return (
     <div>
@@ -33,7 +125,9 @@ const App = () => {
             TODO add buttons as a button group with icons: import Smorgasbord, export Smorgasbord, export as image, reset to default
             TODO consider local storage behavior: check whether that's empty on app boot, if it is, fill from flavours.json
             */}
-            <Smorgasbord flavours={flavours}></Smorgasbord>
+            <Smorgasbord
+              hierchicalFlavours={hierchicalFlavours}
+              onElementClick={handleElementClick}></Smorgasbord>
           </div>
         </div>
       </div>

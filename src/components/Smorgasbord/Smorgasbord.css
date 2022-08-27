@@ -1,0 +1,8 @@
+svg {
+  max-width: 100%;
+  height: auto;
+  height: intrinsic;
+  font-family: sans-serif;
+  font-size: 12px;
+  text-anchor: middle;
+}
