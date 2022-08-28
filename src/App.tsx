@@ -126,12 +126,16 @@ const App = () => {
     <div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 center" id="sunburstContainer">
+          <div className="col-12 center">
             <div className="button-wrapper">
               <ExportAsImageButton></ExportAsImageButton>
               <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
               <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 center">
             <Smorgasbord
               hierchicalFlavours={hierchicalFlavours}
               onElementClick={handleElementClick}></Smorgasbord>

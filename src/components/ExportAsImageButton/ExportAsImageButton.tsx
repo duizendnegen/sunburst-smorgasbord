@@ -13,7 +13,7 @@ const ExportAsImageButton = () => {
 
     let svgString = getSVGString(nodes);
 
-    svgString2Image(svgString, 2 * 1152, 2 * 1152, 'png', save); // passes Blob and filesize String to the callback
+    svgString2Image(svgString, 2 * 1152, 2 * 1152, save);
   }
   
   const save = (dataBlob) => {
@@ -89,9 +89,7 @@ const ExportAsImageButton = () => {
     element.insertBefore(styleElement, refNode);
   }
 
-  const svgString2Image = (svgString, width, height, imageFormat, callback) => {
-    const format = imageFormat ? imageFormat : 'png';
-
+  const svgString2Image = (svgString, width, height, callback) => {
     let imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString))); // Convert SVG string to data URL
 
     let canvas = document.createElement("canvas");
