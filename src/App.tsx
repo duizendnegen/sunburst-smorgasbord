@@ -92,7 +92,7 @@ const App = () => {
           } else {
             let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
-              || hierarchicalFlavour.children?.some(child => child.data.uuid === targetFlavour.uuid)) {
+              || hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
               flavour.state = newState;
             }
           }
