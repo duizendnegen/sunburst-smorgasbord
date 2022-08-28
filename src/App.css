@@ -49,6 +49,10 @@ body {
   border-right: 0;
 }
 
+.button-trigger:hover {
+  cursor: pointer;
+}
+
 .button-trigger strong {
   position: relative;
   left: 0;
