@@ -72,12 +72,13 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
   return <svg xmlns="http://www.w3.org/2000/svg" ref={svgRef} width={diameter} height={diameter} viewBox="-576 -576 1152 1152" id='smorgasbordImage'>
     {nodes
       .map((d, i) => (
-        <g key={d.data.uuid}>
+        <g key={d.data.uuid}
+          onClick={() => { onElementClick(d.data.uuid) }}
+          className={d.parent === null ? 'flavour-root-node' : ''}>
           <path
             d={getArc(d)}
             fill={getColor(d)}
-            fillOpacity="1.0"
-            onClick={() => { onElementClick(d.data.uuid) }}>
+            fillOpacity="1.0">
           </path>
           <text
             transform={getTextTransform(d)}

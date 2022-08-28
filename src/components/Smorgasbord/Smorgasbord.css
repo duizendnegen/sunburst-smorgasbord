@@ -3,3 +3,11 @@ svg {
   height: auto;
   height: intrinsic;
 }
+
+g:hover {
+  cursor: pointer;
+}
+
+g.flavour-root-node:hover {
+  cursor: default;
+}
