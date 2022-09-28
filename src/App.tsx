@@ -7,6 +7,7 @@ import Flavour from './interfaces';
 import ImportJsonButton from './components/ImportJsonButton/ImportJsonButton';
 import ExportAsJsonButton from './components/ExportAsJsonButton/ExportAsJsonButton';
 import ExportAsImageButton from './components/ExportAsImageButton/ExportAsImageButton';
+import ResetButton from './components/ResetButton/ResetButton';
 
 const App = () => {
   const [flavours, setFlavours] = useState([]);
@@ -26,12 +27,19 @@ const App = () => {
   }
 
   useEffect(() => {
-    /*
-    TODO consider local storage behavior: check whether that's empty on app boot, if it is, fill from flavours.json
-    */
-    fetchDefaultFlavours().then((flavours) => {
+    let flavours;
+
+    if (localStorage) {
+      flavours = JSON.parse(localStorage.getItem('flavours'));
+    }
+
+    if (flavours) {
       setFlavours(flavours);
-    });
+    } else {
+      fetchDefaultFlavours().then((flavours) => {
+        setFlavours(flavours);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -39,15 +47,33 @@ const App = () => {
       return;
     }
 
-    setHierarchicalFlavours(d3.stratify<Flavour>()
-      .id(d => d.uuid)
-      .parentId(d => d.parentId)
-        (flavours));
+    if (localStorage) {
+      localStorage.setItem('flavours', JSON.stringify(flavours));
+    }
+
+    try {
+      // TODO double check whether the input is valid :)
+
+      setHierarchicalFlavours(d3.stratify<Flavour>()
+        .id(d => d.uuid)
+        .parentId(d => d.parentId)
+          (flavours));
+    } catch {
+      fetchDefaultFlavours().then((flavours) => {
+        setFlavours(flavours);
+      });
+    }
   }, [ flavours ]);
 
   const importNewFlavours = (data: any) => {
     let json = JSON.parse(data);
     setFlavours(json);
+  }
+
+  const resetFlavours = () => {
+    fetchDefaultFlavours().then((flavours) => {
+      setFlavours(flavours);
+    });
   }
 
   const handleElementClick = (uuid: string) => {
@@ -131,6 +157,7 @@ const App = () => {
               <ExportAsImageButton></ExportAsImageButton>
               <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
               <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+              <ResetButton onReset={resetFlavours}></ResetButton>
             </div>
           </div>
         </div>
