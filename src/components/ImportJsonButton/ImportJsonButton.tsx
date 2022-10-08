@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 
 interface ImportJsonButtonProps {
@@ -6,6 +7,8 @@ interface ImportJsonButtonProps {
 }
 
 const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
+  const { t } = useTranslation();
+
   const inputFile = useRef(null) 
 
   const importNewFlavours = () => {
@@ -25,7 +28,7 @@ const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
 
   return (
     <div className="button-trigger" onClick={importNewFlavours}>
-      <strong>Import</strong>
+    <strong>{t('button.import_json')}</strong>
       <input
         type='file'
         ref={inputFile}
