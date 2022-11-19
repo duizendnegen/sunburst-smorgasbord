@@ -10,12 +10,15 @@ import ImportJsonButton from './components/ImportJsonButton/ImportJsonButton';
 import ExportAsJsonButton from './components/ExportAsJsonButton/ExportAsJsonButton';
 import ExportAsImageButton from './components/ExportAsImageButton/ExportAsImageButton';
 import ResetButton from './components/ResetButton/ResetButton';
+import EditButton from './components/EditButton/EditButton';
+import EditModal from './components/EditModal/EditModal';
 
 const App = () => {
   const { t, i18n } = useTranslation();
 
   const [flavours, setFlavours] = useState([]);
   const [hierchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+  const [editModalActive, setEditModalActive] = useState(false);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -82,6 +85,14 @@ const App = () => {
     fetchDefaultFlavours().then((flavours) => {
       setFlavours(flavours);
     });
+  }
+
+  const toggleEditMode = () => {
+    setEditModalActive(!editModalActive);
+  }
+
+  const handleEditModalChange = (data: any) => {
+    setFlavours(data);
   }
 
   const handleElementClick = (uuid: string) => {
@@ -178,9 +189,15 @@ const App = () => {
             <ExportAsImageButton></ExportAsImageButton>
             <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
             <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+            <EditButton onClick={toggleEditMode}></EditButton>
             <ResetButton onReset={resetFlavours}></ResetButton>
           </div>
         </div>
+        <EditModal
+          isActive={editModalActive}
+          flavours={flavours}
+          onChange={handleEditModalChange}
+          onClose={toggleEditMode}></EditModal>
         <div className="container content has-text-centered">
           <Smorgasbord
             hierchicalFlavours={hierchicalFlavours}
