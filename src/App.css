@@ -1,76 +1,33 @@
-/* GENERAL */
-/* TODO factor this out in a sepate style.css file and one that specifically applies to App.tsx */
-/* TODO base on some existing CSS framework that also has UI so we can have nice button groups and so on */
-
 html {
   scroll-behavior: smooth;
 }
 
 html,
-body {
+body,
+footer.footer {
   background: #1F1F1F;
-}
-
-.button-wrapper {
-  margin-top: 1;
-  margin-bottom: 50px;
-  background: #4a1942;
-  display: inline-block;
-  border-radius: 50em;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.line {
-  height: 1px;
-  width: 100%;
-  background: #D6D6D8;
-  margin: 80px 0;
-}
-
-/* ROOT FONT STYLES */
-
-* {
   color: #fff;
 }
-
-/* SUNBURST STYLES */
 
 .sunburst-clickable {
   cursor: pointer;
 }
 
-/* SAVE IMAGE BUTTON */
-
-.button-trigger {
+.button {
+  background-color: #4a1942;
   color: #fff;
-  display: inline-block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  text-decoration: none;
-  border-right:2px solid rgba(0, 0, 0, 0.7);
+}
+.button:hover {
+  color: #ccc;
 }
 
-.button-trigger:last-child {
-  border-right: 0;
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  color: #fff;
 }
-
-.button-trigger:hover {
-  cursor: pointer;
-}
-
-.button-trigger strong {
-  position: relative;
-  left: 0;
-}
-
 .button-link {
   background-color: transparent;
   border: none;
-  font-size: 1.125rem;
-  font-weight: 200;
-  line-height: 1.8;
+  color: white;
   padding: 0;
   text-decoration: underline;
 }

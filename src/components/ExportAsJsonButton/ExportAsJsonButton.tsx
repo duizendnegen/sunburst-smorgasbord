@@ -14,9 +14,9 @@ const ExportAsJsonButton = ({ flavours } : ExportAsJsonButtonProps) => {
   }
 
   return (
-    <div className="button-trigger" onClick={exportCurrentFlavours}>
+    <button className="button" onClick={exportCurrentFlavours}>
       <strong>{t('button.download_json')}</strong>
-    </div>
+    </button>
   );
 }
 

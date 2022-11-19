@@ -163,72 +163,52 @@ const App = () => {
 
   return (
     <Suspense fallback="loading">
-      <div className="jumbotron">
+      <section className="section">
+        <div className="container content has-text-centered">
+          <h1 className="title">{t('header.title')}</h1>
+          <h2 className="subtitle">{t('header.subtitle')}</h2>
+          <p>
+            <a href="#what-is-this">{t('faq.whats_this')}</a>
+          </p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container content">
+          <div className="buttons has-addons is-centered mb-6">
+            <ExportAsImageButton></ExportAsImageButton>
+            <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
+            <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+            <ResetButton onReset={resetFlavours}></ResetButton>
+          </div>
+        </div>
+        <div className="container content has-text-centered">
+          <Smorgasbord
+            hierchicalFlavours={hierchicalFlavours}
+            onElementClick={handleElementClick}></Smorgasbord>
+        </div>
+      </section>
+      <section className="section">
         <div className="container">
-          <div className="row">
-            <div className="col-12 center">
-              <div className="img img-logo center"></div>
-              <h1>{t('header.title')}</h1>
-              <h2 className="font-light">{t('header.subtitle')}</h2>
-              <a href="#what-is-this">{t('faq.whats_this')}</a>
-            </div>
+          <div className="content has-text-centered">
+            <h2 id="what-is-this" className="title is-4">{t('faq.whats_this')}</h2>
+            <p dangerouslySetInnerHTML={{__html: t('faq.whats_this_content')}}></p>
+            <h2 className="title is-4">{t('faq.how_to_use')}</h2>
+            <p>{t('faq.how_to_use_content_1')}</p>
+            <p>{t('faq.how_to_use_content_2')}</p>
+            <h2 className="title is-4">{t('faq.whats_ra')}</h2>
+            <p dangerouslySetInnerHTML={{__html: t('faq.whats_ra_content')}}></p>
           </div>
         </div>
-      </div>
-      <div>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-12 center">
-              <div className="button-wrapper">
-                <ExportAsImageButton></ExportAsImageButton>
-                <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
-                <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
-                <ResetButton onReset={resetFlavours}></ResetButton>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12 center">
-              <Smorgasbord
-                hierchicalFlavours={hierchicalFlavours}
-                onElementClick={handleElementClick}></Smorgasbord>
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-12 center">
-              <h2 id="what-is-this">{t('faq.whats_this')}</h2>
-              <p dangerouslySetInnerHTML={{__html: t('faq.whats_this_content')}}></p>
-              <h2>{t('faq.how_to_use')}</h2>
-              <p>{t('faq.how_to_use_content_1')}</p>
-              <p>{t('faq.how_to_use_content_2')}</p>
-              <h2>{t('faq.whats_ra')}</h2>
-              <p dangerouslySetInnerHTML={{__html: t('faq.whats_ra_content')}}></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-4 hidden-sm"></div>
-        <div className="col-4">
-          <div className="line"></div>
-        </div>
-        <div className="col-4 hidden-sm"></div>
-      </div>
-      <footer>
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <h3>{t('header.title')}</h3>
-              <p>
-                Available in&nbsp;
-                <button className="button-link" onClick={() => changeLanguage('en')}>English</button>,&nbsp;
-                <button className="button-link" onClick={() => changeLanguage('de')}>German</button>.
-              </p>
-              <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
-            </div>
-          </div>
+      </section>
+      <footer className="footer">
+        <div className="content">
+          <h3>{t('header.title')}</h3>
+          <p>
+            Available in&nbsp;
+            <button className="button-link" onClick={() => changeLanguage('en')}>English</button>,&nbsp;
+            <button className="button-link" onClick={() => changeLanguage('de')}>German</button>.
+          </p>
+          <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
         </div>
       </footer>
     </Suspense>
