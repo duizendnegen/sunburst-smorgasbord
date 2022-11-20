@@ -17,7 +17,7 @@ const App = () => {
   const { t, i18n } = useTranslation();
 
   const [flavours, setFlavours] = useState<Flavour[]>([]);
-  const [hierchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+  const [hierarchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
   const [editModalActive, setEditModalActive] = useState<boolean>(true);
 
   const changeLanguage = (lang) => {
@@ -98,7 +98,7 @@ const App = () => {
   const handleElementClick = (uuid: string) => {
     // find the target flavour
     let targetFlavour = flavours.find(flavour => flavour.uuid === uuid);
-    let targetHierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
+    let targetHierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
 
     // ignore root click
     if (targetHierarchicalFlavour.ancestors().length === 1) {
@@ -117,7 +117,7 @@ const App = () => {
           if (flavour.uuid === uuid) {
             flavour.state = newState;
           } else {
-            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)) {
               flavour.state = newState;
             }
@@ -135,8 +135,9 @@ const App = () => {
           if (flavour.uuid === uuid) {
             flavour.state = newState;
           } else {
-            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-            if (hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
+            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
+              || hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
               flavour.state = newState;
             }
           }
@@ -153,7 +154,7 @@ const App = () => {
           if (flavour.uuid === uuid) {
             flavour.state = newState;
           } else {
-            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid
                 && hierarchicalFlavour.data.state === 'YES')) {
               flavour.state = newState;
@@ -200,7 +201,7 @@ const App = () => {
           onClose={toggleEditMode}></EditModal>
         <div className="container content has-text-centered">
           <Smorgasbord
-            hierchicalFlavours={hierchicalFlavours}
+            hierarchicalFlavours={hierarchicalFlavours}
             onElementClick={handleElementClick}></Smorgasbord>
         </div>
       </section>
