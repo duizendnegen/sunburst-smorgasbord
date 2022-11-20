@@ -17,7 +17,6 @@ const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange
       "uuid": uuidv4(),
       "parentUuid": parentUuidToAddFlavourTo, // TODO change this to parentUuid when pulling upstream changes
       "name": newFlavourName,
-      "value": 1000, // TODO gotta do some magic here, have to start to dynamically calculate the vaule instead...
       "state":"NO"
     }
     

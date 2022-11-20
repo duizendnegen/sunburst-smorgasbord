@@ -3,7 +3,7 @@ interface Flavour {
   parentUuid: string,
   key?: string,
   name?: string,
-  value: number,
+  value?: number,
   state?: string,
 }
 

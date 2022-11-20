@@ -2,871 +2,726 @@
   {
     "uuid": "5e43a92b-3dba-44e5-b6ef-f5c2f45872ca",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "caregiving",
-    "value": 0
+    "key": "caregiving"
   },
   {
     "uuid": "342b5124-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "collaboration",
-    "value": 0
+    "key": "collaboration"
   },
   {
     "uuid": "342b5494-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "communication",
-    "value": 0
+    "key": "communication"
   },
   {
     "uuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "companionship",
-    "value": 0
+    "key": "companionship"
   },
   {
     "uuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5124-f6eb-11ec-b939-0242ac120002",
-    "key": "creativity",
-    "value": 0
+    "key": "creativity"
   },
   {
     "uuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "domesticity",
-    "value": 0
+    "key": "domesticity"
   },
   {
     "uuid": "342b6754-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "5e43a92b-3dba-44e5-b6ef-f5c2f45872ca",
-    "key": "each_other",
-    "value": 0
+    "key": "each_other"
   },
   {
     "uuid": "342b643e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "emotional_intimacy",
-    "value": 0
+    "key": "emotional_intimacy"
   },
   {
     "uuid": "342b58d6-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b643e-f6eb-11ec-b939-0242ac120002",
-    "key": "emotional_support",
-    "value": 0
+    "key": "emotional_support"
   },
   {
     "uuid": "342b6542-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "exclusivity",
-    "value": 0
+    "key": "exclusivity"
   },
   {
     "uuid": "342b537c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "finances",
-    "value": 0
+    "key": "finances"
   },
   {
     "uuid": "342b6326-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "746895ae-6adc-4fa3-a83a-25ec1e465543",
-    "key": "hierarchy",
-    "value": 0
+    "key": "hierarchy"
   },
   {
     "uuid": "342ba552-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5494-f6eb-11ec-b939-0242ac120002",
-    "key": "in_person",
-    "value": 0
+    "key": "in_person"
   },
   {
     "uuid": "342b6984-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "kink",
-    "value": 0
+    "key": "kink"
   },
   {
     "uuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "labels",
-    "value": 0
+    "key": "labels"
   },
   {
     "uuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "legal_arrangements",
-    "value": 0
+    "key": "legal_arrangements"
   },
   {
     "uuid": "342b5f70-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "5e43a92b-3dba-44e5-b6ef-f5c2f45872ca",
-    "key": "others",
-    "value": 0
+    "key": "others"
   },
   {
     "uuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "",
-    "key": "our_relationship_includes",
-    "value": 0
+    "key": "our_relationship_includes"
   },
   {
     "uuid": "342b5a0c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "partnership",
-    "value": 0
+    "key": "partnership"
   },
   {
     "uuid": "342ba656-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5494-f6eb-11ec-b939-0242ac120002",
-    "key": "phone",
-    "value": 0
+    "key": "phone"
   },
   {
     "uuid": "342b6646-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "physical_intimacy",
-    "value": 0
+    "key": "physical_intimacy"
   },
   {
     "uuid": "342b5e58-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6984-f6eb-11ec-b939-0242ac120002",
-    "key": "power_exchange",
-    "value": 0
+    "key": "power_exchange"
   },
   {
     "uuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "public_displays_of_affection",
-    "value": 0
+    "key": "public_displays_of_affection"
   },
   {
     "uuid": "342b55ac-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "sexuality",
-    "value": 0
+    "key": "sexuality"
   },
   {
     "uuid": "746895ae-6adc-4fa3-a83a-25ec1e465543",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "societal_constraints",
-    "value": 0
+    "key": "societal_constraints"
   },
   {
     "uuid": "342b6862-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
-    "key": "spirituality",
-    "value": 0
+    "key": "spirituality"
   },
   {
     "uuid": "aa4f07c3-96cc-4dd5-bc56-7cfdd754beaf",
     "parentUuid": "746895ae-6adc-4fa3-a83a-25ec1e465543",
-    "key": "structural_inequality",
-    "value": 0
+    "key": "structural_inequality"
   },
   {
     "uuid": "342ba75a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5494-f6eb-11ec-b939-0242ac120002",
-    "key": "text",
-    "value": 0
+    "key": "text"
   },
   {
     "uuid": "342c0092-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "acrobatics",
-    "value": 1000
+    "key": "acrobatics"
   },
   {
     "uuid": "51e66002-262f-4bb0-b59d-6ad1a1848326",
     "parentUuid": "aa4f07c3-96cc-4dd5-bc56-7cfdd754beaf",
-    "key": "ability",
-    "value": 1000
+    "key": "ability"
   },
   {
     "uuid": "b2450094-10ff-4899-936f-3959b3b805f2",
     "parentUuid": "aa4f07c3-96cc-4dd5-bc56-7cfdd754beaf",
-    "key": "class",
-    "value": 1000
+    "key": "class"
   },
   {
     "uuid": "3c798a3f-bac9-4c25-b08b-54e2e83756c8",
     "parentUuid": "aa4f07c3-96cc-4dd5-bc56-7cfdd754beaf",
-    "key": "financial",
-    "value": 1000
+    "key": "financial"
   },
   {
     "uuid": "8e632012-0ac0-4d2d-a33d-a2486889c687",
     "parentUuid": "aa4f07c3-96cc-4dd5-bc56-7cfdd754beaf",
-    "key": "gender",
-    "value": 1000
+    "key": "gender"
   },
   {
     "uuid": "16966dd3-09ab-4952-abb0-4c7150c35ed7",
     "parentUuid": "aa4f07c3-96cc-4dd5-bc56-7cfdd754beaf",
-    "key": "race",
-    "value": 1000
+    "key": "race"
   },
   {
     "uuid": "342b7280-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
-    "key": "adoption",
-    "value": 1000
+    "key": "adoption"
   },
   {
     "uuid": "342bdab8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5f70-f6eb-11ec-b939-0242ac120002",
-    "key": "animals",
-    "value": 1000
+    "key": "animals"
   },
   {
     "uuid": "342bb4b6-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b58d6-f6eb-11ec-b939-0242ac120002",
-    "key": "being_asked_for_advice",
-    "value": 1000
+    "key": "being_asked_for_advice"
   },
   {
     "uuid": "342be1ac-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b643e-f6eb-11ec-b939-0242ac120002",
-    "key": "being_vulnerable",
-    "value": 1000
+    "key": "being_vulnerable"
   },
   {
     "uuid": "342bf20a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "body_contact",
-    "value": 1000
+    "key": "body_contact"
   },
   {
     "uuid": "342bb0b0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b55ac-f6eb-11ec-b939-0242ac120002",
-    "key": "body_touch",
-    "value": 1000
+    "key": "body_touch"
   },
   {
     "uuid": "342c057e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6326-f6eb-11ec-b939-0242ac120002",
-    "key": "boss_employee",
-    "value": 1000
+    "key": "boss_employee"
   },
   {
     "uuid": "342b7168-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
-    "key": "business_partner",
-    "value": 1000
+    "key": "business_partner"
   },
   {
     "uuid": "342bd9aa-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5f70-f6eb-11ec-b939-0242ac120002",
-    "key": "children",
-    "value": 1000
+    "key": "children"
   },
   {
     "uuid": "342bcd02-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
-    "key": "chores",
-    "value": 1000
+    "key": "chores"
   },
   {
     "uuid": "342c1fd2-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "chosen_family",
-    "value": 1000
+    "key": "chosen_family"
   },
   {
     "uuid": "342b77f8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
-    "key": "civil_partnership",
-    "value": 1000
+    "key": "civil_partnership"
   },
   {
     "uuid": "342bf110-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "co_sleeping",
-    "value": 1000
+    "key": "co_sleeping"
   },
   {
     "uuid": "342bff8e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "comedy",
-    "value": 1000
+    "key": "comedy"
   },
   {
     "uuid": "342bba9c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5a0c-f6eb-11ec-b939-0242ac120002",
-    "key": "commitment",
-    "value": 1000
+    "key": "commitment"
   },
   {
     "uuid": "342bb77c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b58d6-f6eb-11ec-b939-0242ac120002",
-    "key": "confidante",
-    "value": 1000
+    "key": "confidante"
   },
   {
     "uuid": "342bd00e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
-    "key": "cooking_together",
-    "value": 1000
+    "key": "cooking_together"
   },
   {
     "uuid": "342bfa66-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "craft",
-    "value": 1000
+    "key": "craft"
   },
   {
     "uuid": "342be7a6-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "cuddles",
-    "value": 1000
+    "key": "cuddles"
   },
   {
     "uuid": "342b7c1c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
-    "key": "cultivating_uniqueness",
-    "value": 1000
+    "key": "cultivating_uniqueness"
   },
   {
     "uuid": "342bd694-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5e58-f6eb-11ec-b939-0242ac120002",
-    "key": "d_s",
-    "value": 1000
+    "key": "d_s"
   },
   {
     "uuid": "342c0196-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "dance",
-    "value": 1000
+    "key": "dance"
   },
   {
     "uuid": "342c272a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "datemate",
-    "value": 1000
+    "key": "datemate"
   },
   {
     "uuid": "342c1dd4-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6862-f6eb-11ec-b939-0242ac120002",
-    "key": "discussions",
-    "value": 1000
+    "key": "discussions"
   },
   {
     "uuid": "342bbcb8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5a0c-f6eb-11ec-b939-0242ac120002",
-    "key": "embracing_change",
-    "value": 1000
+    "key": "embracing_change"
   },
   {
     "uuid": "342c151e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6754-f6eb-11ec-b939-0242ac120002",
-    "key": "emergencies",
-    "value": 1000
+    "key": "emergencies"
   },
   {
     "uuid": "342b7d20-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b643e-f6eb-11ec-b939-0242ac120002",
-    "key": "emotional_attraction",
-    "value": 1000
+    "key": "emotional_attraction"
   },
   {
     "uuid": "342c0d58-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6542-f6eb-11ec-b939-0242ac120002",
-    "key": "emotional_exclusivity",
-    "value": 1000
+    "key": "emotional_exclusivity"
   },
   {
     "uuid": "342bb33a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b58d6-f6eb-11ec-b939-0242ac120002",
-    "key": "empathy",
-    "value": 1000
+    "key": "empathy"
   },
   {
     "uuid": "342c1618-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6754-f6eb-11ec-b939-0242ac120002",
-    "key": "end_of_life_death",
-    "value": 1000
+    "key": "end_of_life_death"
   },
   {
     "uuid": "342bbdb2-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
-    "key": "events",
-    "value": 1000
+    "key": "events"
   },
   {
     "uuid": "3a0a2303-286b-49c5-96a2-0a7b3d899ee7",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "writing",
-    "value": 1000
+    "key": "writing"
   },
   {
     "uuid": "342b74b0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
-    "key": "executor_of_will",
-    "value": 1000
+    "key": "executor_of_will"
   },
   {
     "uuid": "342bc21c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
-    "key": "family",
-    "value": 1000
+    "key": "family"
   },
   {
     "uuid": "342bd8b0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5f70-f6eb-11ec-b939-0242ac120002",
-    "key": "family_sick_or_elderly",
-    "value": 1000
+    "key": "family_sick_or_elderly"
   },
   {
     "uuid": "342bf6f6-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6984-f6eb-11ec-b939-0242ac120002",
-    "key": "fetishes",
-    "value": 1000
+    "key": "fetishes"
   },
   {
     "uuid": "342bbeac-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
-    "key": "friends",
-    "value": 1000
+    "key": "friends"
   },
   {
     "uuid": "342bc906-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
-    "key": "friendship",
-    "value": 1000
+    "key": "friendship"
   },
   {
     "uuid": "342badb8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b55ac-f6eb-11ec-b939-0242ac120002",
-    "key": "genitals",
-    "value": 1000
+    "key": "genitals"
   },
   {
     "uuid": "342bee0e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "hand_holding",
-    "value": 1000
+    "key": "hand_holding"
   },
   {
     "uuid": "342c1050-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6754-f6eb-11ec-b939-0242ac120002",
-    "key": "health",
-    "value": 1000
+    "key": "health"
   },
   {
     "uuid": "342be8c8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "hugs",
-    "value": 1000
+    "key": "hugs"
   },
   {
     "uuid": "342c038a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "improv",
-    "value": 1000
+    "key": "improv"
   },
   {
     "uuid": "342bc708-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
-    "key": "intellectual_discussions",
-    "value": 1000
+    "key": "intellectual_discussions"
   },
   {
     "uuid": "342bf00c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "kisses",
-    "value": 1000
+    "key": "kisses"
   },
   {
     "uuid": "342ba96c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b55ac-f6eb-11ec-b939-0242ac120002",
-    "key": "kissing",
-    "value": 1000
+    "key": "kissing"
   },
   {
     "uuid": "342bb1be-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b58d6-f6eb-11ec-b939-0242ac120002",
-    "key": "listening",
-    "value": 1000
+    "key": "listening"
   },
   {
     "uuid": "342be2a6-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b643e-f6eb-11ec-b939-0242ac120002",
-    "key": "love_languages",
-    "value": 1000
+    "key": "love_languages"
   },
   {
     "uuid": "342bd7ac-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5e58-f6eb-11ec-b939-0242ac120002",
-    "key": "m_s",
-    "value": 1000
+    "key": "m_s"
   },
   {
     "uuid": "342b7384-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
-    "key": "marriage",
-    "value": 1000
+    "key": "marriage"
   },
   {
     "uuid": "342c0484-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "martial_arts",
-    "value": 1000
+    "key": "martial_arts"
   },
   {
     "uuid": "342bed14-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "massage",
-    "value": 1000
+    "key": "massage"
   },
   {
     "uuid": "342c0b5a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6326-f6eb-11ec-b939-0242ac120002",
-    "key": "mentor_guide",
-    "value": 1000
+    "key": "mentor_guide"
   },
   {
     "uuid": "342bfb56-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "music",
-    "value": 1000
+    "key": "music"
   },
   {
     "uuid": "342bef08-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6646-f6eb-11ec-b939-0242ac120002",
-    "key": "nudity",
-    "value": 1000
+    "key": "nudity"
   },
   {
     "uuid": "342b7b18-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5124-f6eb-11ec-b939-0242ac120002",
-    "key": "organization",
-    "value": 1000
+    "key": "organization"
   },
   {
     "uuid": "342bacb4-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b55ac-f6eb-11ec-b939-0242ac120002",
-    "key": "orgasms",
-    "value": 1000
+    "key": "orgasms"
   },
   {
     "uuid": "342c1ed8-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "partner",
-    "value": 1000
+    "key": "partner"
   },
   {
     "uuid": "342b841e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b537c-f6eb-11ec-b939-0242ac120002",
-    "key": "payments",
-    "value": 1000
+    "key": "payments"
   },
   {
     "uuid": "342bdbbc-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5f70-f6eb-11ec-b939-0242ac120002",
-    "key": "plants",
-    "value": 1000
+    "key": "plants"
   },
   {
     "uuid": "342b705a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b4ff8-f6eb-11ec-b939-0242ac120002",
-    "key": "power_of_attorney",
-    "value": 1000
+    "key": "power_of_attorney"
   },
   {
     "uuid": "342b7a0a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5124-f6eb-11ec-b939-0242ac120002",
-    "key": "projects",
-    "value": 1000
+    "key": "projects"
   },
   {
     "uuid": "342b8734-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b537c-f6eb-11ec-b939-0242ac120002",
-    "key": "property",
-    "value": 1000
+    "key": "property"
   },
   {
     "uuid": "342c1424-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6754-f6eb-11ec-b939-0242ac120002",
-    "key": "reliability",
-    "value": 1000
+    "key": "reliability"
   },
   {
     "uuid": "342b8630-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b537c-f6eb-11ec-b939-0242ac120002",
-    "key": "responsibilities",
-    "value": 1000
+    "key": "responsibilities"
   },
   {
     "uuid": "342bbbaa-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5a0c-f6eb-11ec-b939-0242ac120002",
-    "key": "routine",
-    "value": 1000
+    "key": "routine"
   },
   {
     "uuid": "342bcbfe-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
-    "key": "routines",
-    "value": 1000
+    "key": "routines"
   },
   {
     "uuid": "342bf85e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6984-f6eb-11ec-b939-0242ac120002",
-    "key": "sadomasochism",
-    "value": 1000
+    "key": "sadomasochism"
   },
   {
     "uuid": "342bc514-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
-    "key": "seen_together",
-    "value": 1000
+    "key": "seen_together"
   },
   {
     "uuid": "342c0c54-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6542-f6eb-11ec-b939-0242ac120002",
-    "key": "sexual_exclusivity",
-    "value": 1000
+    "key": "sexual_exclusivity"
   },
   {
     "uuid": "342b8518-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b537c-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_accounts",
-    "value": 1000
+    "key": "shared_accounts"
   },
   {
     "uuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_activities",
-    "value": 1000
+    "key": "shared_activities"
   },
   {
     "uuid": "342c1cd0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6862-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_beliefs",
-    "value": 1000
+    "key": "shared_beliefs"
   },
   {
     "uuid": "342b7e38-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_experiences",
-    "value": 1000
+    "key": "shared_experiences"
   },
   {
     "uuid": "342bb88a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5a0c-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_goals",
-    "value": 1000
+    "key": "shared_goals"
   },
   {
     "uuid": "342bc802-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5c46-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_interests",
-    "value": 1000
+    "key": "shared_interests"
   },
   {
     "uuid": "342c19ce-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6862-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_ritual",
-    "value": 1000
+    "key": "shared_ritual"
   },
   {
     "uuid": "342bb98e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5a0c-f6eb-11ec-b939-0242ac120002",
-    "key": "shared_values",
-    "value": 1000
+    "key": "shared_values"
   },
   {
     "uuid": "342bce10-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
-    "key": "sharing_a_home",
-    "value": 1000
+    "key": "sharing_a_home"
   },
   {
     "uuid": "342bcf14-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
-    "key": "sharing_a_sleeping_space",
-    "value": 1000
+    "key": "sharing_a_sleeping_space"
   },
   {
     "uuid": "342be58a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b643e-f6eb-11ec-b939-0242ac120002",
-    "key": "sharing_beliefs",
-    "value": 1000
+    "key": "sharing_beliefs"
   },
   {
     "uuid": "342bd112-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5d5e-f6eb-11ec-b939-0242ac120002",
-    "key": "sharing_meals",
-    "value": 1000
+    "key": "sharing_meals"
   },
   {
     "uuid": "5f2c3f76-7a46-48f9-ad34-51669fddd2e2",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "platonic",
-    "value": 1000
+    "key": "platonic"
   },
   {
     "uuid": "61fc0be2-124d-402b-a9c7-ba279c7e42c3",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "comet",
-    "value": 1000
+    "key": "comet"
   },
   {
     "uuid": "80cfd3bc-6da0-464a-8d9a-1f2b0c7cc5b8",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "long_distance",
-    "value": 1000
+    "key": "long_distance"
   },
   {
     "uuid": "342be3a0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b643e-f6eb-11ec-b939-0242ac120002",
-    "key": "sharing_values",
-    "value": 1000
+    "key": "sharing_values"
   },
   {
     "uuid": "342bc41a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
-    "key": "social_media",
-    "value": 1000
+    "key": "social_media"
   },
   {
     "uuid": "342c093e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6326-f6eb-11ec-b939-0242ac120002",
-    "key": "sponsor_sponsee",
-    "value": 1000
+    "key": "sponsor_sponsee"
   },
   {
     "uuid": "342c20e0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
-    "key": "spouse",
-    "value": 1000
+    "key": "spouse"
   },
   {
     "uuid": "342b8842-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b537c-f6eb-11ec-b939-0242ac120002",
-    "key": "support",
-    "value": 1000
+    "key": "support"
   },
   {
     "uuid": "342c0a60-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6326-f6eb-11ec-b939-0242ac120002",
-    "key": "teacher_student",
-    "value": 1000
+    "key": "teacher_student"
   },
   {
     "uuid": "342b7906-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5124-f6eb-11ec-b939-0242ac120002",
-    "key": "teaching",
-    "value": 1000
+    "key": "teaching"
   },
   {
     "uuid": "342c0290-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "theatre",
-    "value": 1000
+    "key": "theatre"
   },
   {
     "uuid": "342bf96c-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "visual_art",
-    "value": 1000
+    "key": "visual_art"
   },
   {
     "uuid": "342bc320-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b5b1a-f6eb-11ec-b939-0242ac120002",
-    "key": "work",
-    "value": 1000
+    "key": "work"
   },
   {
     "uuid": "342bfc50-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
-    "key": "yoga",
-    "value": 1000
+    "key": "yoga"
   },
   {
     "uuid": "342b8950-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba656-f6eb-11ec-b939-0242ac120002",
-    "key": "daily",
-    "value": 1000
+    "key": "daily"
   },
   {
     "uuid": "342b917a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba552-f6eb-11ec-b939-0242ac120002",
-    "key": "daily",
-    "value": 1000
+    "key": "daily"
   },
   {
     "uuid": "342b98be-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba75a-f6eb-11ec-b939-0242ac120002",
-    "key": "daily",
-    "value": 1000
+    "key": "daily"
   },
   {
     "uuid": "342b8a54-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba656-f6eb-11ec-b939-0242ac120002",
-    "key": "weekly",
-    "value": 1000
+    "key": "weekly"
   },
   {
     "uuid": "342b9292-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba552-f6eb-11ec-b939-0242ac120002",
-    "key": "weekly",
-    "value": 1000
+    "key": "weekly"
   },
   {
     "uuid": "342b99cc-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba75a-f6eb-11ec-b939-0242ac120002",
-    "key": "weekly",
-    "value": 1000
+    "key": "weekly"
   },
   {
     "uuid": "342b8e1e-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba656-f6eb-11ec-b939-0242ac120002",
-    "key": "monthly",
-    "value": 1000
+    "key": "monthly"
   },
   {
     "uuid": "342b93a0-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba552-f6eb-11ec-b939-0242ac120002",
-    "key": "monthly",
-    "value": 1000
+    "key": "monthly"
   },
   {
     "uuid": "342b9ac6-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba75a-f6eb-11ec-b939-0242ac120002",
-    "key": "monthly",
-    "value": 1000
+    "key": "monthly"
   },
   {
     "uuid": "342b8f4a-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba656-f6eb-11ec-b939-0242ac120002",
-    "key": "yearly",
-    "value": 1000
+    "key": "yearly"
   },
   {
     "uuid": "342b94ae-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba552-f6eb-11ec-b939-0242ac120002",
-    "key": "yearly",
-    "value": 1000
+    "key": "yearly"
   },
   {
     "uuid": "342b9bca-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba75a-f6eb-11ec-b939-0242ac120002",
-    "key": "yearly",
-    "value": 1000
+    "key": "yearly"
   },
   {
     "uuid": "342b9058-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba656-f6eb-11ec-b939-0242ac120002",
-    "key": "whenever",
-    "value": 1000
+    "key": "whenever"
   },
   {
     "uuid": "342b95bc-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba552-f6eb-11ec-b939-0242ac120002",
-    "key": "whenever",
-    "value": 1000
+    "key": "whenever"
   },
   {
     "uuid": "342b9cc4-f6eb-11ec-b939-0242ac120002",
     "parentUuid": "342ba75a-f6eb-11ec-b939-0242ac120002",
-    "key": "whenever",
-    "value": 1000
+    "key": "whenever"
   }
  ]

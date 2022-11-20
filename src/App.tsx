@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import './App.css';
@@ -36,6 +36,16 @@ const App = () => {
       });
     });
   }
+  
+  const findAllDescendants = useCallback((flavourUuid) => {
+    let children = flavours
+      .filter(flavour => flavour.parentUuid === flavourUuid)
+      .map(flavour => flavour.uuid);
+
+    let descendants = children.flatMap(uuid => findAllDescendants(uuid));
+
+    return children.concat(descendants);
+  }, [ flavours ]);
 
   useEffect(() => {
     let flavours;
@@ -65,6 +75,10 @@ const App = () => {
     try {
       // TODO double check whether the input is valid :)
 
+      flavours.forEach(flavour => {
+        flavour.value = findAllDescendants(flavour.uuid).length === 0 ? 1000 : 0;
+      });
+
       setHierarchicalFlavours(d3.stratify<Flavour>()
         .id(d => d.uuid)
         .parentId(d => d.parentUuid)
@@ -74,7 +88,7 @@ const App = () => {
         setFlavours(flavours);
       });
     }
-  }, [ flavours ]);
+  }, [ flavours, findAllDescendants ]);
 
   const importNewFlavours = (data: any) => {
     let json = JSON.parse(data);
