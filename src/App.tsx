@@ -16,9 +16,9 @@ import EditModal from './components/EditModal/EditModal';
 const App = () => {
   const { t, i18n } = useTranslation();
 
-  const [flavours, setFlavours] = useState([]);
+  const [flavours, setFlavours] = useState<Flavour[]>([]);
   const [hierchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
-  const [editModalActive, setEditModalActive] = useState(false);
+  const [editModalActive, setEditModalActive] = useState<boolean>(true);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -91,7 +91,7 @@ const App = () => {
     setEditModalActive(!editModalActive);
   }
 
-  const handleEditModalChange = (data: any) => {
+  const handleEditModalChange = (data: Flavour[]) => {
     setFlavours(data);
   }
 

@@ -1,32 +1,42 @@
-import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Flavour from '../../interfaces';
+import AddFlavourForm from '../AddFlavourForm/AddFlavourForm';
+import RemoveFlavourForm from '../RemoveFlavourForm/RemoveFlavourForm';
 
 interface EditModalProps {
   isActive: boolean;
-  flavours: any; // TODO better type
+  flavours: Flavour[];
   onClose: () => void;
-  onChange: (data: any) => void; // TODO better parameter type
+  onChange: (data: Flavour[]) => void;
 }
 
 const EditModal = ({ isActive, flavours, onClose, onChange } : EditModalProps) => {
-  // TODO think about good way of initializing the values (first element from flavours? Default empty and disable adding when nothing is selected?)
-  const [parentIdToAddFlavourTo, setParentIdToAddFlavourTo] = useState('');
-  const [newFlavourName, setNewFlavourName] = useState('');
-  const [flavourToRemove, setFlavourToRemove] = useState(''); // TODO implement the relevant logic including removing all descendants
-
-  const addNewFlavour = () => {
+  const addNewFlavour = (newFlavourName, parentUuidToAddFlavourTo) => {
     let flavour = {
       "uuid": uuidv4(),
-      "parentId": parentIdToAddFlavourTo, // TODO change this to parentUuid when pulling upstream changes
+      "parentUuid": parentUuidToAddFlavourTo, // TODO change this to parentUuid when pulling upstream changes
       "name": newFlavourName,
       "value": 1000, // TODO gotta do some magic here, have to start to dynamically calculate the vaule instead...
       "state":"NO"
     }
     
-    onChange([ flavour, ... flavours]);
+    onChange([flavour, ...flavours]);
+  }
 
-    setParentIdToAddFlavourTo('');
-    setNewFlavourName('');
+  const removeFlavourAndDescendents = (flavourUuid) => {
+    let flavourUuidsToRemove = [ flavourUuid, ...findAllDescendants(flavourUuid) ];
+    console.log(flavourUuidsToRemove);
+    onChange(flavours.filter(flavour => !flavourUuidsToRemove.includes(flavour.uuid)));
+  }
+
+  const findAllDescendants = (flavourUuid) => {
+    let children = flavours
+      .filter(flavour => flavour.parentUuid === flavourUuid)
+      .map(flavour => flavour.uuid);
+
+    let descendants = children.flatMap(uuid => findAllDescendants(uuid));
+
+    return children.concat(descendants);
   }
 
   return (
@@ -39,63 +49,16 @@ const EditModal = ({ isActive, flavours, onClose, onChange } : EditModalProps) =
         </header>
         <section className="modal-card-body">
           <h3 className="subtitle is-5">Add</h3>
-          <div className="field">
-            <label className="label">Parent element</label>
-            <div className="control">
-              <div className="select">
-                <select value={parentIdToAddFlavourTo} onChange={(e) => setParentIdToAddFlavourTo(e.target.value)}>
-                  <option value=''></option>
-                  {flavours.map((flavour) => (
-                    <option value={flavour.uuid} key={flavour.uuid}>
-                      {flavour.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">New flavour name</label>
-            <div className="control">
-              <input
-                className="input is-primary"
-                type="text"
-                placeholder="New flavour"
-                onChange={(e) => setNewFlavourName(e.target.value)}
-                value={newFlavourName}></input>
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <button className="button" onClick={addNewFlavour}>
-                Add as a child
-              </button>
-            </div>
-          </div>
+          <AddFlavourForm
+            flavours={flavours}
+            onAdd={addNewFlavour}
+          ></AddFlavourForm>
           <hr></hr>
           <h3 className="subtitle is-5">Remove</h3>
-          <div className="field">
-            <label className="label">Parent element</label>
-            <div className="control">
-              <div className="select">
-                <select>
-                  <option value=''></option>
-                  {flavours.map((flavour) => (
-                    <option value={flavour.uuid} key={flavour.uuid}>
-                      {flavour.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <button className="button">
-                Remove flavour &amp; all descendants
-              </button>
-            </div>
-          </div>
+          <RemoveFlavourForm
+            flavours={flavours}
+            onRemove={removeFlavourAndDescendents}
+          ></RemoveFlavourForm>
         </section>
         <footer className="modal-card-foot">
           <button className="button" onClick={onClose}>Close</button>

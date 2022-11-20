@@ -1,7 +1,8 @@
 interface Flavour {
   uuid: string,
   parentUuid: string,
-  key: string,
+  key?: string,
+  name?: string,
   value: number,
   state?: string,
 }

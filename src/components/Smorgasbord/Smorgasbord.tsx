@@ -10,7 +10,7 @@ interface  SmorgasbordProps {
   onElementClick: (uuid: string) => void
 }
 
-const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) => {  
+const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) => {
   const { t } = useTranslation();
 
   const svgRef = React.useRef<SVGSVGElement>(null);
@@ -153,7 +153,7 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
             fillOpacity="1.0"
             dy="0.32em"
             style={{fontFamily: 'sans-serif', fontSize: '12px', textAnchor: 'middle'}}>
-            {t('flavours.' + d.data.key)}
+            { d.data.key ? t('flavours.' + d.data.key) : d.data.name }
           </text>
         </g>
       ))}

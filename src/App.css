@@ -21,6 +21,11 @@ footer.footer {
   color: #ccc;
 }
 
+.button[disabled] {
+  border-color: #4a1942;
+  color: #333;
+}
+
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
   color: #fff;
 }
