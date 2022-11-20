@@ -6,11 +6,12 @@ import RemoveFlavourForm from '../RemoveFlavourForm/RemoveFlavourForm';
 interface EditModalProps {
   isActive: boolean;
   flavours: Flavour[];
+  hierarchicalFlavours: d3.HierarchyNode<Flavour>;
   onClose: () => void;
   onChange: (data: Flavour[]) => void;
 }
 
-const EditModal = ({ isActive, flavours, onClose, onChange } : EditModalProps) => {
+const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange } : EditModalProps) => {
   const addNewFlavour = (newFlavourName, parentUuidToAddFlavourTo) => {
     let flavour = {
       "uuid": uuidv4(),
@@ -50,13 +51,13 @@ const EditModal = ({ isActive, flavours, onClose, onChange } : EditModalProps) =
         <section className="modal-card-body">
           <h3 className="subtitle is-5">Add</h3>
           <AddFlavourForm
-            flavours={flavours}
+            hierarchicalFlavours={hierarchicalFlavours}
             onAdd={addNewFlavour}
           ></AddFlavourForm>
           <hr></hr>
           <h3 className="subtitle is-5">Remove</h3>
           <RemoveFlavourForm
-            flavours={flavours}
+            hierarchicalFlavours={hierarchicalFlavours}
             onRemove={removeFlavourAndDescendents}
           ></RemoveFlavourForm>
         </section>

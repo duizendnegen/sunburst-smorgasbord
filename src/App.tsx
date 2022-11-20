@@ -18,7 +18,7 @@ const App = () => {
 
   const [flavours, setFlavours] = useState<Flavour[]>([]);
   const [hierarchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
-  const [editModalActive, setEditModalActive] = useState<boolean>(true);
+  const [editModalActive, setEditModalActive] = useState<boolean>(false);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -184,21 +184,13 @@ const App = () => {
           </p>
         </div>
       </section>
+      <EditModal
+        isActive={editModalActive}
+        flavours={flavours}
+        hierarchicalFlavours={hierarchicalFlavours}
+        onChange={handleEditModalChange}
+        onClose={toggleEditMode}></EditModal>
       <section className="section">
-        <div className="container content">
-          <div className="buttons has-addons is-centered mb-6">
-            <ExportAsImageButton></ExportAsImageButton>
-            <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
-            <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
-            <EditButton onClick={toggleEditMode}></EditButton>
-            <ResetButton onReset={resetFlavours}></ResetButton>
-          </div>
-        </div>
-        <EditModal
-          isActive={editModalActive}
-          flavours={flavours}
-          onChange={handleEditModalChange}
-          onClose={toggleEditMode}></EditModal>
         <div className="container content has-text-centered">
           <Smorgasbord
             hierarchicalFlavours={hierarchicalFlavours}

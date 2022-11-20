@@ -4,10 +4,10 @@ import Flavour from "../../interfaces";
 
 interface RemoveFlavourFormProps {
   onRemove: (uuid: string) => void;
-  flavours: Flavour[];
+  hierarchicalFlavours: d3.HierarchyNode<Flavour>;
 }
 
-const RemoveFlavourForm = ({ onRemove, flavours } : RemoveFlavourFormProps) => {
+const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFormProps) => {
   const { t } = useTranslation();
 
   const [flavourToRemove, setFlavourToRemove] = useState('');
@@ -15,6 +15,18 @@ const RemoveFlavourForm = ({ onRemove, flavours } : RemoveFlavourFormProps) => {
   const removeFlavour = () => {
     onRemove(flavourToRemove);
     setFlavourToRemove('');
+  }
+
+  const getLabelForFlavour = (flavour: d3.HierarchyNode<Flavour>) => {
+    if(!flavour.parent) {
+      return flavour.data.key ? t(`flavours.${flavour.data.key}`) : flavour.data.name;
+    }
+
+    return flavour
+      .ancestors()
+      .reverse()
+      .slice(1)
+      .map((ancestor) => ancestor.data.key ? t(`flavours.${ancestor.data.key}`) : ancestor.data.name).join(" > ");
   }
 
   return (
@@ -25,11 +37,11 @@ const RemoveFlavourForm = ({ onRemove, flavours } : RemoveFlavourFormProps) => {
           <div className="select">
           <select value={flavourToRemove} onChange={(e) => setFlavourToRemove(e.target.value)}>
               <option value=''></option>
-              {flavours.map((flavour) => (
-                <option value={flavour.uuid} key={flavour.uuid}>
-                { flavour.key ? t('flavours.' + flavour.key) : flavour.name }
+              {hierarchicalFlavours ? hierarchicalFlavours.descendants().map((flavour) => (
+                <option value={flavour.data.uuid} key={flavour.data.uuid}>
+                  {getLabelForFlavour(flavour)}
                 </option>
-              ))}
+              )) : ''}
             </select>
           </div>
         </div>
