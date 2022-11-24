@@ -11,3 +11,7 @@ g:hover {
 g.flavour-root-node:hover {
   cursor: default;
 }
+
+g text {
+  user-select: none;
+}
