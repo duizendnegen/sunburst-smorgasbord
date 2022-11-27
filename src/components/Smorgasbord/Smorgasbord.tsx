@@ -20,6 +20,11 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
   const padding = 1; // separation between arcs
 
   const [nodes, setNodes] = useState<d3.HierarchyRectangularNode<Flavour>[]>([]);
+  
+  const [ dragSubject, setDragSubject ] = useState<d3.HierarchyRectangularNode<Flavour>>(null);
+  const [ globalRotation, setGlobalRotation ] = useState(0.0);
+  const [ previousRotation, setPreviousRotation ] = useState(0.0);
+  const [ dragStart, setDragStart ] = useState({x: null, y: null});
 
   React.useEffect(() => {
     if(!hierchicalFlavours) {
@@ -56,10 +61,18 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
 
   const getTextTransform = (d: d3.HierarchyRectangularNode<Flavour>) => {
     if (!d.depth) return;
+
     const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
     const y = (d.y0 + d.y1) / 2;
-    return `rotate(${x - 90}) translate(${y}, 0) rotate(${x < 180 ? 0 : 180})`;
+    let flip = ((x + globalRotation + 360) % 360) < 180;
+    return `rotate(${x - 90}) translate(${y}, 0) rotate(${flip ? 0 : 180})`;
   };
+
+  const getGTransform =  (d: d3.HierarchyRectangularNode<Flavour>) => {
+    if (!d.depth) return;
+
+    return `rotate(${globalRotation})`;
+  }
 
   const getColor = (d: any) => {
     if (d.data.parentUuid === null) { // root node is not clickable & has a distinct colour
@@ -72,13 +85,63 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
       return d.color.darker(1).toString();
     }
   }
-  
-  return <svg xmlns="http://www.w3.org/2000/svg" ref={svgRef} width={diameter} height={diameter} viewBox="-576 -576 1152 1152" id='smorgasbordImage'>
+
+  const calculateRotationFor = (clickX, clickY) => {
+    let rootClientRect = document.getElementsByClassName('flavour-root-node')[0].getBoundingClientRect();
+    let rootCenterX = rootClientRect.left + ((rootClientRect.right - rootClientRect.left) / 2);
+    let rootCenterY = rootClientRect.top + ((rootClientRect.bottom - rootClientRect.top) / 2);
+
+    let x = clickX - rootCenterX;
+    let y = clickY - rootCenterY;
+
+    let currentAngle = Math.atan2(y, x);
+    let currentRotation = (180 / Math.PI * currentAngle) + 90;
+
+    return currentRotation;
+  }
+
+  const startDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) => {
+    let currentRotation = calculateRotationFor(e.clientX, e.clientY);
+
+    setDragSubject(d);
+    setDragStart({x: e.clientX, y: e.clientY});
+    setPreviousRotation(currentRotation);
+  }
+
+  const updateDrag = (e) => {
+    if (dragSubject) {
+      let currentRotation = calculateRotationFor(e.clientX, e.clientY);
+      let diff = currentRotation - previousRotation;
+      setPreviousRotation(currentRotation);
+      setGlobalRotation(globalRotation + diff);
+    }
+  }
+
+  const endDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) => {
+    if (d && d.depth && e.clientX === dragStart.x && e.clientY === dragStart.y) {
+      onElementClick(d.data.uuid);
+    }
+
+    setDragSubject(null);
+  }
+
+  return <svg
+    xmlns="http://www.w3.org/2000/svg"
+    ref={svgRef}
+    width={diameter}
+    height={diameter}
+    viewBox="-576 -576 1152 1152"
+    id='smorgasbordImage'
+    onPointerMove={(e) => { updateDrag(e) }}
+    onPointerUp={(e) => { endDrag(e, null) }}
+    onPointerLeave={(e) => { endDrag(e, null) }}>
     {nodes
       .map((d, i) => (
         <g key={d.data.uuid}
-          onClick={() => { onElementClick(d.data.uuid) }}
-          className={d.parent === null ? 'flavour-root-node' : ''}>
+          onPointerDown={(e) => { startDrag(e, d) }}
+          onPointerUp={(e) => { endDrag(e, d) }}
+          className={d.parent === null ? 'flavour-root-node' : ''}
+          transform={getGTransform(d)}>
           <path
             d={getArc(d)}
             fill={getColor(d)}
