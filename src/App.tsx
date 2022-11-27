@@ -117,7 +117,7 @@ const App = () => {
       );
     }
 
-    // 'YES'? Update the parents and children to that
+    // 'YES'? Update the parents to that
     if (newState === 'YES') {
       setFlavours(
         flavours.map(flavour => {
@@ -125,8 +125,7 @@ const App = () => {
             flavour.state = newState;
           } else {
             let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
-              || hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
+            if (hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
               flavour.state = newState;
             }
           }
