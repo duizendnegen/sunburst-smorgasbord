@@ -224,8 +224,8 @@ const App = () => {
               <h3>{t('header.title')}</h3>
               <p>
                 Available in&nbsp;
-                <a href='#' onClick={() => changeLanguage('en')}>English</a>,&nbsp;
-                <a href='#' onClick={() => changeLanguage('de')}>German</a>.
+                <button className="button-link" onClick={() => changeLanguage('en')}>English</button>,&nbsp;
+                <button className="button-link" onClick={() => changeLanguage('de')}>German</button>.
               </p>
               <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
             </div>
