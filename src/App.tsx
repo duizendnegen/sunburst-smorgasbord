@@ -197,6 +197,17 @@ const App = () => {
           </p>
         </div>
       </section>
+      <section className="section">
+        <div className="container content">
+          <div className="buttons has-addons is-centered mb-6">
+            <ExportAsImageButton></ExportAsImageButton>
+            <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
+            <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+            <EditButton onClick={toggleEditMode}></EditButton>
+            <ResetButton onReset={resetFlavours}></ResetButton>
+          </div>
+        </div>
+      </section>
       <EditModal
         isActive={editModalActive}
         flavours={flavours}
