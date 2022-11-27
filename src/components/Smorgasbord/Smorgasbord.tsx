@@ -75,7 +75,7 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
   }
 
   const getColor = (d: any) => {
-    if (d.data.parentUuid === null) { // root node is not clickable & has a distinct colour
+    if (!d.depth) { // root node is not clickable & has a distinct colour
       return "#1F1F1F";
     } else if (d.data.state === 'NO') {
       return "#000";
