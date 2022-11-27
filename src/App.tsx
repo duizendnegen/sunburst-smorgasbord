@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import './App.css';
 import * as d3 from "d3";
 
@@ -10,8 +12,14 @@ import ExportAsImageButton from './components/ExportAsImageButton/ExportAsImageB
 import ResetButton from './components/ResetButton/ResetButton';
 
 const App = () => {
+  const { t, i18n } = useTranslation();
+
   const [flavours, setFlavours] = useState([]);
   const [hierchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
 
   const fetchDefaultFlavours = () => {
     return fetch('flavours.json')
@@ -56,7 +64,7 @@ const App = () => {
 
       setHierarchicalFlavours(d3.stratify<Flavour>()
         .id(d => d.uuid)
-        .parentId(d => d.parentId)
+        .parentId(d => d.parentUuid)
           (flavours));
     } catch {
       fetchDefaultFlavours().then((flavours) => {
@@ -148,41 +156,83 @@ const App = () => {
     }
   }
 
+  // TODO break up this file in separate sub-files;
+  // bring part of this down to the actual functional app;
+  // extract out the header, the FAQ and the footer
+
+  // TODO fingerprnt the translation.json files
+
   return (
-    <div>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 center">
-            <div className="button-wrapper">
-              <ExportAsImageButton></ExportAsImageButton>
-              <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
-              <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
-              <ResetButton onReset={resetFlavours}></ResetButton>
+    <Suspense fallback="loading">
+      <div className="jumbotron">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 center">
+              <div className="img img-logo center"></div>
+              <h1>{t('header.title')}</h1>
+              <h2 className="font-light">{t('header.subtitle')}</h2>
+              <a href="#what-is-this">{t('faq.whats_this')}</a>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 center">
-            <Smorgasbord
-              hierchicalFlavours={hierchicalFlavours}
-              onElementClick={handleElementClick}></Smorgasbord>
+      </div>
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-12 center">
+              <div className="button-wrapper">
+                <ExportAsImageButton></ExportAsImageButton>
+                <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
+                <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+                <ResetButton onReset={resetFlavours}></ResetButton>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 center">
+              <Smorgasbord
+                hierchicalFlavours={hierchicalFlavours}
+                onElementClick={handleElementClick}></Smorgasbord>
+            </div>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-12 center">
+              <h2 id="what-is-this">{t('faq.whats_this')}</h2>
+              <p dangerouslySetInnerHTML={{__html: t('faq.whats_this_content')}}></p>
+              <h2>{t('faq.how_to_use')}</h2>
+              <p>{t('faq.how_to_use_content_1')}</p>
+              <p>{t('faq.how_to_use_content_2')}</p>
+              <h2>{t('faq.whats_ra')}</h2>
+              <p dangerouslySetInnerHTML={{__html: t('faq.whats_ra_content')}}></p>
+            </div>
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 center">
-            <h2 id="what-is-this">What is this?</h2>
-            <p>This is a tool to help you discuss and explore the relationships you'd like with your loved ones. It's inspired by the <a href="//www.multiamory.com/podcast/339-the-smorgasbord-of-relationships">Relationship Anarchy Smorgasbord</a>, which was initially developed by Lyrica Lawrence and Heather Orr in 2016.</p>
-            <h2>How do I use it?</h2>
-            <p>Focus on a specific relationship you have in your life. Then, have a look at the words written in each panel, and think about whether they're relevant to your relationship, or whether you'd like them to be. Reveal the colors of your relationship by clicking on the panels that you like.</p>
-            <p>Exactly how you use this tool is up to you, but it works best when you share the results with your loved ones. You can either click through it together, or each use it independently and share your results with each other. The point is to have a conversation.</p>
-            <h2>What is relationship anarchy?</h2>
-            <p>Relationship anarchy is a way to approach relationships intentionally. Instead of assuming how a relationship should look based on its label (e.g. spouse, lover, parent, friend), you actively define what each person wants the relationship to look like. First described by Andie Nordgren in 2006, <a href="https://relationship-anarchy.com/2016-1-18-e3xi8xcwhx3gad4gwzz06r52dco3ni/">The Short Instructional Manifesto for Relationship Anarchy</a> is a good place to start if you're new to the idea.</p>
+      <div className="row">
+        <div className="col-4 hidden-sm"></div>
+        <div className="col-4">
+          <div className="line"></div>
+        </div>
+        <div className="col-4 hidden-sm"></div>
+      </div>
+      <footer>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <h3>{t('header.title')}</h3>
+              <p>
+                Available in&nbsp;
+                <a href='#' onClick={() => changeLanguage('en')}>English</a>,&nbsp;
+                <a href='#' onClick={() => changeLanguage('de')}>German</a>.
+              </p>
+              <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </footer>
+    </Suspense>
   );
 }
 

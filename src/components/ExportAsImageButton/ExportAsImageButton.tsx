@@ -1,6 +1,9 @@
 import saveAs from "file-saver";
+import { useTranslation } from "react-i18next";
 
 const ExportAsImageButton = () => {
+  const { t } = useTranslation();
+
   const exportAsImage = () => {
     // deep clone the image and process to hide disabled elements
     let nodes = document.getElementById('smorgasbordImage').cloneNode(true) as any;
@@ -114,7 +117,7 @@ const ExportAsImageButton = () => {
 
   return (
     <div className="button-trigger" onClick={exportAsImage}>
-      <strong>Download as image</strong>
+      <strong>{t('button.download_image')}</strong>
     </div>
   );
 }

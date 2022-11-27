@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import * as d3 from "d3";
 import './Smorgasbord.css';
 import Flavour from "../../interfaces";
@@ -8,7 +10,9 @@ interface  SmorgasbordProps {
   onElementClick: (uuid: string) => void
 }
 
-const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) => {
+const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) => {  
+  const { t } = useTranslation();
+
   const svgRef = React.useRef<SVGSVGElement>(null);
 
   const diameter = 1152;
@@ -58,7 +62,7 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
   };
 
   const getColor = (d: any) => {
-    if (d.data.parentId === null) { // root node is not clickable & has a distinct colour
+    if (d.data.parentUuid === null) { // root node is not clickable & has a distinct colour
       return "#1F1F1F";
     } else if (d.data.state === 'NO') {
       return "#000";
@@ -86,7 +90,7 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
             fillOpacity="1.0"
             dy="0.32em"
             style={{fontFamily: 'sans-serif', fontSize: '12px', textAnchor: 'middle'}}>
-            {d.data.name}
+            {t('flavours.' + d.data.key)}
           </text>
         </g>
       ))}
