@@ -27,11 +27,21 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
       <div className="select">
       <select value={value} onChange={(e) => onChange(e.target.value)}>
           <option value=''></option>
-          {hierarchicalFlavours ? hierarchicalFlavours.descendants().map((flavour) => (
-            <option value={flavour.data.uuid} key={flavour.data.uuid}>
-              {getLabelForFlavour(flavour)}
-            </option>
-          )) : ''}
+          {hierarchicalFlavours ? hierarchicalFlavours
+            .descendants()
+            .filter((flavour) => flavour.parent)
+            .map((flavour) => {
+              return {
+                key: flavour.data.uuid,
+                label: getLabelForFlavour(flavour)
+              }
+            })
+            .sort((a, b) => a.label.localeCompare(b.label))
+            .map((flavour) => (
+              <option value={flavour.key} key={flavour.key}>
+                {flavour.label}
+              </option>
+            )) : ''}
         </select>
       </div>
     </div>
