@@ -24,7 +24,8 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
         <SelectFlavourControl
           value={parentUuidToAddFlavourTo}
           onChange={setParentUuidToAddFlavourTo}
-          hierarchicalFlavours={hierarchicalFlavours}></SelectFlavourControl>
+          hierarchicalFlavours={hierarchicalFlavours ? hierarchicalFlavours
+            .descendants() : []}></SelectFlavourControl>
       </div>
       <div className="field">
         <label className="label">New flavour name</label>

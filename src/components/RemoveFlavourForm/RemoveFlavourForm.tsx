@@ -22,7 +22,9 @@ const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFor
         <SelectFlavourControl
           value={flavourToRemove}
           onChange={setFlavourToRemove}
-          hierarchicalFlavours={hierarchicalFlavours}></SelectFlavourControl>
+          hierarchicalFlavours={hierarchicalFlavours ? hierarchicalFlavours
+            .descendants()
+            .filter((flavour) => flavour.parent): []}></SelectFlavourControl>
       </div>
       <div className="field">
         <div className="control">

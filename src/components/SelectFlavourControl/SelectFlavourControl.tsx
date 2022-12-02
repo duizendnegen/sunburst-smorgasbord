@@ -4,7 +4,7 @@ import Flavour from "../../interfaces";
 interface SelectFlavourControlProps {
   onChange: (uuid: string) => void;
   value: string,
-  hierarchicalFlavours: d3.HierarchyNode<Flavour>;
+  hierarchicalFlavours: d3.HierarchyNode<Flavour>[];
 }
 
 const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : SelectFlavourControlProps) => {
@@ -27,9 +27,7 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
       <div className="select">
       <select value={value} onChange={(e) => onChange(e.target.value)}>
           <option value=''></option>
-          {hierarchicalFlavours ? hierarchicalFlavours
-            .descendants()
-            .filter((flavour) => flavour.parent)
+          {hierarchicalFlavours
             .map((flavour) => {
               return {
                 key: flavour.data.uuid,
@@ -41,7 +39,7 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
               <option value={flavour.key} key={flavour.key}>
                 {flavour.label}
               </option>
-            )) : ''}
+            ))}
         </select>
       </div>
     </div>
