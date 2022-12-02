@@ -31,10 +31,15 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
             .map((flavour) => {
               return {
                 key: flavour.data.uuid,
-                label: getLabelForFlavour(flavour)
+                label: getLabelForFlavour(flavour),
+                depth: flavour.depth
               }
             })
-            .sort((a, b) => a.label.localeCompare(b.label))
+            .sort((a, b) => a.depth === 0
+              ? -1
+              : b.depth === 0
+                ? 1
+                : a.label.localeCompare(b.label))
             .map((flavour) => (
               <option value={flavour.key} key={flavour.key}>
                 {flavour.label}
