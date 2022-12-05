@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Flavour from '../../interfaces';
 import AddFlavourForm from '../AddFlavourForm/AddFlavourForm';
 import RemoveFlavourForm from '../RemoveFlavourForm/RemoveFlavourForm';
+import { useTranslation } from "react-i18next";
 
 interface EditModalProps {
   isActive: boolean;
@@ -12,6 +13,7 @@ interface EditModalProps {
 }
 
 const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange } : EditModalProps) => {
+  const { t } = useTranslation();
   const addNewFlavour = (newFlavourName, parentUuidToAddFlavourTo) => {
     let flavour = {
       "uuid": uuidv4(),
@@ -44,24 +46,24 @@ const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange
       <div className="modal-background" onClick={onClose}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Customize your Smorgasbord</p>
+          <p className="modal-card-title">{t('edit.customize')}</p>
           <button className="delete" aria-label="close" onClick={onClose}></button>
         </header>
         <section className="modal-card-body">
-          <h3 className="subtitle is-5">Add</h3>
+          <h3 className="subtitle is-5">{t('edit.add')}</h3>
           <AddFlavourForm
             hierarchicalFlavours={hierarchicalFlavours}
             onAdd={addNewFlavour}
           ></AddFlavourForm>
           <hr></hr>
-          <h3 className="subtitle is-5">Remove</h3>
+          <h3 className="subtitle is-5">{t('edit.remove')}</h3>
           <RemoveFlavourForm
             hierarchicalFlavours={hierarchicalFlavours}
             onRemove={removeFlavourAndDescendents}
           ></RemoveFlavourForm>
         </section>
         <footer className="modal-card-foot">
-          <button className="button" onClick={onClose}>Close</button>
+          <button className="button" onClick={onClose}>{t('edit.close')}</button>
         </footer>
       </div>
     </div>

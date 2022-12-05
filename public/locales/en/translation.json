@@ -6,11 +6,27 @@
   "button": {
     "download_image": "Download as image",
     "download_json": "Export",
+    "edit": "Edit",
     "import_json": "Import",
     "reset": "Reset"
   },
-  "footer": {
-    "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open source</a>; made with <a href=\"https://d3js.org/\">D3</a>, based on their <a href=\"https://observablehq.com/@d3/sunburst\">Sunburst diagram</a>.<br />No cookies, no tracking, no data collected. Local storage used to make sure you don't have to start over every time you load the website. Sweet.<br />Made by JayK / Shandalara / dzing"
+  "edit":{
+    "add": "Add",
+    "add_as_child": "Add as child",
+    "close": "Close",
+    "customize": "Customize your Smorgasboard",
+    "new_flavour": "New flavour",
+    "new_flavour_name": "New flavour name",
+    "parent_element": "Parent element",
+    "remove": "Remove",
+    "remove_flavour": "Flavour to remove",
+    "remove_flavour_button": "Remove flavour and all descendants"
+  },
+    "footer": {
+    "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open source</a>; made with <a href=\"https://d3js.org/\">D3</a>, based on their <a href=\"https://observablehq.com/@d3/sunburst\">Sunburst diagram</a>.<br />No cookies, no tracking, no data collected. Local storage used to make sure you don't have to start over every time you load the website. Sweet.<br />Made by JayK / Shandalara / dzing",
+    "languages": "Available in",
+    "languages_german": "German",
+    "languages_english": "English"
   },
   "faq": {
     "whats_this": "What is this?",

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Flavour from "../../interfaces";
 import SelectFlavourControl from "../SelectFlavourControl/SelectFlavourControl";
+import { useTranslation } from "react-i18next";
+
 
 interface RemoveFlavourFormProps {
   onRemove: (uuid: string) => void;
@@ -8,6 +10,7 @@ interface RemoveFlavourFormProps {
 }
 
 const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFormProps) => {
+  const { t } = useTranslation();
   const [flavourToRemove, setFlavourToRemove] = useState('');
 
   const removeFlavour = () => {
@@ -18,7 +21,7 @@ const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFor
   return (
     <div>
       <div className="field">
-        <label className="label">Flavour to remove</label>
+        <label className="label">{t('edit.remove_flavour')}</label>
         <SelectFlavourControl
           value={flavourToRemove}
           onChange={setFlavourToRemove}
@@ -32,7 +35,7 @@ const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFor
             className='button'
             onClick={removeFlavour}
             disabled={flavourToRemove === ''}>
-            Remove flavour &amp; all descendants
+            {t('edit.remove_flavour_button')}
           </button>
         </div>
       </div>

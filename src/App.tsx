@@ -238,9 +238,9 @@ const App = () => {
         <div className="content">
           <h3>{t('header.title')}</h3>
           <p>
-            Available in&nbsp;
-            <button className="button-link" onClick={() => changeLanguage('en')}>English</button>,&nbsp;
-            <button className="button-link" onClick={() => changeLanguage('de')}>German</button>.
+          {t('footer.languages')}&nbsp;
+            <button className="button-link" onClick={() => changeLanguage('en')}>{t('footer.languages_english')}</button>,&nbsp;
+            <button className="button-link" onClick={() => changeLanguage('de')}>{t('footer.languages_german')}</button>.
           </p>
           <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
         </div>

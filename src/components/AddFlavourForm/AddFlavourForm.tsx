@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Flavour from "../../interfaces";
 import SelectFlavourControl from "../SelectFlavourControl/SelectFlavourControl";
+import { useTranslation } from "react-i18next";
+
 
 interface AddFlavourFormProps {
   onAdd: (name: string, parentUuid: string) => void;
@@ -8,6 +10,7 @@ interface AddFlavourFormProps {
 }
 
 const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) => {
+  const { t } = useTranslation();
   const [parentUuidToAddFlavourTo, setParentUuidToAddFlavourTo] = useState('');
   const [newFlavourName, setNewFlavourName] = useState('');
   
@@ -20,7 +23,7 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
   return (
     <div>
       <div className="field">
-        <label className="label">Parent element</label>
+        <label className="label">{t('edit.parent_element')}</label>
         <SelectFlavourControl
           value={parentUuidToAddFlavourTo}
           onChange={setParentUuidToAddFlavourTo}
@@ -28,12 +31,12 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
             .descendants() : []}></SelectFlavourControl>
       </div>
       <div className="field">
-        <label className="label">New flavour name</label>
+        <label className="label">{t('edit.new_flavour_name')}</label>
         <div className="control">
           <input
             className="input is-primary"
             type="text"
-            placeholder="New flavour"
+            placeholder={t('edit.new_flavour')}
             onChange={(e) => setNewFlavourName(e.target.value)}
             value={newFlavourName}></input>
         </div>
@@ -45,7 +48,7 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
             className="button"
             onClick={addNewFlavour}
             disabled={parentUuidToAddFlavourTo === '' || newFlavourName === ''}>
-            Add as a child
+            {t('edit.add_as_child')}
           </button>
         </div>
       </div>

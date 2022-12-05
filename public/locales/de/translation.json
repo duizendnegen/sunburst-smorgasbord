@@ -6,11 +6,27 @@
   "button": {
     "download_image": "Als Bild downloaden",
     "download_json": "Exportieren",
+    "edit": "Bearbeiten",
     "import_json": "Importieren",
     "reset": "Zurücksetzen"
   },
+  "edit":{
+    "add": "Hinzufügen",
+    "add_as_child": "Als untergeordnetes Element hinzufügen",
+    "close": "Schließen",
+    "customize": "Passe dein Smorgasboard an",
+    "new_flavour": "Neues Element",
+    "new_flavour_name": "Neuer Elementname",
+    "parent_element": "Übergeordnetes Element",
+    "remove": "Entfernen",
+    "remove_flavour": "Element entfernen",
+    "remove_flavour_button": "Element und alle untergeordneten Elemente entfernen"  
+  },
   "footer": {
-    "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open Source</a>; mit <a href=\"https://d3js.org/\">D3</a> hergestellt, basierend auf <a href=\"https://observablehq.com/@d3/sunburst\">Sunburstdiagramm</a>.<br />Keine Cookies, kein Tracking, keine Datenerhebung. Lokaler Speicher wird verwendet, damit du nicht jedes Mal von vorne anfangen musst, wenn du die Webseite neu lädst. Sweet.<br />Made by JayK / Shandalara / dzing"
+    "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open Source</a>; mit <a href=\"https://d3js.org/\">D3</a> hergestellt, basierend auf dem <a href=\"https://observablehq.com/@d3/sunburst\">Sunburstdiagramm</a>.<br />Keine Cookies, kein Tracking, keine Datenerhebung. Dein lokaler Speicher wird verwendet, damit du nicht jedes Mal von vorne anfangen musst, wenn du die Webseite neu lädst. Sweet.<br />Made by JayK / Shandalara / dzing",
+    "languages": "Verfügbar auf",
+    "languages_german": "Deutsch",
+    "languages_english": "Englisch"
   },
   "faq": {
     "whats_this": "Was ist das?",
