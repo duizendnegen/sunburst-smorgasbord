@@ -132,7 +132,9 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     height={diameter}
     viewBox="-576 -576 1152 1152"
     id='smorgasbordImage'
-    onPointerMove={(e) => { updateDrag(e) }}
+    // only listen to mouse move event; touch screen moves get confused between scrolling and rotating
+    // TODO should implement a different gesture for mobile
+    onMouseMove={(e) => { updateDrag(e) }} 
     onPointerUp={(e) => { endDrag(e, null) }}
     onPointerLeave={(e) => { endDrag(e, null) }}>
     {nodes
