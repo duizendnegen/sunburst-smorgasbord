@@ -14,15 +14,27 @@ interface EditModalProps {
 
 const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange } : EditModalProps) => {
   const { t } = useTranslation();
+  
   const addNewFlavour = (newFlavourName, parentUuidToAddFlavourTo) => {
     let flavour = {
       "uuid": uuidv4(),
-      "parentUuid": parentUuidToAddFlavourTo, // TODO change this to parentUuid when pulling upstream changes
+      "parentUuid": parentUuidToAddFlavourTo,
       "name": newFlavourName,
-      "state":"NO"
+      "state":"YES"
     }
+
+    let parentHierarchicalFlavour = hierarchicalFlavours.find(hf => hf.data.uuid === parentUuidToAddFlavourTo);
     
-    onChange([flavour, ...flavours]);
+    onChange([flavour, ...flavours.map(f => {
+      // change the flavour to be selected when the newly added flavour is a child flavour of it
+      let hierarchicalFlavour = hierarchicalFlavours.find(hf => hf.data.uuid === f.uuid);
+
+      if (parentHierarchicalFlavour.ancestors().map(af => af.data.uuid).includes(hierarchicalFlavour.data.uuid)) {
+        f.state = 'YES';
+      }
+
+      return f;
+    })]);
   }
 
   const removeFlavourAndDescendents = (flavourUuid) => {
