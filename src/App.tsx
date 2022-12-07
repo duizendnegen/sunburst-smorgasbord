@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import './App.css';
@@ -10,12 +10,15 @@ import ImportJsonButton from './components/ImportJsonButton/ImportJsonButton';
 import ExportAsJsonButton from './components/ExportAsJsonButton/ExportAsJsonButton';
 import ExportAsImageButton from './components/ExportAsImageButton/ExportAsImageButton';
 import ResetButton from './components/ResetButton/ResetButton';
+import EditButton from './components/EditButton/EditButton';
+import EditModal from './components/EditModal/EditModal';
 
 const App = () => {
   const { t, i18n } = useTranslation();
 
-  const [flavours, setFlavours] = useState([]);
-  const [hierchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+  const [flavours, setFlavours] = useState<Flavour[]>([]);
+  const [hierarchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+  const [editModalActive, setEditModalActive] = useState<boolean>(false);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -33,6 +36,16 @@ const App = () => {
       });
     });
   }
+  
+  const findAllDescendants = useCallback((flavourUuid) => {
+    let children = flavours
+      .filter(flavour => flavour.parentUuid === flavourUuid)
+      .map(flavour => flavour.uuid);
+
+    let descendants = children.flatMap(uuid => findAllDescendants(uuid));
+
+    return children.concat(descendants);
+  }, [ flavours ]);
 
   useEffect(() => {
     let flavours;
@@ -62,6 +75,10 @@ const App = () => {
     try {
       // TODO double check whether the input is valid :)
 
+      flavours.forEach(flavour => {
+        flavour.value = findAllDescendants(flavour.uuid).length === 0 ? 1000 : 0;
+      });
+
       setHierarchicalFlavours(d3.stratify<Flavour>()
         .id(d => d.uuid)
         .parentId(d => d.parentUuid)
@@ -71,7 +88,7 @@ const App = () => {
         setFlavours(flavours);
       });
     }
-  }, [ flavours ]);
+  }, [ flavours, findAllDescendants ]);
 
   const importNewFlavours = (data: any) => {
     let json = JSON.parse(data);
@@ -84,10 +101,18 @@ const App = () => {
     });
   }
 
+  const toggleEditMode = () => {
+    setEditModalActive(!editModalActive);
+  }
+
+  const handleEditModalChange = (data: Flavour[]) => {
+    setFlavours(data);
+  }
+
   const handleElementClick = (uuid: string) => {
     // find the target flavour
     let targetFlavour = flavours.find(flavour => flavour.uuid === uuid);
-    let targetHierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
+    let targetHierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
 
     // ignore root click
     if (targetHierarchicalFlavour.ancestors().length === 1) {
@@ -106,7 +131,7 @@ const App = () => {
           if (flavour.uuid === uuid) {
             flavour.state = newState;
           } else {
-            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)) {
               flavour.state = newState;
             }
@@ -124,7 +149,7 @@ const App = () => {
           if (flavour.uuid === uuid) {
             flavour.state = newState;
           } else {
-            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
               flavour.state = newState;
             }
@@ -142,7 +167,7 @@ const App = () => {
           if (flavour.uuid === uuid) {
             flavour.state = newState;
           } else {
-            let hierarchicalFlavour = hierchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid
                 && hierarchicalFlavour.data.state === 'YES')) {
               flavour.state = newState;
@@ -163,72 +188,61 @@ const App = () => {
 
   return (
     <Suspense fallback="loading">
-      <div className="jumbotron">
+      <section className="section">
+        <div className="container content has-text-centered">
+          <h1 className="title">{t('header.title')}</h1>
+          <h2 className="subtitle">{t('header.subtitle')}</h2>
+          <p>
+            <a href="#what-is-this">{t('faq.whats_this')}</a>
+          </p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container content">
+          <div className="buttons has-addons is-centered mb-6">
+            <ExportAsImageButton></ExportAsImageButton>
+            <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
+            <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+            <EditButton onClick={toggleEditMode}></EditButton>
+            <ResetButton onReset={resetFlavours}></ResetButton>
+          </div>
+        </div>
+      </section>
+      <EditModal
+        isActive={editModalActive}
+        flavours={flavours}
+        hierarchicalFlavours={hierarchicalFlavours}
+        onChange={handleEditModalChange}
+        onClose={toggleEditMode}></EditModal>
+      <section className="section">
+        <div className="container content has-text-centered">
+          <Smorgasbord
+            hierarchicalFlavours={hierarchicalFlavours}
+            onElementClick={handleElementClick}></Smorgasbord>
+        </div>
+      </section>
+      <section className="section">
         <div className="container">
-          <div className="row">
-            <div className="col-12 center">
-              <div className="img img-logo center"></div>
-              <h1>{t('header.title')}</h1>
-              <h2 className="font-light">{t('header.subtitle')}</h2>
-              <a href="#what-is-this">{t('faq.whats_this')}</a>
-            </div>
+          <div className="content has-text-centered">
+            <h2 id="what-is-this" className="title is-4">{t('faq.whats_this')}</h2>
+            <p dangerouslySetInnerHTML={{__html: t('faq.whats_this_content')}}></p>
+            <h2 className="title is-4">{t('faq.how_to_use')}</h2>
+            <p>{t('faq.how_to_use_content_1')}</p>
+            <p>{t('faq.how_to_use_content_2')}</p>
+            <h2 className="title is-4">{t('faq.whats_ra')}</h2>
+            <p dangerouslySetInnerHTML={{__html: t('faq.whats_ra_content')}}></p>
           </div>
         </div>
-      </div>
-      <div>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-12 center">
-              <div className="button-wrapper">
-                <ExportAsImageButton></ExportAsImageButton>
-                <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
-                <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
-                <ResetButton onReset={resetFlavours}></ResetButton>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12 center">
-              <Smorgasbord
-                hierchicalFlavours={hierchicalFlavours}
-                onElementClick={handleElementClick}></Smorgasbord>
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-12 center">
-              <h2 id="what-is-this">{t('faq.whats_this')}</h2>
-              <p dangerouslySetInnerHTML={{__html: t('faq.whats_this_content')}}></p>
-              <h2>{t('faq.how_to_use')}</h2>
-              <p>{t('faq.how_to_use_content_1')}</p>
-              <p>{t('faq.how_to_use_content_2')}</p>
-              <h2>{t('faq.whats_ra')}</h2>
-              <p dangerouslySetInnerHTML={{__html: t('faq.whats_ra_content')}}></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-4 hidden-sm"></div>
-        <div className="col-4">
-          <div className="line"></div>
-        </div>
-        <div className="col-4 hidden-sm"></div>
-      </div>
-      <footer>
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <h3>{t('header.title')}</h3>
-              <p>
-                Available in&nbsp;
-                <button className="button-link" onClick={() => changeLanguage('en')}>English</button>,&nbsp;
-                <button className="button-link" onClick={() => changeLanguage('de')}>German</button>.
-              </p>
-              <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
-            </div>
-          </div>
+      </section>
+      <footer className="footer">
+        <div className="content">
+          <h3>{t('header.title')}</h3>
+          <p>
+          {t('footer.languages')}&nbsp;
+            <button className="button-link" onClick={() => changeLanguage('en')}>{t('footer.languages_english')}</button>,&nbsp;
+            <button className="button-link" onClick={() => changeLanguage('de')}>{t('footer.languages_german')}</button>.
+          </p>
+          <p dangerouslySetInnerHTML={{__html: t('footer.disclaimer')}}></p>
         </div>
       </footer>
     </Suspense>

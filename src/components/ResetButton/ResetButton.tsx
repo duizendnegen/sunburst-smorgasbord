@@ -8,9 +8,9 @@ const ResetButton = ({ onReset } : ResetButtonProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="button-trigger" onClick={onReset}>
-    <strong>{t('button.reset')}</strong>
-    </div>
+    <button className="button" onClick={onReset}>
+      <strong>{t('button.reset')}</strong>
+    </button>
   )
 }
 

@@ -6,11 +6,11 @@ import './Smorgasbord.css';
 import Flavour from "../../interfaces";
 
 interface  SmorgasbordProps {
-  hierchicalFlavours: d3.HierarchyNode<Flavour>,
+  hierarchicalFlavours: d3.HierarchyNode<Flavour>,
   onElementClick: (uuid: string) => void
 }
 
-const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) => {  
+const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps) => {
   const { t } = useTranslation();
 
   const svgRef = React.useRef<SVGSVGElement>(null);
@@ -27,28 +27,28 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
   const [ dragStart, setDragStart ] = useState({x: null, y: null});
 
   React.useEffect(() => {
-    if(!hierchicalFlavours) {
+    if(!hierarchicalFlavours) {
       return;
     }
     
-    hierchicalFlavours.sum(d => Math.max(0, d.value));
-    hierchicalFlavours.sort((a, b) => d3.descending(a.value, b.value));
+    hierarchicalFlavours.sum(d => Math.max(0, d.value));
+    hierarchicalFlavours.sort((a, b) => d3.descending(a.value, b.value));
 
-    const partition = d3.partition<Flavour>().size([2 * Math.PI, radius])(hierchicalFlavours);
+    const partition = d3.partition<Flavour>().size([2 * Math.PI, radius])(hierarchicalFlavours);
 
-    hierchicalFlavours.children.forEach((child: any, i: number) => {
+    hierarchicalFlavours.children.forEach((child: any, i: number) => {
       child.index = i;
     });
 
     // construct the color scale and set on each node
-    let colorScale = d3.scaleSequential([0, hierchicalFlavours.children.length], d3.interpolateRainbow).unknown("#1b1b1b");
-    hierchicalFlavours.descendants().forEach((child: any, _) => {
+    let colorScale = d3.scaleSequential([0, hierarchicalFlavours.children.length], d3.interpolateRainbow).unknown("#1b1b1b");
+    hierarchicalFlavours.descendants().forEach((child: any, _) => {
       child.color = d3.color(colorScale(child.ancestors().reverse()[1]?.index));
     });
 
     setNodes(partition.descendants());
     
-  }, [ hierchicalFlavours, radius ]);
+  }, [ hierarchicalFlavours, radius ]);
   
   // Construct an arc generator.
   const getArc = d3.arc<d3.HierarchyRectangularNode<Flavour>>()
@@ -132,7 +132,9 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
     height={diameter}
     viewBox="-576 -576 1152 1152"
     id='smorgasbordImage'
-    onPointerMove={(e) => { updateDrag(e) }}
+    // only listen to mouse move event; touch screen moves get confused between scrolling and rotating
+    // TODO should implement a different gesture for mobile
+    onMouseMove={(e) => { updateDrag(e) }} 
     onPointerUp={(e) => { endDrag(e, null) }}
     onPointerLeave={(e) => { endDrag(e, null) }}>
     {nodes
@@ -153,7 +155,7 @@ const Smorgasbord = ({ hierchicalFlavours, onElementClick } : SmorgasbordProps) 
             fillOpacity="1.0"
             dy="0.32em"
             style={{fontFamily: 'sans-serif', fontSize: '12px', textAnchor: 'middle'}}>
-            {t('flavours.' + d.data.key)}
+            { d.data.key ? t('flavours.' + d.data.key) : d.data.name }
           </text>
         </g>
       ))}

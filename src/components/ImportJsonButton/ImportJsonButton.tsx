@@ -27,15 +27,15 @@ const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
   }
 
   return (
-    <div className="button-trigger" onClick={importNewFlavours}>
-    <strong>{t('button.import_json')}</strong>
+    <button className="button" onClick={importNewFlavours}>
+      <strong>{t('button.import_json')}</strong>
       <input
         type='file'
         ref={inputFile}
         onChange={handleFileSubmission}
         style={{display: 'none'}}
         accept="application/json"/>
-    </div>
+    </button>
   )
 };
 
