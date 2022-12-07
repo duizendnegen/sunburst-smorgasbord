@@ -13,11 +13,17 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
   const { t } = useTranslation();
   const [parentUuidToAddFlavourTo, setParentUuidToAddFlavourTo] = useState('');
   const [newFlavourName, setNewFlavourName] = useState('');
+  const [buttonIsConfirmation, setButtonIsConfirmation] = useState(false);
   
   const addNewFlavour = () => {
     onAdd(newFlavourName, parentUuidToAddFlavourTo);
+    setButtonIsConfirmation(true);
     setParentUuidToAddFlavourTo('');
     setNewFlavourName('');
+
+    setTimeout(() => {
+      setButtonIsConfirmation(false);
+    }, 500);
   }
 
   return (
@@ -45,7 +51,7 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
       <div className="field">
         <div className="control">
           <button
-            className="button"
+            className={ buttonIsConfirmation ? "button is-confirmation" : "button" }
             onClick={addNewFlavour}
             disabled={parentUuidToAddFlavourTo === '' || newFlavourName === ''}>
             {t('edit.add_as_child')}

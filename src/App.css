@@ -39,3 +39,22 @@ footer.footer {
 .button-link:hover {
   cursor: pointer;
 }
+.button.is-confirmation {
+  color: transparent !important;
+  pointer-events: none;
+}
+.button.is-confirmation:after {
+  content: '\2713';
+  display: inline-block;
+  color: #ffffff;
+  padding: 0 6px 0 0;
+  height: 1em;
+  width: 1em;
+  left: calc(50% - (1em * .5));
+  top: calc(50% - (1em * .75));
+  position: absolute !important;
+}
+
+.button[disabled].is-confirmation:after {
+  color: #363636;
+}
