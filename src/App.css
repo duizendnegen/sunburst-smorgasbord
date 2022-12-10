@@ -8,20 +8,25 @@ footer.footer {
   background: #1F1F1F;
   color: #fff;
 }
+.modal {
+  color: #000;
+}
 
 .sunburst-clickable {
   cursor: pointer;
 }
 
-.button {
+.button.is-primary {
   background-color: #4a1942;
   color: #fff;
 }
-.button:hover {
-  color: #ccc;
+.button.is-primary:hover {
+  background-color: #4a1942;
+  color: #aaa;
 }
 
-.button[disabled] {
+.button.is-primary[disabled] {
+  background-color: #fff;
   border-color: #4a1942;
   color: #333;
 }

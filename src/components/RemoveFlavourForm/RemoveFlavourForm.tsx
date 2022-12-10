@@ -32,7 +32,7 @@ const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFor
       <div className="field">
         <div className="control">
           <button
-            className='button'
+            className='button is-primary'
             onClick={removeFlavour}
             disabled={flavourToRemove === ''}>
             {t('edit.remove_flavour_button')}

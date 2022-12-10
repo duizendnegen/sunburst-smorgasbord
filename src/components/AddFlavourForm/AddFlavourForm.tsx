@@ -41,7 +41,7 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
         <div className="control">
           <input
             id="input-new-flavour-name"
-            className="input is-primary"
+            className="input"
             type="text"
             placeholder={t('edit.new_flavour')}
             onChange={(e) => setNewFlavourName(e.target.value)}
@@ -52,7 +52,7 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
       <div className="field">
         <div className="control">
           <button
-            className={ buttonIsConfirmation ? "button is-confirmation" : "button" }
+            className={ buttonIsConfirmation ? "button is-primary is-confirmation" : "button is-primary" }
             onClick={addNewFlavour}
             disabled={parentUuidToAddFlavourTo === '' || newFlavourName === ''}>
             {t('edit.add_as_child')}

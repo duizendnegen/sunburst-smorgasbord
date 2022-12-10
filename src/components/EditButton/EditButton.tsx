@@ -8,7 +8,7 @@ const EditButton = ({ onClick } : EditButtonProps) => {
   const { t } = useTranslation();
 
   return (
-    <button className="button" onClick={onClick}>
+    <button className="button is-primary" onClick={onClick}>
       <strong>{t('button.edit')}</strong>
     </button>
   )

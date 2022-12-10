@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import AddFlavourForm from './AddFlavourForm';
 import * as d3 from 'd3';
 import { I18nextProvider } from 'react-i18next';

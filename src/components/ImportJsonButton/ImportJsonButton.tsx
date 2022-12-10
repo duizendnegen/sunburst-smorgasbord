@@ -27,7 +27,7 @@ const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
   }
 
   return (
-    <button className="button" onClick={importNewFlavours}>
+    <button className="button is-primary" onClick={importNewFlavours}>
       <strong>{t('button.import_json')}</strong>
       <input
         type='file'

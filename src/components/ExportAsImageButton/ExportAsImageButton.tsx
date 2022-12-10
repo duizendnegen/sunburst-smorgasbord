@@ -116,7 +116,7 @@ const ExportAsImageButton = () => {
   }
 
   return (
-    <button className="button" onClick={exportAsImage}>
+    <button className="button is-primary" onClick={exportAsImage}>
       <strong>{t('button.download_image')}</strong>
     </button>
   );
