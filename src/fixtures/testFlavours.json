@@ -1,0 +1,44 @@
+[
+  {
+    "uuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "",
+    "name": "Our relationship includes...",
+    "key": "our_relationship_includes"
+  },
+  {
+    "uuid": "342b7b18-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342b5124-f6eb-11ec-b939-0242ac120002",
+    "name": "Organization",
+    "key": "organization"
+  },
+  {
+    "uuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342b5124-f6eb-11ec-b939-0242ac120002",
+    "name": "Creativity",
+    "key": "creativity"
+  },
+  {
+    "uuid": "342b5124-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
+    "name": "Collaboration",
+    "key": "collaboration"
+  },
+  {
+    "uuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342b4d3c-f6eb-11ec-b939-0242ac120002",
+    "name": "Labels",
+    "key": "labels"
+  },
+  {
+    "uuid": "61fc0be2-124d-402b-a9c7-ba279c7e42c3",
+    "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
+    "name": "Comet",
+    "key": "comet"
+  },
+  {
+    "uuid": "342c1fd2-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
+    "name": "Chosen family",
+    "key": "chosen_family"
+  }
+]

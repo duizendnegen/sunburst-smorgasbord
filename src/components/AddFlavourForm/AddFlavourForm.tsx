@@ -29,7 +29,7 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
   return (
     <div>
       <div className="field">
-        <label className="label">{t('edit.parent_element')}</label>
+        <label className="label" htmlFor="select-flavour">{t('edit.parent_element')}</label>
         <SelectFlavourControl
           value={parentUuidToAddFlavourTo}
           onChange={setParentUuidToAddFlavourTo}
@@ -37,9 +37,10 @@ const AddFlavourForm = ({ onAdd, hierarchicalFlavours } : AddFlavourFormProps) =
             .descendants() : []}></SelectFlavourControl>
       </div>
       <div className="field">
-        <label className="label">{t('edit.new_flavour_name')}</label>
+        <label className="label" htmlFor="input-new-flavour-name">{t('edit.new_flavour_name')}</label>
         <div className="control">
           <input
+            id="input-new-flavour-name"
             className="input is-primary"
             type="text"
             placeholder={t('edit.new_flavour')}

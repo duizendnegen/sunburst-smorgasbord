@@ -25,7 +25,10 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
   return (
     <div className="control">
       <div className="select">
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
+      <select
+        id="select-flavour"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}>
           <option value=''></option>
           {hierarchicalFlavours
             .map((flavour) => {
