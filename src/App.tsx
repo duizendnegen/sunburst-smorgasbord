@@ -1,7 +1,7 @@
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import './App.css';
+import './App.scss';
 import * as d3 from "d3";
 
 import Smorgasbord from './components/Smorgasbord/Smorgasbord';
@@ -19,6 +19,7 @@ const App = () => {
   const [flavours, setFlavours] = useState<Flavour[]>([]);
   const [hierarchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
   const [editModalActive, setEditModalActive] = useState<boolean>(false);
+  const [buttonsFloating, setButtonsFloating] = useState<boolean>(false);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -46,6 +47,23 @@ const App = () => {
 
     return children.concat(descendants);
   }, [ flavours ]);
+
+  const handleScroll = useCallback((e) => {
+    let buttonPosition = document.getElementsByClassName('js-button-container-scrolltop')[0].getBoundingClientRect().top;
+    if (buttonPosition < 30 && !buttonsFloating) {
+      setButtonsFloating(true);
+    } else if (buttonPosition >= 30 && buttonsFloating) {
+      setButtonsFloating(false);
+    }
+  }, [ buttonsFloating ]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, [ handleScroll ])
 
   useEffect(() => {
     let flavours;
@@ -184,8 +202,6 @@ const App = () => {
   // bring part of this down to the actual functional app;
   // extract out the header, the FAQ and the footer
 
-  // TODO fingerprnt the translation.json files
-
   return (
     <Suspense fallback="loading">
       <section className="section">
@@ -199,12 +215,16 @@ const App = () => {
       </section>
       <section className="section">
         <div className="container content">
-          <div className="buttons has-addons is-centered mb-6">
-            <ExportAsImageButton></ExportAsImageButton>
-            <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
-            <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
-            <EditButton onClick={toggleEditMode}></EditButton>
-            <ResetButton onReset={resetFlavours}></ResetButton>
+          <div className='js-button-container-scrolltop buttons-wrapper'>
+            <div className={ buttonsFloating
+              ? "buttons has-addons is-centered is-fixed"
+              : "buttons has-addons is-centered"}>
+              <ExportAsImageButton></ExportAsImageButton>
+              <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
+              <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+              <EditButton onClick={toggleEditMode}></EditButton>
+              <ResetButton onReset={resetFlavours}></ResetButton>
+            </div>
           </div>
         </div>
       </section>
