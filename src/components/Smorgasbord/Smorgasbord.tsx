@@ -4,51 +4,25 @@ import { useTranslation } from "react-i18next";
 import * as d3 from "d3";
 import './Smorgasbord.css';
 import Flavour from "../../interfaces";
+import hierarchicalNodesState from "../../states/hierarchicalNodes.selector";
+import { useRecoilValue } from "recoil";
+import { padding, diameter, radius } from "../../constants";
 
 interface  SmorgasbordProps {
-  hierarchicalFlavours: d3.HierarchyNode<Flavour>,
   onElementClick: (uuid: string) => void
 }
 
-const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps) => {
+const Smorgasbord = ({ onElementClick } : SmorgasbordProps) => {
   const { t } = useTranslation();
 
   const svgRef = React.useRef<SVGSVGElement>(null);
-
-  const diameter = 1152;
-  const radius = diameter / 2;
-  const padding = 1; // separation between arcs
-
-  const [nodes, setNodes] = useState<d3.HierarchyRectangularNode<Flavour>[]>([]);
+  
+  const nodes = useRecoilValue(hierarchicalNodesState);
   
   const [ dragSubject, setDragSubject ] = useState<d3.HierarchyRectangularNode<Flavour>>(null);
   const [ globalRotation, setGlobalRotation ] = useState(0.0);
   const [ previousRotation, setPreviousRotation ] = useState(0.0);
   const [ dragStart, setDragStart ] = useState({x: null, y: null});
-
-  React.useEffect(() => {
-    if(!hierarchicalFlavours) {
-      return;
-    }
-    
-    hierarchicalFlavours.sum(d => Math.max(0, d.value));
-    hierarchicalFlavours.sort((a, b) => d3.descending(a.value, b.value));
-
-    const partition = d3.partition<Flavour>().size([2 * Math.PI, radius])(hierarchicalFlavours);
-
-    hierarchicalFlavours.children.forEach((child: any, i: number) => {
-      child.index = i;
-    });
-
-    // construct the color scale and set on each node
-    let colorScale = d3.scaleSequential([0, hierarchicalFlavours.children.length], d3.interpolateRainbow).unknown("#1b1b1b");
-    hierarchicalFlavours.descendants().forEach((child: any, _) => {
-      child.color = d3.color(colorScale(child.ancestors().reverse()[1]?.index));
-    });
-
-    setNodes(partition.descendants());
-    
-  }, [ hierarchicalFlavours, radius ]);
   
   // Construct an arc generator.
   const getArc = d3.arc<d3.HierarchyRectangularNode<Flavour>>()
@@ -66,9 +40,9 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     const y = (d.y0 + d.y1) / 2;
     let flip = ((x + globalRotation + 360) % 360) < 180;
     return `rotate(${x - 90}) translate(${y}, 0) rotate(${flip ? 0 : 180})`;
-  };
+  }
 
-  const getGTransform =  (d: d3.HierarchyRectangularNode<Flavour>) => {
+  const getGTransform = (d: d3.HierarchyRectangularNode<Flavour>) => {
     if (!d.depth) return;
 
     return `rotate(${globalRotation})`;

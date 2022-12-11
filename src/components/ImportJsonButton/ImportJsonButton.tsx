@@ -1,13 +1,11 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSetRecoilState } from "recoil";
+import flavoursState from '../../states/flavours.atom';
 
-
-interface ImportJsonButtonProps {
-  onUpload: (data: any) => void
-}
-
-const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
+const ImportJsonButton = () => {
   const { t } = useTranslation();
+  const setFlavours = useSetRecoilState(flavoursState);
 
   const inputFile = useRef(null) 
 
@@ -22,7 +20,8 @@ const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
     var reader = new FileReader();
     reader.readAsText(file, "UTF-8");
     reader.onload = function (evt) {
-      onUpload(evt.target.result);
+      let json = JSON.parse(evt.target.result as any);
+      setFlavours(json);
     }
   }
 

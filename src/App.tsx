@@ -1,8 +1,8 @@
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import './App.scss';
-import * as d3 from "d3";
 
 import Smorgasbord from './components/Smorgasbord/Smorgasbord';
 import Flavour from './interfaces';
@@ -13,14 +13,18 @@ import ResetButton from './components/ResetButton/ResetButton';
 import EditButton from './components/EditButton/EditButton';
 import EditModal from './components/EditModal/EditModal';
 import ResetConfirmationModal from './components/ResetConfirmationModal/ResetConfirmationModal';
+import flavoursState from './states/flavours.atom';
+import hierarchicalFlavoursState from './states/hierarchicalFlavours.selector';
 
 const App = () => {
   const { t, i18n } = useTranslation();
 
-  const [flavours, setFlavours] = useState<Flavour[]>([]);
-  const [hierarchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+  const [flavours, setFlavours] = useRecoilState(flavoursState);
+  const hierarchicalFlavours = useRecoilValue(hierarchicalFlavoursState);
+
   const [resetConfirmationModalActive, setResetConfirmationModalActive] = useState<boolean>(false);
   const [editModalActive, setEditModalActive] = useState<boolean>(false);
+
   const [buttonsFloating, setButtonsFloating] = useState<boolean>(false);
 
   const changeLanguage = (lang) => {
@@ -39,18 +43,34 @@ const App = () => {
       });
     });
   }
-  
-  const findAllDescendants = useCallback((flavourUuid) => {
-    let children = flavours
-      .filter(flavour => flavour.parentUuid === flavourUuid)
-      .map(flavour => flavour.uuid);
 
-    let descendants = children.flatMap(uuid => findAllDescendants(uuid));
+  useEffect(() => {
+    let flavours;
 
-    return children.concat(descendants);
-  }, [ flavours ]);
+    if (localStorage) {
+      flavours = JSON.parse(localStorage.getItem('flavours'));
+    }
 
-  const handleScroll = useCallback((e) => {
+    if (flavours) {
+      setFlavours(flavours);
+    } else {
+      fetchDefaultFlavours().then((flavours) => {
+        setFlavours(flavours);
+      })
+    }
+  }, [ setFlavours ]);
+
+  useEffect(() => {
+    if(!flavours || flavours.length === 0) {
+      return;
+    }
+
+    if(localStorage) {
+      localStorage.setItem('flavours', JSON.stringify(flavours));
+    }
+  }, [ flavours ])
+
+  const handleScroll = useCallback(() => {
     let buttonPosition = document.getElementsByClassName('js-button-container-scrolltop')[0].getBoundingClientRect().top;
     if (buttonPosition < 30 && !buttonsFloating) {
       setButtonsFloating(true);
@@ -65,55 +85,7 @@ const App = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     }
-  }, [ handleScroll ])
-
-  useEffect(() => {
-    let flavours;
-
-    if (localStorage) {
-      flavours = JSON.parse(localStorage.getItem('flavours'));
-    }
-
-    if (flavours) {
-      setFlavours(flavours);
-    } else {
-      fetchDefaultFlavours().then((flavours) => {
-        setFlavours(flavours);
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if(!flavours || flavours.length === 0) {
-      return;
-    }
-
-    if (localStorage) {
-      localStorage.setItem('flavours', JSON.stringify(flavours));
-    }
-
-    try {
-      // TODO double check whether the input is valid :)
-
-      flavours.forEach(flavour => {
-        flavour.value = findAllDescendants(flavour.uuid).length === 0 ? 1000 : 0;
-      });
-
-      setHierarchicalFlavours(d3.stratify<Flavour>()
-        .id(d => d.uuid)
-        .parentId(d => d.parentUuid)
-          (flavours));
-    } catch {
-      fetchDefaultFlavours().then((flavours) => {
-        setFlavours(flavours);
-      });
-    }
-  }, [ flavours, findAllDescendants ]);
-
-  const importNewFlavours = (data: any) => {
-    let json = JSON.parse(data);
-    setFlavours(json);
-  }
+  }, [ handleScroll ]);
 
   const resetFlavours = () => {
     fetchDefaultFlavours().then((flavours) => {
@@ -123,10 +95,6 @@ const App = () => {
 
   const toggleEditMode = () => {
     setEditModalActive(!editModalActive);
-  }
-
-  const handleEditModalChange = (data: Flavour[]) => {
-    setFlavours(data);
   }
 
   const handleElementClick = (uuid: string) => {
@@ -147,13 +115,19 @@ const App = () => {
     // 'NO'? Update all children to that
     if (newState === 'NO') {
       setFlavours(
-        flavours.map(flavour => {
+        flavours.map((flavour): Flavour => {
           if (flavour.uuid === uuid) {
-            flavour.state = newState;
+            return {
+              ...flavour,
+              state: newState
+            }
           } else {
             let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)) {
-              flavour.state = newState;
+              return {
+                ...flavour,
+                state: newState
+              }
             }
           }
 
@@ -167,11 +141,17 @@ const App = () => {
       setFlavours(
         flavours.map(flavour => {
           if (flavour.uuid === uuid) {
-            flavour.state = newState;
+            return {
+              ...flavour,
+              state: newState
+            }
           } else {
             let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
-              flavour.state = newState;
+              return {
+                ...flavour,
+                state: newState
+              }
             }
           }
 
@@ -185,12 +165,18 @@ const App = () => {
       setFlavours(
         flavours.map(flavour => {
           if (flavour.uuid === uuid) {
-            flavour.state = newState;
+            return {
+              ...flavour,
+              state: newState
+            }
           } else {
             let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
             if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid
                 && hierarchicalFlavour.data.state === 'YES')) {
-              flavour.state = newState;
+              return {
+                ...flavour,
+                state: newState
+              }
             }
           }
 
@@ -222,8 +208,8 @@ const App = () => {
               ? "buttons has-addons is-centered is-fixed"
               : "buttons has-addons is-centered"}>
               <ExportAsImageButton></ExportAsImageButton>
-              <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
-              <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
+              <ExportAsJsonButton></ExportAsJsonButton>
+              <ImportJsonButton></ImportJsonButton>
               <EditButton onClick={toggleEditMode}></EditButton>
               <ResetButton onClick={() => { setResetConfirmationModalActive(true); }}></ResetButton>
             </div>
@@ -237,14 +223,10 @@ const App = () => {
       ></ResetConfirmationModal>
       <EditModal
         isActive={editModalActive}
-        flavours={flavours}
-        hierarchicalFlavours={hierarchicalFlavours}
-        onChange={handleEditModalChange}
         onClose={toggleEditMode}></EditModal>
       <section className="section">
         <div className="container content has-text-centered">
           <Smorgasbord
-            hierarchicalFlavours={hierarchicalFlavours}
             onElementClick={handleElementClick}></Smorgasbord>
         </div>
       </section>

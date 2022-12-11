@@ -1,19 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
-import Flavour from '../../interfaces';
 import AddFlavourForm from '../AddFlavourForm/AddFlavourForm';
 import RemoveFlavourForm from '../RemoveFlavourForm/RemoveFlavourForm';
 import { useTranslation } from "react-i18next";
+import { useRecoilState, useRecoilValue } from 'recoil';
+import flavoursState from '../../states/flavours.atom';
+import hierarchicalFlavoursState from '../../states/hierarchicalFlavours.selector';
 
 interface EditModalProps {
   isActive: boolean;
-  flavours: Flavour[];
-  hierarchicalFlavours: d3.HierarchyNode<Flavour>;
   onClose: () => void;
-  onChange: (data: Flavour[]) => void;
 }
 
-const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange } : EditModalProps) => {
+const EditModal = ({ isActive, onClose } : EditModalProps) => {
   const { t } = useTranslation();
+  const [flavours, setFlavours] = useRecoilState(flavoursState);
+  const hierarchicalFlavours = useRecoilValue(hierarchicalFlavoursState);
   
   const addNewFlavour = (newFlavourName, parentUuidToAddFlavourTo) => {
     let flavour = {
@@ -25,12 +26,15 @@ const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange
 
     let parentHierarchicalFlavour = hierarchicalFlavours.find(hf => hf.data.uuid === parentUuidToAddFlavourTo);
     
-    onChange([flavour, ...flavours.map(f => {
+    setFlavours([flavour, ...flavours.map(f => {
       // change the flavour to be selected when the newly added flavour is a child flavour of it
       let hierarchicalFlavour = hierarchicalFlavours.find(hf => hf.data.uuid === f.uuid);
 
       if (parentHierarchicalFlavour.ancestors().map(af => af.data.uuid).includes(hierarchicalFlavour.data.uuid)) {
-        f.state = 'YES';
+        return {
+          ...f,
+          state: 'YES'
+        };
       }
 
       return f;
@@ -39,8 +43,7 @@ const EditModal = ({ isActive, flavours, hierarchicalFlavours, onClose, onChange
 
   const removeFlavourAndDescendents = (flavourUuid) => {
     let flavourUuidsToRemove = [ flavourUuid, ...findAllDescendants(flavourUuid) ];
-    console.log(flavourUuidsToRemove);
-    onChange(flavours.filter(flavour => !flavourUuidsToRemove.includes(flavour.uuid)));
+    setFlavours(flavours.filter(flavour => !flavourUuidsToRemove.includes(flavour.uuid)));
   }
 
   const findAllDescendants = (flavourUuid) => {

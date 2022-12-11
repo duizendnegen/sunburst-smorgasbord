@@ -1,12 +1,11 @@
 import saveAs from "file-saver";
 import { useTranslation } from "react-i18next";
+import { useRecoilValue } from "recoil";
+import flavoursState from "../../states/flavours.atom";
 
-interface ExportAsJsonButtonProps {
-  flavours: any
-}
-
-const ExportAsJsonButton = ({ flavours } : ExportAsJsonButtonProps) => {
+const ExportAsJsonButton = () => {
   const { t } = useTranslation();
+  const flavours = useRecoilValue(flavoursState);
 
   const exportCurrentFlavours = () => {
     let dataBlob = new Blob([JSON.stringify(flavours)], {type: "application/json;charset=utf-8"});
