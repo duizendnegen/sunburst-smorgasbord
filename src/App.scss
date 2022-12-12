@@ -1,3 +1,6 @@
+@charset "utf-8";
+@import "../node_modules/bulma/bulma.sass";
+
 html {
   scroll-behavior: smooth;
 }
@@ -29,6 +32,21 @@ footer.footer {
   background-color: #fff;
   border-color: #4a1942;
   color: #333;
+}
+
+.buttons-wrapper {
+  height: 3em;
+}
+
+/* only float buttons on desktop */
+@include desktop {
+  .buttons.is-fixed {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+  }
 }
 
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {

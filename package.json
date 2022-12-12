@@ -3,12 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.47",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
+    "bulma": "^0.9.4",
     "d3": "^7.6.1",
     "file-saver": "^2.0.5",
     "i18next": "^21.10.0",
@@ -51,10 +46,17 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
     "@types/d3": "^7.4.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.47",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "@types/file-saver": "^2.0.5",
     "i18next-fs-backend": "^2.0.1",
-    "react-test-renderer": "^18.2.0"
+    "react-test-renderer": "^18.2.0",
+    "sass": "^1.56.2"
   },
   "jest": {
     "transformIgnorePatterns": [
