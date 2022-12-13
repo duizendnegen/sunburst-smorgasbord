@@ -114,6 +114,7 @@
     "family_sick_or_elderly": "Familie (krank oder alt)",
     "fetishes": "Fetische",
     "friends": "Freunde",
+    "friend": "Freund:ïn",
     "friendship": "Freundschaft",
     "genitals": "Genitalien",
     "hand_holding": "Händchen halten",
@@ -163,6 +164,7 @@
     "comet": "Komet",
     "long_distance": "Fernbeziehung",
     "sharing_values": "Werte teilen",
+    "shibari": "Shibari",
     "social_media": "Soziale Medien",
     "sponsor_sponsee": "Sponsor - Gesponsorte:r",
     "spouse": "Ehepartner:in",
@@ -177,6 +179,11 @@
     "weekly": "Wöchentlich",
     "monthly": "Monatlich",
     "yearly": "Jährlich",
-    "whenever": "Wann auch immer"
+    "whenever": "Wann auch immer",
+    "words_of_affirmation": "Words of affirmation",
+    "quality_time": "Quality time",
+    "exchanging_gifts": "Exchanging gifts",
+    "acts_of_service": "Acts of service",
+    "physical_touch": "Physical touch"
   }
 }
