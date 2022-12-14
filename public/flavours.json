@@ -141,7 +141,7 @@
   },
   {
     "uuid": "342c0092-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "key": "acrobatics"
   },
   {
@@ -270,9 +270,9 @@
     "key": "cultivating_uniqueness"
   },
   {
-    "uuid": "342bd694-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b5e58-f6eb-11ec-b939-0242ac120002",
-    "key": "d_s"
+    "uuid": "7335c960-3f86-46a1-b63e-fc52e4fe382f",
+    "parentUuid": "342b6984-f6eb-11ec-b939-0242ac120002",
+    "key": "shibari"
   },
   {
     "uuid": "342c0196-f6eb-11ec-b939-0242ac120002",
@@ -410,9 +410,29 @@
     "key": "love_languages"
   },
   {
-    "uuid": "342bd7ac-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b5e58-f6eb-11ec-b939-0242ac120002",
-    "key": "m_s"
+    "uuid": "9a349aed-9fbd-46d7-97c5-c4365c7a58e4",
+    "parentUuid": "342be2a6-f6eb-11ec-b939-0242ac120002",
+    "key": "words_of_affirmation"
+  },
+  {
+    "uuid": "62a23e39-d644-4758-9f82-c5794b5a8284",
+    "parentUuid": "342be2a6-f6eb-11ec-b939-0242ac120002",
+    "key": "quality_time"
+  },
+  {
+    "uuid": "3755a1a5-4d26-43ea-9b55-fc809913eb64",
+    "parentUuid": "342be2a6-f6eb-11ec-b939-0242ac120002",
+    "key": "exchanging_gifts"
+  },
+  {
+    "uuid": "b4037a6c-7057-4065-992c-981ebaa75330",
+    "parentUuid": "342be2a6-f6eb-11ec-b939-0242ac120002",
+    "key": "acts_of_service"
+  },
+  {
+    "uuid": "334f8413-8124-4396-9390-69bd4e0b8843",
+    "parentUuid": "342be2a6-f6eb-11ec-b939-0242ac120002",
+    "key": "physical_touch"
   },
   {
     "uuid": "342b7384-f6eb-11ec-b939-0242ac120002",
@@ -421,7 +441,7 @@
   },
   {
     "uuid": "342c0484-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "key": "martial_arts"
   },
   {
@@ -585,6 +605,11 @@
     "key": "platonic"
   },
   {
+    "uuid": "418b08bc-1936-433a-b6b3-f4c45ff9c88d",
+    "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
+    "key": "friend"
+  },
+  {
     "uuid": "61fc0be2-124d-402b-a9c7-ba279c7e42c3",
     "parentUuid": "342b6d1c-f6eb-11ec-b939-0242ac120002",
     "key": "comet"
@@ -645,8 +670,23 @@
     "key": "work"
   },
   {
+    "uuid": "f551bded-68aa-4e06-8dbf-8333be97bc33",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
+    "key": "holiday"
+  },
+  {
+    "uuid": "532cbdfa-9f18-46dd-a759-c07652e89583",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
+    "key": "working_out"
+  },
+  {
+    "uuid": "6ce9777a-9aeb-44f7-b744-f627ba62035d",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
+    "key": "gaming"
+  },
+  {
     "uuid": "342bfc50-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "key": "yoga"
   },
   {
