@@ -12,12 +12,14 @@ import ExportAsImageButton from './components/ExportAsImageButton/ExportAsImageB
 import ResetButton from './components/ResetButton/ResetButton';
 import EditButton from './components/EditButton/EditButton';
 import EditModal from './components/EditModal/EditModal';
+import ResetConfirmationModal from './components/ResetConfirmationModal/ResetConfirmationModal';
 
 const App = () => {
   const { t, i18n } = useTranslation();
 
   const [flavours, setFlavours] = useState<Flavour[]>([]);
   const [hierarchicalFlavours, setHierarchicalFlavours] = useState<d3.HierarchyNode<Flavour>>();
+  const [resetConfirmationModalActive, setResetConfirmationModalActive] = useState<boolean>(false);
   const [editModalActive, setEditModalActive] = useState<boolean>(false);
   const [buttonsFloating, setButtonsFloating] = useState<boolean>(false);
 
@@ -223,11 +225,16 @@ const App = () => {
               <ExportAsJsonButton flavours={flavours}></ExportAsJsonButton>
               <ImportJsonButton onUpload={importNewFlavours}></ImportJsonButton>
               <EditButton onClick={toggleEditMode}></EditButton>
-              <ResetButton onReset={resetFlavours}></ResetButton>
+              <ResetButton onClick={() => { setResetConfirmationModalActive(true); }}></ResetButton>
             </div>
           </div>
         </div>
       </section>
+      <ResetConfirmationModal
+        isActive={resetConfirmationModalActive}
+        onReset={() => { resetFlavours(); setResetConfirmationModalActive(false); }}
+        onCancel={() => { setResetConfirmationModalActive(false); }}
+      ></ResetConfirmationModal>
       <EditModal
         isActive={editModalActive}
         flavours={flavours}
