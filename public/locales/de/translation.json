@@ -176,14 +176,14 @@
     "work": "Arbeit",
     "yoga": "Yoga",
     "daily": "Täglich",
-    "weekly": "Wöchentlich",
-    "monthly": "Monatlich",
-    "yearly": "Jährlich",
+    "weekly": "Ein paarmal die Woche",
+    "monthly": "Ein paarmal im Monat",
+    "yearly": "Ein paarmal im Jahr",
     "whenever": "Wann auch immer",
-    "words_of_affirmation": "Words of affirmation",
-    "quality_time": "Quality time",
-    "exchanging_gifts": "Exchanging gifts",
-    "acts_of_service": "Acts of service",
-    "physical_touch": "Physical touch"
+    "words_of_affirmation": "Worte der Anerkennung",
+    "quality_time": "Gemeinsame Zeit",
+    "exchanging_gifts": "Geschenke",
+    "acts_of_service": "Praktische Hilfe",
+    "physical_touch": "Körperliche Intimität"
   }
 }
