@@ -141,7 +141,7 @@
   },
   {
     "uuid": "342c0092-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "key": "acrobatics"
   },
   {
@@ -441,7 +441,7 @@
   },
   {
     "uuid": "342c0484-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "key": "martial_arts"
   },
   {
@@ -670,8 +670,23 @@
     "key": "work"
   },
   {
+    "uuid": "f551bded-68aa-4e06-8dbf-8333be97bc33",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
+    "key": "holiday"
+  },
+  {
+    "uuid": "532cbdfa-9f18-46dd-a759-c07652e89583",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
+    "key": "working_out"
+  },
+  {
+    "uuid": "6ce9777a-9aeb-44f7-b744-f627ba62035d",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
+    "key": "gaming"
+  },
+  {
     "uuid": "342bfc50-f6eb-11ec-b939-0242ac120002",
-    "parentUuid": "342b6e3e-f6eb-11ec-b939-0242ac120002",
+    "parentUuid": "342bc604-f6eb-11ec-b939-0242ac120002",
     "key": "yoga"
   },
   {
