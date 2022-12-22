@@ -8,7 +8,7 @@ const hierarchicalFlavoursState = selector({
   get: ({get}) => {
     const flavours = get(flavoursState);
 
-    if(!flavours || flavours.length === 0) {
+    if (!flavours || flavours.length === 0) {
       return null;
     }
     

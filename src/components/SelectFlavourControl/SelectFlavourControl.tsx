@@ -12,7 +12,7 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
   const { t } = useTranslation();
 
   const getLabelForFlavour = (flavour: d3.HierarchyNode<Flavour>) : string => {
-    if(!flavour.parent) {
+    if (!flavour.parent) {
       return flavour.data.key ? t(`flavours.${flavour.data.key}`) : flavour.data.name;
     }
 

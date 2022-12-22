@@ -61,11 +61,11 @@ const App = () : JSX.Element => {
   }, [ setFlavours ]);
 
   useEffect(() => {
-    if(!flavours || flavours.length === 0) {
+    if (!flavours || flavours.length === 0) {
       return;
     }
 
-    if(localStorage) {
+    if (localStorage) {
       localStorage.setItem("flavours", JSON.stringify(flavours));
     }
   }, [ flavours ])
