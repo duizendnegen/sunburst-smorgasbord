@@ -112,78 +112,38 @@ const App = () : JSX.Element => {
       : oldState === "YES" ? "MAYBE"
         : "NO";
     
-    // 'NO'? Update all children to that
-    if (newState === "NO") {
-      setFlavours(
-        flavours.map((flavour): Flavour => {
-          if (flavour.uuid === uuid) {
+    setFlavours(
+      flavours.map((flavour): Flavour => {
+        if (flavour.uuid === uuid) {
+          return {
+            ...flavour,
+            state: newState
+          }
+        } else {
+          let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
+          if (
+            (
+              newState === "NO" // 'NO'? Update all children to that
+              && hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
+            ) ||
+            (
+              newState === "YES" // 'YES'? Update the parents to that
+              && hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)
+            ) ||
+            (
+              newState === "MAYBE" // 'MAYBE'? Update the children that have 'YES' to that
+              && hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid && hierarchicalFlavour.data.state === "YES")
+            )) {
             return {
               ...flavour,
               state: newState
             }
-          } else {
-            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)) {
-              return {
-                ...flavour,
-                state: newState
-              }
-            }
           }
+        }
 
-          return flavour;
-        })
-      );
-    }
-
-    // 'YES'? Update the parents to that
-    if (newState === "YES") {
-      setFlavours(
-        flavours.map(flavour => {
-          if (flavour.uuid === uuid) {
-            return {
-              ...flavour,
-              state: newState
-            }
-          } else {
-            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-            if (hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)) {
-              return {
-                ...flavour,
-                state: newState
-              }
-            }
-          }
-
-          return flavour;
-        })
-      );
-    }
-    
-    // 'MAYBE'? Update the children that have 'YES' to that
-    if (newState === "MAYBE") {
-      setFlavours(
-        flavours.map(flavour => {
-          if (flavour.uuid === uuid) {
-            return {
-              ...flavour,
-              state: newState
-            }
-          } else {
-            let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-            if (hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid
-                && hierarchicalFlavour.data.state === "YES")) {
-              return {
-                ...flavour,
-                state: newState
-              }
-            }
-          }
-
-          return flavour;
-        })
-      );
-    }
+        return flavour;
+      })
+    );
   }
 
   // TODO break up this file in separate sub-files;
