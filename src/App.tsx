@@ -24,6 +24,7 @@ const App = () : JSX.Element => {
 
   const [resetConfirmationModalActive, setResetConfirmationModalActive] = useState<boolean>(false);
   const [editModalActive, setEditModalActive] = useState<boolean>(false);
+  const [howToHidden, setHowToHidden] = useState<boolean>(false);
 
   const [buttonsFloating, setButtonsFloating] = useState<boolean>(false);
 
@@ -97,6 +98,10 @@ const App = () : JSX.Element => {
     setEditModalActive(!editModalActive);
   }
 
+  const toggleHowTo = () : void => {
+    setHowToHidden(!howToHidden);
+  }
+
   const handleElementClick = (uuid: string) : void => {
     // find the target flavour
     let targetFlavour = flavours.find(flavour => flavour.uuid === uuid);
@@ -159,6 +164,23 @@ const App = () : JSX.Element => {
           <p>
             <a href="#what-is-this">{t("faq.whats_this")}</a>
           </p>
+        </div>
+        <div className="container card">
+          <header className="card-header">
+            <p className="card-header-title">
+              How do I use this?
+            </p>
+            <button className="card-header-icon" aria-label="more options" onClick={toggleHowTo}>
+              <span className="icon">
+                <i className="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </header>
+          <div className={howToHidden ? "card-content is-hidden" : "card-content"}>
+            <div className="content">
+              {t("faq.how_to_use_content_1")}
+            </div>
+          </div>
         </div>
       </section>
       <section className="section">
