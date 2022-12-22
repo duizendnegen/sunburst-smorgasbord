@@ -4,12 +4,12 @@ interface EditButtonProps {
   onClick: () => void;
 }
 
-const EditButton = ({ onClick } : EditButtonProps) => {
+const EditButton = ({ onClick } : EditButtonProps) : JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <button className="button is-primary" onClick={onClick}>
-      <strong>{t('button.edit')}</strong>
+      <strong>{t("button.edit")}</strong>
     </button>
   )
 }

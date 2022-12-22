@@ -4,12 +4,12 @@ interface ResetButtonProps {
   onClick: () => void;
 }
 
-const ResetButton = ({ onClick } : ResetButtonProps) => {
+const ResetButton = ({ onClick } : ResetButtonProps) : JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <button className="button is-primary" onClick={onClick}>
-      <strong>{t('button.reset')}</strong>
+      <strong>{t("button.reset")}</strong>
     </button>
   )
 }

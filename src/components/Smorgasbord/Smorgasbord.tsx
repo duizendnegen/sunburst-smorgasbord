@@ -2,53 +2,27 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as d3 from "d3";
-import './Smorgasbord.css';
+import "./Smorgasbord.css";
 import Flavour from "../../interfaces";
+import hierarchicalNodesState from "../../states/hierarchicalNodes.selector";
+import { useRecoilValue } from "recoil";
+import { padding, diameter, radius } from "../../constants";
 
-interface  SmorgasbordProps {
-  hierarchicalFlavours: d3.HierarchyNode<Flavour>,
+interface SmorgasbordProps {
   onElementClick: (uuid: string) => void
 }
 
-const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps) => {
+const Smorgasbord = ({ onElementClick } : SmorgasbordProps) : JSX.Element => {
   const { t } = useTranslation();
 
   const svgRef = React.useRef<SVGSVGElement>(null);
-
-  const diameter = 1152;
-  const radius = diameter / 2;
-  const padding = 1; // separation between arcs
-
-  const [nodes, setNodes] = useState<d3.HierarchyRectangularNode<Flavour>[]>([]);
+  
+  const nodes = useRecoilValue(hierarchicalNodesState);
   
   const [ dragSubject, setDragSubject ] = useState<d3.HierarchyRectangularNode<Flavour>>(null);
   const [ globalRotation, setGlobalRotation ] = useState(0.0);
   const [ previousRotation, setPreviousRotation ] = useState(0.0);
   const [ dragStart, setDragStart ] = useState({x: null, y: null});
-
-  React.useEffect(() => {
-    if(!hierarchicalFlavours) {
-      return;
-    }
-    
-    hierarchicalFlavours.sum(d => Math.max(0, d.value));
-    hierarchicalFlavours.sort((a, b) => d3.descending(a.value, b.value));
-
-    const partition = d3.partition<Flavour>().size([2 * Math.PI, radius])(hierarchicalFlavours);
-
-    hierarchicalFlavours.children.forEach((child: any, i: number) => {
-      child.index = i;
-    });
-
-    // construct the color scale and set on each node
-    let colorScale = d3.scaleSequential([0, hierarchicalFlavours.children.length], d3.interpolateRainbow).unknown("#1b1b1b");
-    hierarchicalFlavours.descendants().forEach((child: any, _) => {
-      child.color = d3.color(colorScale(child.ancestors().reverse()[1]?.index));
-    });
-
-    setNodes(partition.descendants());
-    
-  }, [ hierarchicalFlavours, radius ]);
   
   // Construct an arc generator.
   const getArc = d3.arc<d3.HierarchyRectangularNode<Flavour>>()
@@ -59,35 +33,35 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     .innerRadius(d => d.y0)
     .outerRadius(d => d.y1 - padding);
 
-  const getTextTransform = (d: d3.HierarchyRectangularNode<Flavour>) => {
+  const getTextTransform = (d: d3.HierarchyRectangularNode<Flavour>) : string => {
     if (!d.depth) return;
 
     const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
     const y = (d.y0 + d.y1) / 2;
     let flip = ((x + globalRotation + 360) % 360) < 180;
     return `rotate(${x - 90}) translate(${y}, 0) rotate(${flip ? 0 : 180})`;
-  };
+  }
 
-  const getGTransform =  (d: d3.HierarchyRectangularNode<Flavour>) => {
+  const getGTransform = (d: d3.HierarchyRectangularNode<Flavour>) : string => {
     if (!d.depth) return;
 
     return `rotate(${globalRotation})`;
   }
 
-  const getColor = (d: any) => {
+  const getColor = (d: any) : string => {
     if (!d.depth) { // root node is not clickable & has a distinct colour
       return "#1F1F1F";
-    } else if (d.data.state === 'NO') {
+    } else if (d.data.state === "NO") {
       return "#000";
-    } else if (d.data.state === 'MAYBE') {
+    } else if (d.data.state === "MAYBE") {
       return d.color.darker(3).toString();
     } else {
       return d.color.darker(1).toString();
     }
   }
 
-  const calculateRotationFor = (clickX, clickY) => {
-    let rootClientRect = document.getElementsByClassName('flavour-root-node')[0].getBoundingClientRect();
+  const calculateRotationFor = (clickX, clickY) : number => {
+    let rootClientRect = document.getElementsByClassName("flavour-root-node")[0].getBoundingClientRect();
     let rootCenterX = rootClientRect.left + ((rootClientRect.right - rootClientRect.left) / 2);
     let rootCenterY = rootClientRect.top + ((rootClientRect.bottom - rootClientRect.top) / 2);
 
@@ -100,7 +74,7 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     return currentRotation;
   }
 
-  const startDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) => {
+  const startDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) : void => {
     let currentRotation = calculateRotationFor(e.clientX, e.clientY);
 
     setDragSubject(d);
@@ -108,7 +82,7 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     setPreviousRotation(currentRotation);
   }
 
-  const updateDrag = (e) => {
+  const updateDrag = (e) : void => {
     if (dragSubject) {
       let currentRotation = calculateRotationFor(e.clientX, e.clientY);
       let diff = currentRotation - previousRotation;
@@ -117,7 +91,7 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     }
   }
 
-  const endDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) => {
+  const endDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) : void => {
     if (d && d.depth && e.clientX === dragStart.x && e.clientY === dragStart.y) {
       onElementClick(d.data.uuid);
     }
@@ -134,15 +108,15 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
     id='smorgasbordImage'
     // only listen to mouse move event; touch screen moves get confused between scrolling and rotating
     // TODO should implement a different gesture for mobile
-    onMouseMove={(e) => { updateDrag(e) }} 
-    onPointerUp={(e) => { endDrag(e, null) }}
-    onPointerLeave={(e) => { endDrag(e, null) }}>
+    onMouseMove={(e) : void => { updateDrag(e) }} 
+    onPointerUp={(e) : void => { endDrag(e, null) }}
+    onPointerLeave={(e) : void => { endDrag(e, null) }}>
     {nodes
-      .map((d, i) => (
+      .map((d) : JSX.Element => (
         <g key={d.data.uuid}
-          onPointerDown={(e) => { startDrag(e, d) }}
-          onPointerUp={(e) => { endDrag(e, d) }}
-          className={d.parent === null ? 'flavour-root-node' : ''}
+          onPointerDown={(e) : void => { startDrag(e, d) }}
+          onPointerUp={(e) : void => { endDrag(e, d) }}
+          className={d.parent === null ? "flavour-root-node" : ""}
           transform={getGTransform(d)}>
           <path
             d={getArc(d)}
@@ -154,8 +128,8 @@ const Smorgasbord = ({ hierarchicalFlavours, onElementClick } : SmorgasbordProps
             fill="#fff"
             fillOpacity="1.0"
             dy="0.32em"
-            style={{fontFamily: 'sans-serif', fontSize: '12px', textAnchor: 'middle'}}>
-            { d.data.key ? t('flavours.' + d.data.key) : d.data.name }
+            style={{fontFamily: "sans-serif", fontSize: "12px", textAnchor: "middle"}}>
+            { d.data.key ? t("flavours." + d.data.key) : d.data.name }
           </text>
         </g>
       ))}

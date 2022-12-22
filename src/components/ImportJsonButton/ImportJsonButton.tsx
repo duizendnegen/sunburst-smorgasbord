@@ -1,39 +1,40 @@
-import { useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { useSetRecoilState } from "recoil";
+import flavoursState from "../../states/flavours.atom";
 
-
-interface ImportJsonButtonProps {
-  onUpload: (data: any) => void
-}
-
-const ImportJsonButton = ({ onUpload } : ImportJsonButtonProps) => {
+const ImportJsonButton = () : JSX.Element => {
   const { t } = useTranslation();
+  const setFlavours = useSetRecoilState(flavoursState);
 
-  const inputFile = useRef(null) 
+  const inputFile = useRef(null);
 
-  const importNewFlavours = () => {
+  const importNewFlavours = () : void => {
     inputFile.current.click();
   }
 
-  const handleFileSubmission = (event) => {
+  const handleFileSubmission = (event) : void => {
     event.stopPropagation();
     event.preventDefault();
     var file = event.target.files[0];
     var reader = new FileReader();
+    reader.onload = handleReaderOnLoad;
     reader.readAsText(file, "UTF-8");
-    reader.onload = function (evt) {
-      onUpload(evt.target.result);
-    }
+  }
+
+  const handleReaderOnLoad = (evt) : void => {
+    let json = JSON.parse(evt.target.result as any);
+    setFlavours(json);
   }
 
   return (
     <button className="button is-primary" onClick={importNewFlavours}>
-      <strong>{t('button.import_json')}</strong>
+      <strong>{t("button.import_json")}</strong>
       <input
         type='file'
         ref={inputFile}
         onChange={handleFileSubmission}
-        style={{display: 'none'}}
+        style={{display: "none"}}
         accept="application/json"/>
     </button>
   )
