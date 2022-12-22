@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import flavoursState from "../../states/flavours.atom";
 import hierarchicalFlavoursState from "../../states/hierarchicalFlavours.selector";
 import Flavour from "../../interfaces";
+import { findAllDescendants } from "../../helpers";
 
 interface EditModalProps {
   isActive: boolean;
@@ -43,19 +44,8 @@ const EditModal = ({ isActive, onClose } : EditModalProps) : JSX.Element => {
   }
 
   const removeFlavourAndDescendents = (flavourUuid) : void => {
-    let flavourUuidsToRemove = [ flavourUuid, ...findAllDescendants(flavourUuid) ];
+    let flavourUuidsToRemove = [ flavourUuid, ...findAllDescendants(flavours, flavourUuid) ];
     setFlavours(flavours.filter(flavour => !flavourUuidsToRemove.includes(flavour.uuid)));
-  }
-
-  // TODO move to utils.tsx
-  const findAllDescendants = (flavourUuid) : Flavour[] => {
-    let children = flavours
-      .filter(flavour => flavour.parentUuid === flavourUuid)
-      .map(flavour => flavour.uuid);
-
-    let descendants = children.flatMap(uuid => findAllDescendants(uuid));
-
-    return children.concat(descendants);
   }
 
   return (

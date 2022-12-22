@@ -3,16 +3,7 @@ import { selector } from "recoil";
 import Flavour from "../interfaces";
 import flavoursState from "./flavours.atom";
 import { radius } from "../constants";
-
-const findAllDescendants = (flavours, flavourUuid) : Flavour[] => {
-  let children = flavours
-    .filter(flavour => flavour.parentUuid === flavourUuid)
-    .map(flavour => flavour.uuid);
-
-  let descendants = children.flatMap(uuid => findAllDescendants(flavours, uuid));
-
-  return children.concat(descendants);
-}
+import { findAllDescendants } from "../helpers";
 
 const hierarchicalNodesState = selector({
   key: "hierarchicalNodesState",
