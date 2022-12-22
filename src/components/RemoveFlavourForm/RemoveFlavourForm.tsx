@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Flavour from "../../interfaces";
+import * as d3 from "d3";
 import SelectFlavourControl from "../SelectFlavourControl/SelectFlavourControl";
 import { useTranslation } from "react-i18next";
 
@@ -9,19 +10,19 @@ interface RemoveFlavourFormProps {
   hierarchicalFlavours: d3.HierarchyNode<Flavour>;
 }
 
-const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFormProps) => {
+const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFormProps) : JSX.Element => {
   const { t } = useTranslation();
-  const [flavourToRemove, setFlavourToRemove] = useState('');
+  const [flavourToRemove, setFlavourToRemove] = useState("");
 
-  const removeFlavour = () => {
+  const removeFlavour = () : void => {
     onRemove(flavourToRemove);
-    setFlavourToRemove('');
+    setFlavourToRemove("");
   }
 
   return (
     <div>
       <div className="field">
-        <label className="label" htmlFor="select-flavour">{t('edit.remove_flavour')}</label>
+        <label className="label" htmlFor="select-flavour">{t("edit.remove_flavour")}</label>
         <SelectFlavourControl
           value={flavourToRemove}
           onChange={setFlavourToRemove}
@@ -34,8 +35,8 @@ const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFor
           <button
             className='button is-primary'
             onClick={removeFlavour}
-            disabled={flavourToRemove === ''}>
-            {t('edit.remove_flavour_button')}
+            disabled={flavourToRemove === ""}>
+            {t("edit.remove_flavour_button")}
           </button>
         </div>
       </div>

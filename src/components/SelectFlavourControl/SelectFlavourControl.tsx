@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import * as d3 from "d3";
 import Flavour from "../../interfaces";
 
 interface SelectFlavourControlProps {
@@ -7,10 +8,10 @@ interface SelectFlavourControlProps {
   hierarchicalFlavours: d3.HierarchyNode<Flavour>[];
 }
 
-const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : SelectFlavourControlProps) => {
+const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : SelectFlavourControlProps) : JSX.Element => {
   const { t } = useTranslation();
 
-  const getLabelForFlavour = (flavour: d3.HierarchyNode<Flavour>) => {
+  const getLabelForFlavour = (flavour: d3.HierarchyNode<Flavour>) : string => {
     if(!flavour.parent) {
       return flavour.data.key ? t(`flavours.${flavour.data.key}`) : flavour.data.name;
     }
@@ -25,10 +26,10 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
   return (
     <div className="control">
       <div className="select">
-      <select
-        id="select-flavour"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}>
+        <select
+          id="select-flavour"
+          value={value}
+          onChange={(e) : void => onChange(e.target.value)}>
           <option value=''></option>
           {hierarchicalFlavours
             .map((flavour) => {

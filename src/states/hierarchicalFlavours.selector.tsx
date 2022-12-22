@@ -4,7 +4,7 @@ import Flavour from "../interfaces";
 import flavoursState from "./flavours.atom";
 
 const hierarchicalFlavoursState = selector({
-  key: 'hierarchicalFlavours',
+  key: "hierarchicalFlavours",
   get: ({get}) => {
     const flavours = get(flavoursState);
 
@@ -14,8 +14,7 @@ const hierarchicalFlavoursState = selector({
     
     return d3.stratify<Flavour>()
       .id(d => d.uuid)
-      .parentId(d => d.parentUuid)
-        (flavours);
+      .parentId(d => d.parentUuid)(flavours);
   }
 });
 

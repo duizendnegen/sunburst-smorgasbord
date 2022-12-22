@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 const flavoursState = atom({
-  key: 'flavours',
+  key: "flavours",
   default: []
 });
 

@@ -1,9 +1,9 @@
 import { I18nextProvider } from "react-i18next";
 import ResetConfirmationModal from "./ResetConfirmationModal";
-import i18n from '../../i18n.tests';
-import { act, fireEvent, getByText, render, screen } from '@testing-library/react';
+import i18n from "../../i18n.tests";
+import { fireEvent, render, screen } from "@testing-library/react";
 
-it('does not reset after cancelling', async () => {
+it("does not reset after cancelling", async () => {
   const onReset = jest.fn();
   const onCancel = jest.fn();
 
@@ -21,7 +21,7 @@ it('does not reset after cancelling', async () => {
   expect(onReset).toHaveBeenCalledTimes(0);
 });
 
-it('resets after confirming', async () => {
+it("resets after confirming", async () => {
   const onReset = jest.fn();
   const onCancel = jest.fn();
 
