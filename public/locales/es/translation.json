@@ -12,15 +12,15 @@
   },
   "edit": {
       "add": "Añadir",
-      "add_as_child": "Añadir como hijo",
+      "add_as_child": "Añadir como Subcategoría",
       "close": "Cerrar",
       "customize": "Personaliza tu Smorgasbord",
-      "new_flavour": "Nuevo sabor",
-      "new_flavour_name": "Nombre del nuevo sabor",
-      "parent_element": "Elemento padre",
+      "new_flavour": "Nueva Categoría",
+      "new_flavour_name": "Nombre de la nueva Categoría",
+      "parent_element": "Categoría superior",
       "remove": "Eliminar",
-      "remove_flavour": "Sabor a eliminar",
-      "remove_flavour_button": "Eliminar sabor y todos los descendientes"
+      "remove_flavour": "Categoría a eliminar",
+      "remove_flavour_button": "Eliminar Categoría y todas las Subcategorías"
   },
   "reset": {
       "content": "Reiniciar tu Smorgasbord cargará el lienzo predeterminado: tus cambios se perderán. ¿OK?",
@@ -28,7 +28,7 @@
       "cancel": "No, cancelar"
   },
   "footer": {
-      "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open Source</a>; hecho con <a href=\"https://d3js.org/\">D3</a>, basado en su <a href=\"https://observablehq.com/@d3/sunburst\">diagrama Sunburst</a>.<br />Sin cookies, sin seguimiento, sin datos recopilados. Se utiliza almacenamiento local para asegurarse de que no tenga que comenzar de nuevo cada vez que cargue el sitio web. Genial.",
+      "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open Source</a>; hecho con <a href=\"https://d3js.org/\">D3</a>, basado en su <a href=\"https://observablehq.com/@d3/sunburst\">diagrama Sunburst</a>.<br />Sin cookies, sin seguimiento, sin datos recopilados. Se utiliza almacenamiento local para asegurarse de que no tenga que comenzar de nuevo cada vez que cargue el sitio web.",
       "languages": "Disponible en",
       "languages_german": "Alemán",
       "languages_english": "Inglés",
@@ -50,7 +50,7 @@
       "companionship": "Compañerismo",
       "creativity": "Creatividad",
       "domesticity": "Vida doméstica",
-      "each_other": "Le un a le otre",
+      "each_other": "Le une a le otre",
       "emotional_intimacy": "Intimidad emocional",
       "emotional_support": "Apoyo emocional",
       "exclusivity": "Exclusividad",
@@ -169,7 +169,7 @@
       "sharing_values": "Compartir valores",
       "shibari": "Shibari",
       "social_media": "Redes sociales",
-      "sponsor_sponsee": "Patrocinadore - Padrine",
+      "sponsor_sponsee": "Sponsor - Sponsorizade",
       "spouse": "Cónyuge",
       "support": "Apoyo",
       "teacher_student": "Profesoree - Estudiante",
@@ -180,7 +180,7 @@
       "working_out": "Ejercicio",
       "yoga": "Yoga",
       "daily": "Diario",
-      "weekly": "Unas veces a la semana",
+      "weekly": "Una vez a la semana",
       "monthly": "Unas veces al mes",
       "yearly": "Unas veces al año",
       "whenever": "Cuando sea",
