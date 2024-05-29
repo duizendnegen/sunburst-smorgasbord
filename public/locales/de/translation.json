@@ -31,7 +31,8 @@
     "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open Source</a>; mit <a href=\"https://d3js.org/\">D3</a> hergestellt, basierend auf dem <a href=\"https://observablehq.com/@d3/sunburst\">Sunburstdiagramm</a>.<br />Keine Cookies, kein Tracking, keine Datenerhebung. Dein lokaler Speicher wird verwendet, damit du nicht jedes Mal von vorne anfangen musst, wenn du die Webseite neu lädst. Sweet.",
     "languages": "Verfügbar auf",
     "languages_german": "Deutsch",
-    "languages_english": "Englisch"
+    "languages_english": "Englisch",
+    "languages_spanish": "Spanisch"
   },
   "faq": {
     "whats_this": "Was ist das?",
@@ -111,7 +112,7 @@
     "writing": "Schreiben",
     "executor_of_will": "Testamentsvollstrecker",
     "family": "Familie",
-    "family_sick_or_elderly": "Familie (krank oder alt)",
+    "family_sick_or_elderly": "Familie",
     "fetishes": "Fetische",
     "friends": "Freunde",
     "friend": "Freund:ïn",
