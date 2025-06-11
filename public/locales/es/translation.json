@@ -32,7 +32,9 @@
       "languages": "Disponible en",
       "languages_german": "Alemán",
       "languages_english": "Inglés",
-      "languages_spanish": "Español"
+      "languages_esperanto": "Esperanto",
+      "languages_spanish": "Español",
+      "languages_dutch": "Neerlandés"
   },
   "faq": {
       "whats_this": "¿Qué es esto?",
