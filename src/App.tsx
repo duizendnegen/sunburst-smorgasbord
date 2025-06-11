@@ -210,7 +210,8 @@ const App = () : JSX.Element => {
             {t("footer.languages")}&nbsp;
             <button className="button-link" onClick={() : void => changeLanguage("en")}>{t("footer.languages_english")}</button>,&nbsp;
             <button className="button-link" onClick={() : void => changeLanguage("es")}>{t("footer.languages_spanish")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("de")}>{t("footer.languages_german")}</button>.
+            <button className="button-link" onClick={() : void => changeLanguage("de")}>{t("footer.languages_german")}</button>,&nbsp;
+            <button className="button-link" onClick={() : void => changeLanguage("nl")}>{t("footer.languages_dutch")}</button>.
           </p>
           <p dangerouslySetInnerHTML={{__html: t("footer.disclaimer")}}></p>
         </div>
