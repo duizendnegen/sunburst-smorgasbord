@@ -10,7 +10,7 @@
     "import_json": "Importieren",
     "reset": "Zurücksetzen"
   },
-  "edit":{
+  "edit": {
     "add": "Hinzufügen",
     "add_as_child": "Als untergeordnetes Element hinzufügen",
     "close": "Schließen",
@@ -20,7 +20,7 @@
     "parent_element": "Übergeordnetes Element",
     "remove": "Entfernen",
     "remove_flavour": "Element entfernen",
-    "remove_flavour_button": "Element und alle untergeordneten Elemente entfernen"  
+    "remove_flavour_button": "Element und alle untergeordneten Elemente entfernen"
   },
   "reset": {
     "content": "Durch das Zurücksetzen wird dein Smorgasbord erneut geladen - deine Änderungen gehen verloren. OK?",
@@ -32,7 +32,9 @@
     "languages": "Verfügbar auf",
     "languages_german": "Deutsch",
     "languages_english": "Englisch",
-    "languages_spanish": "Spanisch"
+    "languages_esperanto": "Esperanto",
+    "languages_spanish": "Spanisch",
+    "languages_dutch": "Niederländisch"
   },
   "faq": {
     "whats_this": "Was ist das?",
