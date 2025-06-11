@@ -10,7 +10,7 @@
     "import_json": "Import",
     "reset": "Reset"
   },
-  "edit":{
+  "edit": {
     "add": "Add",
     "add_as_child": "Add as child",
     "close": "Close",
@@ -32,7 +32,9 @@
     "languages": "Available in",
     "languages_german": "German",
     "languages_english": "English",
-    "languages_spanish": "Spanish"
+    "languages_esperanto": "Esperanto",
+    "languages_spanish": "Spanish",
+    "languages_dutch": "Dutch"
   },
   "faq": {
     "whats_this": "What is this?",
