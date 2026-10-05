@@ -3,12 +3,18 @@
     "title": "Sunburst Smorgasbord",
     "subtitle": "Relationship anarchy, as radiant as the sun."
   },
+  "board": {
+    "language": "English"
+  },
   "button": {
     "download_image": "Download as image",
-    "download_json": "Export",
+    "export_markdown": "Export",
     "edit": "Edit",
-    "import_json": "Import",
+    "import_markdown": "Import",
     "reset": "Reset"
+  },
+  "import": {
+    "error": "Could not read that file as a Sunburst Smorgasbord markdown export."
   },
   "edit": {
     "add": "Add",

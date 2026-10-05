@@ -6,8 +6,8 @@ import "./App.scss";
 
 import Smorgasbord from "./components/Smorgasbord/Smorgasbord";
 import Flavour from "./interfaces";
-import ImportJsonButton from "./components/ImportJsonButton/ImportJsonButton";
-import ExportAsJsonButton from "./components/ExportAsJsonButton/ExportAsJsonButton";
+import ImportMarkdownButton from "./components/ImportMarkdownButton/ImportMarkdownButton";
+import ExportMarkdownButton from "./components/ExportMarkdownButton/ExportMarkdownButton";
 import ExportAsImageButton from "./components/ExportAsImageButton/ExportAsImageButton";
 import ResetButton from "./components/ResetButton/ResetButton";
 import EditButton from "./components/EditButton/EditButton";
@@ -168,8 +168,8 @@ const App = () : JSX.Element => {
               ? "buttons has-addons is-centered is-fixed"
               : "buttons has-addons is-centered"}>
               <ExportAsImageButton></ExportAsImageButton>
-              <ExportAsJsonButton></ExportAsJsonButton>
-              <ImportJsonButton></ImportJsonButton>
+              <ExportMarkdownButton></ExportMarkdownButton>
+              <ImportMarkdownButton></ImportMarkdownButton>
               <EditButton onClick={toggleEditMode}></EditButton>
               <ResetButton onClick={() : void => { setResetConfirmationModalActive(true); }}></ResetButton>
             </div>

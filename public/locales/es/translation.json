@@ -3,12 +3,18 @@
       "title": "Sunburst Smorgasbord",
       "subtitle": "Anarquía relacional, tan radiante como el sol."
   },
+  "board": {
+      "language": "Español"
+  },
   "button": {
       "download_image": "Descargar como imagen",
-      "download_json": "Exportar",
+      "export_markdown": "Exportar",
       "edit": "Editar",
-      "import_json": "Importar",
+      "import_markdown": "Importar",
       "reset": "Reiniciar"
+  },
+  "import": {
+      "error": "No se pudo leer ese archivo como exportación markdown del Sunburst Smorgasbord."
   },
   "edit": {
       "add": "Añadir",

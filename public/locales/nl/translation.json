@@ -3,12 +3,18 @@
     "title": "Sunburst Smorgasbord",
     "subtitle": "Relatie-anarchie, zo stralend als de zon."
   },
+  "board": {
+    "language": "Nederlands"
+  },
   "button": {
     "download_image": "Downloaden als afbeelding",
-    "download_json": "Exporteren",
+    "export_markdown": "Exporteren",
     "edit": "Bewerken",
-    "import_json": "Importeren",
+    "import_markdown": "Importeren",
     "reset": "Herstellen"
+  },
+  "import": {
+    "error": "Dat bestand kon niet worden gelezen als markdown-export van het Sunburst Smorgasbord."
   },
   "edit": {
     "add": "Toevoegen",

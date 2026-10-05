@@ -3,12 +3,18 @@
     "title": "Sunburst Smorgasbord",
     "subtitle": "Relationship Anarchy, so strahlend wie die Sonne."
   },
+  "board": {
+    "language": "Deutsch"
+  },
   "button": {
     "download_image": "Als Bild downloaden",
-    "download_json": "Exportieren",
+    "export_markdown": "Exportieren",
     "edit": "Bearbeiten",
-    "import_json": "Importieren",
+    "import_markdown": "Importieren",
     "reset": "Zurücksetzen"
+  },
+  "import": {
+    "error": "Diese Datei konnte nicht als Markdown-Export des Sunburst Smorgasbords gelesen werden."
   },
   "edit": {
     "add": "Hinzufügen",
