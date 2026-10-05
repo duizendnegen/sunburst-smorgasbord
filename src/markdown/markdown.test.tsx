@@ -141,6 +141,18 @@ describe("importMarkdown", () => {
     expect(board).toHaveLength(3); // root + Kink + Body contact
     expect(byName(board).get("Some notes about kink.")).toBeUndefined();
   });
+
+  it("throws for an empty document", () => {
+    expect(() => importMarkdown("")).toThrow(/no importable items/);
+  });
+
+  it("throws for a document with only blank lines", () => {
+    expect(() => importMarkdown("\n\n   \n\n")).toThrow(/no importable items/);
+  });
+
+  it("throws for a document without any recognizable structure", () => {
+    expect(() => importMarkdown("# Sunburst Smorgasbord\n\nSome notes about the board.\n")).toThrow(/no importable items/);
+  });
 });
 
 describe("exportMarkdown", () => {

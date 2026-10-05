@@ -64,6 +64,12 @@ export const importMarkdown = (markdown: string): Flavour[] => {
     // Free text is not part of the format; ignore it.
   }
 
+  // A document without any recognizable structure (empty, blank-only, or
+  // free text only) is invalid; throw so the caller's error state triggers.
+  if (flavours.length === 1) {
+    throw new Error("Markdown document contains no importable items");
+  }
+
   // Restore the invariant: lift each node's state up to its ancestors, so a
   // "YES" leaf renders together with its whole branch (as in the app).
   const byUuid = new Map(flavours.map((flavour): [string, Flavour] => [flavour.uuid, flavour]));

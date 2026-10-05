@@ -46,4 +46,7 @@ The data exchange format for the Sunburst Smorgasbord is human-readable markdown
 - A list item that appears before any `h2` attaches to the root (it becomes a primary node).
 - Any depth round-trips: each list item attaches to the most recent line at a shallower indentation.
 - Blank lines are ignored.
+- A document that yields no nodes at all (empty, blank-only, or free text only) is
+  invalid: the importer throws, and the UI reports the import error instead of
+  replacing the board.
 - Importing replaces the current board state entirely (same semantics as the old JSON import).
