@@ -46,6 +46,11 @@ const ImportMarkdownButton = () : JSX.Element => {
     let reader = new FileReader();
     reader.onload = handleReaderOnLoad;
     reader.readAsText(file, "UTF-8");
+
+    // Reset the input so re-selecting the same file fires `change` again.
+    // (Browsers skip the event when the value is unchanged.) Safe: the File
+    // object is already captured by FileReader.
+    event.target.value = "";
   }
 
   const handleReaderOnLoad = (evt: ProgressEvent<FileReader>) : void => {

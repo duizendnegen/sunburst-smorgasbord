@@ -89,6 +89,29 @@ describe("ImportMarkdownButton", () => {
     expect(importMarkdown).not.toHaveBeenCalled();
   });
 
+  it("imports the same file again after an earlier import", async () => {
+    (importMarkdown as jest.Mock).mockReturnValue(importedFlavours);
+    renderButton();
+
+    const content = "# Sunburst Smorgasbord\n";
+    const file = new File([content], "board.md", { type: "text/markdown" });
+
+    fireEvent.change(fileInput(), { target: { files: [file] } });
+    await waitFor(() : void => {
+      expect(importMarkdown).toHaveBeenCalledTimes(1);
+    });
+
+    // Re-selecting the same file must import again and overwrite state.
+    const updated = [...importedFlavours, { uuid: "extra", parentUuid: "root", name: "Extra" }];
+    (importMarkdown as jest.Mock).mockReturnValueOnce(updated);
+    fireEvent.change(fileInput(), { target: { files: [file] } });
+
+    await waitFor(() : void => {
+      expect(importMarkdown).toHaveBeenCalledTimes(2);
+    });
+    expect(JSON.parse(screen.getByTestId("probe").textContent)).toEqual(updated);
+  });
+
   it("ignores a change without a file", () => {
     (importMarkdown as jest.Mock).mockReturnValue(importedFlavours);
     renderButton();
