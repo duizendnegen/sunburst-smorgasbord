@@ -73,7 +73,7 @@ const ImportMarkdownButton = () : JSX.Element => {
         onChange={handleFileSubmission}
         style={{display: "none"}}
         // DEPRECATED: .json entries support legacy imports.
-        accept=".md,.markdown,.json,text/markdown,text/x-markdown,application/json"/>
+        accept=".md,.markdown,text/markdown,text/x-markdown,.json,application/json"/>
     </button>
   )
 };
