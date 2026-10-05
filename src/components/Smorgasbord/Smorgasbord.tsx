@@ -8,6 +8,9 @@ import hierarchicalNodesState from "../../states/hierarchicalNodes.selector";
 import { useRecoilValue } from "recoil";
 import { padding, diameter, radius } from "../../constants";
 
+// Pointer movement (in px) below which a press-and-release still counts as a click.
+const DRAG_THRESHOLD_PX = 10;
+
 interface SmorgasbordProps {
   onElementClick: (uuid: string) => void
 }
@@ -74,6 +77,11 @@ const Smorgasbord = ({ onElementClick } : SmorgasbordProps) : JSX.Element => {
     return currentRotation;
   }
 
+  const distanceFromDragStart = (e) : number => {
+    if (dragStart.x === null || dragStart.y === null) return Infinity;
+    return Math.hypot(e.clientX - dragStart.x, e.clientY - dragStart.y);
+  }
+
   const startDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) : void => {
     let currentRotation = calculateRotationFor(e.clientX, e.clientY);
 
@@ -85,6 +93,14 @@ const Smorgasbord = ({ onElementClick } : SmorgasbordProps) : JSX.Element => {
   const updateDrag = (e) : void => {
     if (dragSubject) {
       let currentRotation = calculateRotationFor(e.clientX, e.clientY);
+
+      // Sub-threshold jitter: a slightly drifting click must not rotate the
+      // board. Keep tracking the angle so the first real rotation step is small.
+      if (distanceFromDragStart(e) <= DRAG_THRESHOLD_PX) {
+        setPreviousRotation(currentRotation);
+        return;
+      }
+
       let diff = currentRotation - previousRotation;
       setPreviousRotation(currentRotation);
       setGlobalRotation(globalRotation + diff);
@@ -92,7 +108,9 @@ const Smorgasbord = ({ onElementClick } : SmorgasbordProps) : JSX.Element => {
   }
 
   const endDrag = (e, d: d3.HierarchyRectangularNode<Flavour>) : void => {
-    if (d && d.depth && e.clientX === dragStart.x && e.clientY === dragStart.y) {
+    // A click is a release within the jitter threshold of the press point;
+    // past it, the pointer was rotating the board.
+    if (d && d.depth && distanceFromDragStart(e) <= DRAG_THRESHOLD_PX) {
       onElementClick(d.data.uuid);
     }
 
