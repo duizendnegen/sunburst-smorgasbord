@@ -50,7 +50,7 @@ describe("ImportMarkdownButton", () => {
     renderButton();
 
     expect(screen.getByRole("button", { name: "Import" })).toBeInTheDocument();
-    expect(fileInput()).toHaveAttribute("accept", ".md,.markdown,text/markdown,text/x-markdown");
+    expect(fileInput()).toHaveAttribute("accept", ".md,.markdown,.json,text/markdown,text/x-markdown,application/json");
   });
 
   it("opens the file picker when clicked", () => {
@@ -73,6 +73,20 @@ describe("ImportMarkdownButton", () => {
       expect(importMarkdown).toHaveBeenCalledWith("# Sunburst Smorgasbord\n");
     });
     expect(JSON.parse(screen.getByTestId("probe").textContent)).toEqual(importedFlavours);
+  });
+
+  it("imports a legacy JSON board when the content looks like JSON", async () => {
+    renderButton();
+
+    const json = JSON.stringify(importedFlavours);
+    const file = new File([json], "board.json", { type: "application/json" });
+    fireEvent.change(fileInput(), { target: { files: [file] } });
+
+    await waitFor(() : void => {
+      expect(JSON.parse(screen.getByTestId("probe").textContent)).toEqual(importedFlavours);
+    });
+    // The markdown importer must not be used for JSON content.
+    expect(importMarkdown).not.toHaveBeenCalled();
   });
 
   it("ignores a change without a file", () => {
