@@ -59,6 +59,7 @@ const ImportMarkdownButton = () : JSX.Element => {
       // DEPRECATED: JSON fallback.
       setFlavours(looksLikeJson(text, currentFile.current?.name) ? importJson(text) : importMarkdown(text));
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Could not import markdown board:", error);
       window.alert(t("import.error"));
     }
