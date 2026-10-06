@@ -50,7 +50,7 @@ describe("ImportMarkdownButton", () => {
     renderButton();
 
     expect(screen.getByRole("button", { name: "Import" })).toBeInTheDocument();
-    expect(fileInput()).toHaveAttribute("accept", ".md,.markdown,.json,text/markdown,text/x-markdown,application/json");
+    expect(fileInput()).toHaveAttribute("accept", ".md,.markdown,text/markdown,text/x-markdown,.json,application/json");
   });
 
   it("opens the file picker when clicked", () => {
