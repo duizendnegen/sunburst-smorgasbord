@@ -15,6 +15,7 @@ import EditModal from "./components/EditModal/EditModal";
 import ResetConfirmationModal from "./components/ResetConfirmationModal/ResetConfirmationModal";
 import flavoursState from "./states/flavours.atom";
 import hierarchicalFlavoursState from "./states/hierarchicalFlavours.selector";
+import { cycleFlavourState } from "./helpers";
 
 const App = () : JSX.Element => {
   const { t, i18n } = useTranslation();
@@ -98,52 +99,7 @@ const App = () : JSX.Element => {
   }
 
   const handleElementClick = (uuid: string) : void => {
-    // find the target flavour
-    let targetFlavour = flavours.find(flavour => flavour.uuid === uuid);
-    let targetHierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
-
-    // ignore root click
-    if (targetHierarchicalFlavour.ancestors().length === 1) {
-      return;
-    }
-
-    let oldState = targetFlavour.state;
-    let newState = oldState === "NO" ? "YES"
-      : oldState === "YES" ? "MAYBE"
-        : "NO";
-    
-    setFlavours(
-      flavours.map((flavour): Flavour => {
-        if (flavour.uuid === uuid) {
-          return {
-            ...flavour,
-            state: newState
-          }
-        } else {
-          let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-          if (
-            (
-              newState === "NO" // 'NO'? Update all children to that
-              && hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
-            ) ||
-            (
-              newState === "YES" // 'YES'? Update the parents to that
-              && hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)
-            ) ||
-            (
-              newState === "MAYBE" // 'MAYBE'? Update the children that have 'YES' to that
-              && hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid && hierarchicalFlavour.data.state === "YES")
-            )) {
-            return {
-              ...flavour,
-              state: newState
-            }
-          }
-        }
-
-        return flavour;
-      })
-    );
+    setFlavours(cycleFlavourState(flavours, hierarchicalFlavours, uuid));
   }
 
   // TODO break up this file in separate sub-files;
