@@ -8,6 +8,7 @@ This is a tool to help you discuss and explore the relationships you'd like with
 - [Local storage](docs/local-storage.md): how the board is saved, restored and reset.
 - [Image download](docs/image-download.md): saving the board as a PNG.
 - [Markdown format](docs/markdown-format.md): the import/export file format.
+- [Internationalization](docs/i18n.md): available languages, language detection and adding a translation.
 
 ## Running the project
 
@@ -31,4 +32,4 @@ Tests use [Jest](https://jestjs.io/) and [React Testing Library](https://testing
 ## Contributing to the project
 
 We're open for pull requests - best discuss your suggestion first by opening an issue.
-New translations can be submitted by adding a new file in `public/locales/{language}/translation.json` and adding a new language button to [the application footer](https://github.com/duizendnegen/sunburst-smorgasbord/blob/main/src/App.tsx). See [the English translation file](https://github.com/duizendnegen/sunburst-smorgasbord/blob/main/public/locales/en/translation.json) for an example.
+New translations are welcome; see [Adding a language](docs/i18n.md#adding-a-language) for the steps.

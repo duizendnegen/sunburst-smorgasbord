@@ -27,7 +27,7 @@ On startup the app reads `localStorage["flavours"]`:
   set to `NO`.
 
 The UI language is restored by the language detector; without a stored choice it
-follows the browser's language, falling back to English.
+follows the browser's language, falling back to English (see [Internationalization](i18n.md)).
 
 ## Resetting
 

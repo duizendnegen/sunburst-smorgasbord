@@ -61,3 +61,4 @@ language.
 - [Local storage](local-storage.md): how the board is saved, restored and reset.
 - [Image download](image-download.md): saving the board as a PNG.
 - [Markdown format](markdown-format.md): importing and exporting the board as a file.
+- [Internationalization](i18n.md): languages and how flavour names are translated.
