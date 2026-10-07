@@ -50,3 +50,12 @@ The data exchange format for the Sunburst Smorgasbord is human-readable markdown
   invalid: the importer throws, and the UI reports the import error instead of
   replacing the board.
 - Importing replaces the current board state entirely (same semantics as the old JSON import).
+
+## In the app
+
+- **Export** (`src/components/ExportMarkdownButton`) downloads the board as
+  `sunburst-smorgasbord.md`.
+- **Import** (`src/components/ImportMarkdownButton`) replaces the board with a chosen file.
+  Files ending in `.json`, or whose content starts with `[` or `{`, are read as a legacy
+  JSON export (a plain array of flavours) instead. This fallback is deprecated.
+- An imported board is saved to [local storage](local-storage.md) like any other change.

@@ -3,12 +3,13 @@ import * as d3 from "d3";
 import Flavour from "../../interfaces";
 
 interface SelectFlavourControlProps {
+  id?: string;
   onChange: (uuid: string) => void;
   value: string,
   hierarchicalFlavours: d3.HierarchyNode<Flavour>[];
 }
 
-const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : SelectFlavourControlProps) : JSX.Element => {
+const SelectFlavourControl = ({ id = "select-flavour", onChange, value, hierarchicalFlavours } : SelectFlavourControlProps) : JSX.Element => {
   const { t } = useTranslation();
 
   const getLabelForFlavour = (flavour: d3.HierarchyNode<Flavour>) : string => {
@@ -27,7 +28,7 @@ const SelectFlavourControl = ({ onChange, value, hierarchicalFlavours } : Select
     <div className="control">
       <div className="select">
         <select
-          id="select-flavour"
+          id={id}
           value={value}
           onChange={(e) : void => onChange(e.target.value)}>
           <option value=''></option>

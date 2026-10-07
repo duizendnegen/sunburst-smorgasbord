@@ -10,14 +10,16 @@ import ImportMarkdownButton from "./components/ImportMarkdownButton/ImportMarkdo
 import ExportMarkdownButton from "./components/ExportMarkdownButton/ExportMarkdownButton";
 import ExportAsImageButton from "./components/ExportAsImageButton/ExportAsImageButton";
 import ResetButton from "./components/ResetButton/ResetButton";
+import LanguageLinks from "./components/LanguageLinks/LanguageLinks";
 import EditButton from "./components/EditButton/EditButton";
 import EditModal from "./components/EditModal/EditModal";
 import ResetConfirmationModal from "./components/ResetConfirmationModal/ResetConfirmationModal";
 import flavoursState from "./states/flavours.atom";
 import hierarchicalFlavoursState from "./states/hierarchicalFlavours.selector";
+import { cycleFlavourState } from "./helpers";
 
 const App = () : JSX.Element => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [flavours, setFlavours] = useRecoilState(flavoursState);
   const hierarchicalFlavours = useRecoilValue(hierarchicalFlavoursState);
@@ -26,10 +28,6 @@ const App = () : JSX.Element => {
   const [editModalActive, setEditModalActive] = useState<boolean>(false);
 
   const [buttonsFloating, setButtonsFloating] = useState<boolean>(false);
-
-  const changeLanguage = (lang) : void => {
-    i18n.changeLanguage(lang);
-  };
 
   const fetchDefaultFlavours = () : Promise<Flavour[]> => {
     return fetch("flavours.json")
@@ -98,52 +96,7 @@ const App = () : JSX.Element => {
   }
 
   const handleElementClick = (uuid: string) : void => {
-    // find the target flavour
-    let targetFlavour = flavours.find(flavour => flavour.uuid === uuid);
-    let targetHierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === targetFlavour.uuid);
-
-    // ignore root click
-    if (targetHierarchicalFlavour.ancestors().length === 1) {
-      return;
-    }
-
-    let oldState = targetFlavour.state;
-    let newState = oldState === "NO" ? "YES"
-      : oldState === "YES" ? "MAYBE"
-        : "NO";
-    
-    setFlavours(
-      flavours.map((flavour): Flavour => {
-        if (flavour.uuid === uuid) {
-          return {
-            ...flavour,
-            state: newState
-          }
-        } else {
-          let hierarchicalFlavour = hierarchicalFlavours.find(hierarchicalFlavour => hierarchicalFlavour.data.uuid === flavour.uuid);
-          if (
-            (
-              newState === "NO" // 'NO'? Update all children to that
-              && hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid)
-            ) ||
-            (
-              newState === "YES" // 'YES'? Update the parents to that
-              && hierarchicalFlavour.descendants().some(child => child.data.uuid === targetFlavour.uuid)
-            ) ||
-            (
-              newState === "MAYBE" // 'MAYBE'? Update the children that have 'YES' to that
-              && hierarchicalFlavour.ancestors().some(ancestor => ancestor.data.uuid === targetFlavour.uuid && hierarchicalFlavour.data.state === "YES")
-            )) {
-            return {
-              ...flavour,
-              state: newState
-            }
-          }
-        }
-
-        return flavour;
-      })
-    );
+    setFlavours(cycleFlavourState(flavours, hierarchicalFlavours, uuid));
   }
 
   // TODO break up this file in separate sub-files;
@@ -206,13 +159,7 @@ const App = () : JSX.Element => {
       <footer className="footer">
         <div className="content">
           <h3>{t("header.title")}</h3>
-          <p>
-            {t("footer.languages")}&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("en")}>{t("footer.languages_english")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("es")}>{t("footer.languages_spanish")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("de")}>{t("footer.languages_german")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("nl")}>{t("footer.languages_dutch")}</button>.
-          </p>
+          <LanguageLinks></LanguageLinks>
           <p dangerouslySetInnerHTML={{__html: t("footer.disclaimer")}}></p>
         </div>
       </footer>

@@ -22,8 +22,9 @@ const RemoveFlavourForm = ({ onRemove, hierarchicalFlavours } : RemoveFlavourFor
   return (
     <div>
       <div className="field">
-        <label className="label" htmlFor="select-flavour">{t("edit.remove_flavour")}</label>
+        <label className="label" htmlFor="select-flavour-to-remove">{t("edit.remove_flavour")}</label>
         <SelectFlavourControl
+          id="select-flavour-to-remove"
           value={flavourToRemove}
           onChange={setFlavourToRemove}
           hierarchicalFlavours={hierarchicalFlavours ? hierarchicalFlavours
