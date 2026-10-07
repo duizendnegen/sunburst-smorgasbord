@@ -2,11 +2,29 @@
 
 This is a tool to help you discuss and explore the relationships you'd like with your loved ones.
 
+## Documentation
+
+- [Functionality](docs/functionality.md): how the board works — states, rotating, editing, persistence, import and export.
+- [Markdown format](docs/markdown-format.md): the import/export file format.
+
 ## Running the project
 
-Install requirements using `npm install`\
-Run `npm start` to build the project locally and view it in the browser at [http://localhost:3000](http://localhost:3000).\
-Tests can be ran using `npm test`.
+Requires [Node.js](https://nodejs.org/) 24 (the version CI uses).
+
+| Command          | What it does                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| `npm install`    | Install dependencies.                                                                          |
+| `npm start`      | Run the app locally at [http://localhost:3000](http://localhost:3000), reloading on changes.   |
+| `npm test`       | Run the tests in watch mode. Use `npm test -- --watchAll=false` for a single run.              |
+| `npm run lint`   | Lint the sources with ESLint.                                                                  |
+| `npm run build`  | Build the production bundle into `build/`.                                                     |
+
+Tests use [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) and live next to the code they test (`*.test.tsx`). Components that read board state are wrapped in a `RecoilRoot`; use the file-based i18n instance from `src/i18n.tests.tsx` so translations load without a server.
+
+## Continuous integration and deployment
+
+- Every pull request to `main` runs lint, tests and a production build ([`pull-request.yml`](.github/workflows/pull-request.yml)). The build runs with `CI=true`, which turns lint warnings into errors, so run `CI=true npm run build` locally if in doubt.
+- Every push to `main` runs the same checks and then deploys the build to AWS S3 and CloudFront ([`main.yml`](.github/workflows/main.yml)).
 
 ## Contributing to the project
 
