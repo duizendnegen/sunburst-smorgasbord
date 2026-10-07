@@ -10,6 +10,7 @@ import ImportMarkdownButton from "./components/ImportMarkdownButton/ImportMarkdo
 import ExportMarkdownButton from "./components/ExportMarkdownButton/ExportMarkdownButton";
 import ExportAsImageButton from "./components/ExportAsImageButton/ExportAsImageButton";
 import ResetButton from "./components/ResetButton/ResetButton";
+import LanguageLinks from "./components/LanguageLinks/LanguageLinks";
 import EditButton from "./components/EditButton/EditButton";
 import EditModal from "./components/EditModal/EditModal";
 import ResetConfirmationModal from "./components/ResetConfirmationModal/ResetConfirmationModal";
@@ -18,7 +19,7 @@ import hierarchicalFlavoursState from "./states/hierarchicalFlavours.selector";
 import { cycleFlavourState } from "./helpers";
 
 const App = () : JSX.Element => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [flavours, setFlavours] = useRecoilState(flavoursState);
   const hierarchicalFlavours = useRecoilValue(hierarchicalFlavoursState);
@@ -27,10 +28,6 @@ const App = () : JSX.Element => {
   const [editModalActive, setEditModalActive] = useState<boolean>(false);
 
   const [buttonsFloating, setButtonsFloating] = useState<boolean>(false);
-
-  const changeLanguage = (lang) : void => {
-    i18n.changeLanguage(lang);
-  };
 
   const fetchDefaultFlavours = () : Promise<Flavour[]> => {
     return fetch("flavours.json")
@@ -162,13 +159,7 @@ const App = () : JSX.Element => {
       <footer className="footer">
         <div className="content">
           <h3>{t("header.title")}</h3>
-          <p>
-            {t("footer.languages")}&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("en")}>{t("footer.languages_english")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("es")}>{t("footer.languages_spanish")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("de")}>{t("footer.languages_german")}</button>,&nbsp;
-            <button className="button-link" onClick={() : void => changeLanguage("nl")}>{t("footer.languages_dutch")}</button>.
-          </p>
+          <LanguageLinks></LanguageLinks>
           <p dangerouslySetInnerHTML={{__html: t("footer.disclaimer")}}></p>
         </div>
       </footer>

@@ -35,11 +35,7 @@
   },
   "footer": {
     "disclaimer": "<a href=\"https://github.com/duizendnegen/sunburst-smorgasbord\">Open source</a>; gemaakt met <a href=\"https://d3js.org/\">D3</a>, gebaseerd op hun <a href=\"https://observablehq.com/@d3/sunburst\">Sunburst-diagram</a>.<br />Geen cookies, geen tracking, geen gegevensverzameling. Lokale opslag zorgt ervoor dat je niet steeds opnieuw hoeft te beginnen als je de website laadt. Fijn, toch?",
-    "languages": "Beschikbaar in",
-    "languages_german": "Duits",
-    "languages_english": "Engels",
-    "languages_spanish": "Spaans",
-    "languages_dutch": "Nederlands"
+    "languages": "Beschikbaar in"
   },
   "faq": {
     "whats_this": "Wat is dit?",
