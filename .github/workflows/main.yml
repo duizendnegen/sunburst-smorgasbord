@@ -1,4 +1,4 @@
-name: Test, build & deploy
+name: Lint, test, build & deploy
 
 on:
   push:
@@ -11,19 +11,22 @@ jobs:
     environment: production
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v1
+        uses: actions/checkout@v4
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 24.x
+          cache: npm
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+      - name: Lint
+        run: npm run lint
       - name: Run tests
         run: npm test
       - name: Build
         run: npm run build
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
