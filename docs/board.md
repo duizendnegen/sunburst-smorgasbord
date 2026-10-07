@@ -1,4 +1,4 @@
-# Sunburst Smorgasbord Functionality
+# The Board
 
 The Sunburst Smorgasbord is a sunburst chart of relationship "flavours". The root
 ("Our relationship includes...") sits in the center; each ring outward is one level
@@ -43,11 +43,11 @@ Pressing on the board and dragging rotates it around its center, so labels can b
 from any angle. A press-and-release counts as a click as long as the pointer moved no
 more than 10px (`DRAG_THRESHOLD_PX` in `src/components/Smorgasbord/Smorgasbord.tsx`);
 movement within that threshold does not rotate the board. Rotation follows mouse moves
-only — on touch screens a drag scrolls the page instead.
+only — on touch screens a drag scrolls the page instead. The rotation is not saved.
 
 ## Editing the board
 
-**Edit** opens a modal to customize the board:
+**Edit** opens a modal (`src/components/EditModal/EditModal.tsx`) to customize the board:
 
 - **Add** a flavour as a child of any existing flavour. The new flavour starts as `YES`,
   and so do all of its ancestors.
@@ -56,19 +56,8 @@ only — on touch screens a drag scrolls the page instead.
 User-added flavours have no translation key; their name is shown as typed in every
 language.
 
-## Persistence, reset and languages
+## Related
 
-- The board is saved to the browser's `localStorage` on every change and restored on
-  the next visit. Without a saved board, the default board is loaded from
-  `public/flavours.json` with every flavour set to `NO`.
-- **Reset** (after confirmation) replaces the board with the default board.
-- The footer switches the UI language. Default flavours are shown in the active
-  language; translations live in `public/locales/<language>/translation.json`.
-
-## Import and export
-
-- **Export** downloads the board as markdown; **Import** replaces the board with an
-  exported markdown file (legacy JSON exports are still accepted). The format is
-  described in [markdown-format.md](markdown-format.md).
-- **Download as image** downloads the board as a PNG. Flavours set to `NO` are hidden in
-  the image, so it shows only what the relationship includes.
+- [Local storage](local-storage.md): how the board is saved, restored and reset.
+- [Image download](image-download.md): saving the board as a PNG.
+- [Markdown format](markdown-format.md): importing and exporting the board as a file.

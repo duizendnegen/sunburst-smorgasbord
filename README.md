@@ -4,7 +4,9 @@ This is a tool to help you discuss and explore the relationships you'd like with
 
 ## Documentation
 
-- [Functionality](docs/functionality.md): how the board works — states, rotating, editing, persistence, import and export.
+- [The board](docs/board.md): the data model, selecting flavours, rotating and editing.
+- [Local storage](docs/local-storage.md): how the board is saved, restored and reset.
+- [Image download](docs/image-download.md): saving the board as a PNG.
 - [Markdown format](docs/markdown-format.md): the import/export file format.
 
 ## Running the project
