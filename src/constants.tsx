@@ -10,7 +10,8 @@ export const LANGUAGES = [
   { code: "en", name: "English" },
   { code: "es", name: "Español" },
   { code: "de", name: "Deutsch" },
-  { code: "nl", name: "Nederlands" }
+  { code: "nl", name: "Nederlands" },
+  { code: "fr", name: "Français" }
 ];
 
 export const BOARD_NAME = "Sunburst Smorgasbord";

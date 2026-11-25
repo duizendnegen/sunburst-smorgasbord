@@ -21,7 +21,7 @@ describe("LanguageLinks", () => {
     renderLinks();
 
     expect(screen.getAllByRole("button").map(button => button.textContent))
-      .toEqual(["English", "Español", "Deutsch", "Nederlands"]);
+      .toEqual(["English", "Español", "Deutsch", "Nederlands", "Français"]);
   });
 
   it("marks each link with its language", () => {

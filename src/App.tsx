@@ -150,6 +150,7 @@ const App = () : JSX.Element => {
             <p dangerouslySetInnerHTML={{__html: t("faq.whats_this_content")}}></p>
             <h2 className="title is-4">{t("faq.how_to_use")}</h2>
             <p>{t("faq.how_to_use_content_1")}</p>
+            <p>{t("faq.how_to_use_content_colors")}</p>
             <p>{t("faq.how_to_use_content_2")}</p>
             <h2 className="title is-4">{t("faq.whats_ra")}</h2>
             <p dangerouslySetInnerHTML={{__html: t("faq.whats_ra_content")}}></p>
